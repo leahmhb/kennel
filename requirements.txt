@@ -1,0 +1,19 @@
+djangorestframework==3.11.0
+# Bleeding edge Django
+django==2.2.7
+
+# Configuration
+django-environ>=0.4.5
+
+# Unicode slugification
+
+#awesome-slugify==1.6.5
+#django-autoslug==1.9.3
+
+# Time zones support
+#pytz>=2018.4
+
+#django-extensions>=2.0.7
+
+# Your custom requirements go here
+#django-widget-tweaks==1.4.2
