@@ -1,0 +1,87 @@
+//fonts
+@font-face {
+  font-family: 'Open Sans Condensed Light';
+  src: url('../fonts/OpenSans-CondLight.eot?#iefix') format("embedded-opentype"), 
+  url('../fonts/OpenSans-CondLight.ttf') format("truetype"),
+  local('Open Sans Condensed Light');
+  font-weight: lighter;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'Open Sans Condensed Bold';
+  src: url('../fonts/OpenSans-CondBold.eot?#iefix') format("embedded-opentype"), 
+  url('../fonts/OpenSans-CondBold.ttf') format("truetype"),
+  local('Open Sans Condensed Bold');
+  font-weight: bold;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'Open Sans Light';
+  src: url('../fonts/OpenSans-Light.eot?#iefix') format("embedded-opentype"), 
+  url('../fonts/OpenSans-Light.ttf') format("truetype"),
+  local('Open Sans Light');
+  font-weight: lighter;
+}
+@font-face {
+  font-family: 'Open Sans Semibold';
+  src: url('../fonts/OpenSans-Semibold.eot?#iefix') format("embedded-opentype"), 
+  url('../fonts/OpenSans-Semibold.ttf') format("truetype"),
+  local('Open Sans Semibold');
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'Open Sans Bold';
+  src: url('../fonts/OpenSans-Bold.eot?#iefix') format("embedded-opentype"), 
+  url('../fonts/OpenSans-Bold.ttf') format("truetype"),
+  local('Open Sans Bold');
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'Open Sans Italic';
+  src: url('../fonts/OpenSans-Italic.eot?#iefix') format("embedded-opentype"), 
+  url('../fonts/OpenSans-Italic.ttf') format("truetype"),
+  local('Open Sans Italic');
+ font-style: italic
+}
+@font-face {
+  font-family: 'Open Sans Regular';
+  src: url('../fonts/OpenSans-Regular.eot?#iefix') format("embedded-opentype"),
+  url('../fonts/OpenSans-Regular.ttf') format("truetype"),
+  local('Open Sans Regular');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'PT Serif Regular';
+  src: url('../fonts/PT_Serif-Web-Regular.eot?#iefix') format("embedded-opentype"),
+  url('../fonts/PT_Serif-Web-Regular.ttf') format("truetype"),
+  local('PT Serif Regular');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'PT Serif Bold';
+  src: url('../fonts/PT_Serif-Web-Bold.eot?#iefix') format("embedded-opentype"),
+  url('../fonts/PT_Serif-Web-Bold.ttf') format("truetype"),
+  local('PT Serif Bold');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'PT Serif Italic';
+  src: url('../fonts/PT_Serif-Web-Italic.eot?#iefix') format("embedded-opentype"),
+  url('../fonts/PT_Serif-Web-Italic.ttf') format("truetype"),
+  local('PT Serif Italic');
+ font-style: italic;
+}
+
+//New variables
+$font-family-serif:     'PT Serif Regular', serif !default;
+$font-family-serif-bold:     'PT Serif Bold', serif !default;
+$font-family-serif-italic:     'PT Serif Italic', serif !default;
+$font-family-condensed-light: 'Open Sans Condensed Light', sans-serif !default;
+$font-family-condensed-bold: 'Open Sans Condensed Bold', sans-serif !default;
+$font-family-base-light: 'Open Sans Light', sans-serif !default;
+$font-family-base-semibold: 'Open Sans Semibold', sans-serif !default;
+$font-family-base-bold: 'Open Sans Bold', sans-serif !default;
+$font-family-base-italic: 'Open Sans Italic', sans-serif !default;

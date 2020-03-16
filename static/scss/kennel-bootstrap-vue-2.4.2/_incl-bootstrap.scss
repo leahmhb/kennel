@@ -1,0 +1,60 @@
+/*!
+ * Kennel Bootstrap v4.3.1 (https://getbootstrap.com/)
+ */
+
+// Configuration
+
+@import "../../bootstrap-4.3.1/scss/functions";
+@import "../fonts";
+@import "../colors";
+@import "../kennel-bootstrap-4.3.1/color-system";
+@import "../kennel-bootstrap-4.3.1/add-kennel-colors";
+@import "../kennel-bootstrap-4.3.1/kennel";
+@import "../kennel-bootstrap-4.3.1/plain";
+@import "../../bootstrap-4.3.1/scss/variables";
+
+@import "../kennel-bootstrap-4.3.1/mixins";
+@import "../../bootstrap-4.3.1/scss/utilities";
+
+// Layout & components
+
+@import "../../bootstrap-4.3.1/scss/root";
+@import "../../bootstrap-4.3.1/scss/reboot";
+@import "../../bootstrap-4.3.1/scss/type";
+@import "../../bootstrap-4.3.1/scss/images";
+@import "../../bootstrap-4.3.1/scss/grid";
+@import "../../bootstrap-4.3.1/scss/tables";
+@import "../../bootstrap-4.3.1/scss/forms";
+@import "../../bootstrap-4.3.1/scss/buttons";
+@import "../../bootstrap-4.3.1/scss/transitions";
+@import "../../bootstrap-4.3.1/scss/dropdown";
+@import "../../bootstrap-4.3.1/scss/button-group";
+@import "../../bootstrap-4.3.1/scss/nav";
+@import "../../bootstrap-4.3.1/scss/navbar";
+@import "../kennel-bootstrap-4.3.1/card";
+@import "../../bootstrap-4.3.1/scss/card";
+@import "../../bootstrap-4.3.1/scss/breadcrumb";
+@import "../../bootstrap-4.3.1/scss/pagination";
+@import "../kennel-bootstrap-4.3.1/badge";
+@import "../../bootstrap-4.3.1/scss/badge";
+@import "../../bootstrap-4.3.1/scss/alert";
+@import "../../bootstrap-4.3.1/scss/progress";
+@import "../../bootstrap-4.3.1/scss/list-group";
+@import "../../bootstrap-4.3.1/scss/close";
+@import "../../bootstrap-4.3.1/scss/toasts";
+@import "../../bootstrap-4.3.1/scss/modal";
+@import "../../bootstrap-4.3.1/scss/tooltip";
+@import "../../bootstrap-4.3.1/scss/popover";
+@import "../../bootstrap-4.3.1/scss/carousel";
+@import "../../bootstrap-4.3.1/scss/spinners";
+
+
+// Helpers
+
+@import "../../bootstrap-4.3.1/scss/helpers";
+
+
+// Utilities
+
+@import "../../bootstrap-4.3.1/scss/utilities/api";
+

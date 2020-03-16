@@ -1,0 +1,11 @@
+// Alternate styles
+//
+// Generate contextual modifier classes for colorizing the card.
+
+@each $color, $value in $theme-colors {
+    .card-#{$color} {
+        @include card-variant(
+        $value, 
+        $value);
+    }
+}

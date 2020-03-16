@@ -1,0 +1,4 @@
+@mixin badge-variant($background, $color) {
+  color: color-yiq($background);
+  background: $background;
+}

@@ -1,0 +1,56 @@
+//basic css
+b, strong, .font-weight-bold {
+font-family: $font-family-base-bold;
+}
+
+i, em, .font-italic {
+font-family: $font-family-base-italic;
+}
+
+.text-serif {
+font-family: $font-family-serif;
+}
+
+b.text-serif, strong.text-serif {
+font-family: $font-family-serif-bold;
+}
+
+i.text-serif, em.text-serif {
+font-family: $font-family-serif-italic;
+}
+
+.help-text {
+font-size: 0.786rem;
+color: #666;
+line-height: $line-height-base;
+}
+
+.text-light {
+font-family: $font-family-condensed-light;
+}
+
+b.text-light, strong.text-light {
+font-family: $font-family-condensed-bold;
+}
+
+
+.table {
+margin-top: 1.143rem;
+}
+
+.navbar-toggler {
+border-radius: 0.25rem;
+}
+
+.form-group {
+margin-bottom: 1.143rem;
+}
+
+.font-weight-light, .card-subtitle {
+font-family: $font-family-base-light;
+}
+
+.card-title, .card-header, .card-footer, .modal-title {
+font-family: $font-family-base-semibold;
+}
+

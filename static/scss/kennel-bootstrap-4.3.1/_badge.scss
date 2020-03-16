@@ -1,0 +1,21 @@
+//badge overrides
+
+$badge-padding-y:                   .5em !default;
+
+.badge.badge-pill {
+        border-radius: 50rem;
+}
+
+.badge.badge-light {
+    color: $body-color;
+}
+
+// Alternate styles
+//
+// Generate contextual modifier classes for colorizing the bage.
+
+@each $color, $value in $theme-colors {
+    .badge-#{$color} {
+        @include badge-variant($value, $badge-color);
+    }
+}

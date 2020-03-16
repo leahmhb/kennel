@@ -1,0 +1,10 @@
+@mixin card-variant($background, $border) {
+  color: $black;
+  @include gradient-bg($background);
+  border-color: $border !important;
+
+  .card-header {
+    background: $background;
+    color: color-yiq($background);
+  }
+}

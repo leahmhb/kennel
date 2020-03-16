@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>kennel | {% block title %}home{% endblock title %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  {% block css %}
+  <link rel="stylesheet" href="{% static 'css/bootstrap4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-vue2.min.css' %}">
+  <link href="{% static 'fonts/fontawesome-pro-5.0.1/web-fonts-with-css/css/fontawesome-all.min.css' %}" rel="stylesheet">
+  <!-- This file stores project-specific CSS -->
+  <link href="{% static 'css/kennel.css' %}" rel="stylesheet">
+  {% endblock %}
+  {% block after_css %}
+  {% endblock %}
+</head>
+
+<body>
+  <div id="navbarSlot" v-cloak>
+    <b-navbar
+    fixed="top"
+    toggleable="lg"
+    type="light"
+    variant="light">
+    <b-navbar-brand href="">Kennel</b-navbar-brand>
+    <b-navbar-toggle target="headerCollapse"></b-navbar-toggle>
+    <b-collapse id="headerCollapse" is-nav>
+      <b-navbar-nav class="mr-auto">
+        <b-nav-item href="" :class="navBarActiveLink('api')"><i class="fas fa-home"></i> API</b-nav-item>
+        <b-nav-item href="" :class="navBarActiveLink('poodleList')"><i class="fas fa-users"></i> Poodles</b-nav-item>  
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+</div>
+
+<div id="maincontent" class="container">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+  {% endfor %}
+  {% endif %}
+
+  {% block content %}
+  <p>Use this document as a way to quick start any new project.</p>
+  {% endblock content %}
+</div> <!-- /container -->
+
+<footer class="footer navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+   <span class="mr-auto navbar-text">
+    {% if request.user.previous_login %}
+    Last Login: {{request.user.previous_login|date:"Y M d H:i T"}}
+    {% else %}
+    {% now "Y M d H:i T" %}
+    {% endif %}
+  </span>
+  <span class="ml-auto navbar-text">Managed by Leah Blake</span>
+</div>
+</footer>
+
+{% block modal %}{% endblock modal %}
+
+
+{% block javascript %}
+{% comment %} 
+<script src="{% static 'js/vue-2.6.11.min.js' %}"></script>
+<script src="{% static 'js/axios-0.19.0.min.js' %}"></script>
+<script src="{% static 'bootstrap-vue-2.4.2/bootstrap-vue.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+{% endcomment %}
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>     
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+
+<script src="{% static 'js/project.js' %}"></script>
+
+{% endblock javascript %}
+{% block after_javascript %}{% endblock after_javascript %}
+</body>
+</html>
+

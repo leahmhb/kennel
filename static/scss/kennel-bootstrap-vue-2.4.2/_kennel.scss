@@ -1,0 +1,33 @@
+$custom-control-gutter: $form-grid-gutter-width; //variable from bootstrap
+$custom-control-indicator-size: 1;
+$custom-control-indicator-bg-size: 1;
+$custom-radio-indicator-border-radius: $border-radius; //variable from bootstrap
+$custom-control-indicator-border-width: $border-radius; //variable from bootstrap
+$input-line-height-lg: $input-height-lg; //variable from bootstrap
+$input-line-height-sm: $input-height-sm; //variable from bootstrap
+
+
+$b-custom-file-line-height-lg: 1.5 !default;
+$b-custom-file-line-height-sm: 0.75 !default;
+$b-custom-file-padding-y-lg: 1rem;
+$b-custom-file-padding-y-sm: 0.5rem;
+
+$b-custom-file-height-inner-lg: calc(
+  #{$b-custom-file-line-height-lg * 1rem} + #{$b-custom-file-padding-y-lg * 2}
+) !default;
+$b-custom-file-height-inner-sm: calc(
+  #{$b-custom-file-line-height-sm * 1rem} + #{$b-custom-file-padding-y-sm * 2}
+) !default;
+
+// Table sorting
+$nasic-recolor-sort-icon: #41BEE8 !default;
+
+// Sort icons are square, but "squished" horizontally by the above variables
+$b-table-sort-icon-bg-not-sorted: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='101' height='101' view-box='0 0 101 101' preserveAspectRatio='none'><path fill='#41BEE8' opacity='.3' d='M51 1l25 23 24 22H1l25-22zM51 101l25-23 24-22H1l25 22z'/></svg>") !default;
+$b-table-sort-icon-bg-ascending: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='101' height='101' view-box='0 0 101 101' preserveAspectRatio='none'><path fill='#41BEE8' d='M51 1l25 23 24 22H1l25-22z'/><path fill='#41BEE8' opacity='.3' d='M51 101l25-23 24-22H1l25 22z'/></svg>") !default;
+$b-table-sort-icon-bg-descending: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='101' height='101' view-box='0 0 101 101' preserveAspectRatio='none'><path fill='#41BEE8' opacity='.3' d='M51 1l25 23 24 22H1l25-22z'/><path fill='#41BEE8' d='M51 101l25-23 24-22H1l25 22z'/></svg>") !default;
+// Icons to use on dark table or dark header/footer (lighter color icons)
+// We simply just replace the fill color 'black' white 'white'
+$b-table-sort-icon-bg-dark-not-sorted: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='101' height='101' view-box='0 0 101 101' preserveAspectRatio='none'><path fill='white' opacity='.3' d='M51 1l25 23 24 22H1l25-22zM51 101l25-23 24-22H1l25 22z'/></svg>") !default;
+$b-table-sort-icon-bg-dark-ascending: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='101' height='101' view-box='0 0 101 101' preserveAspectRatio='none'><path fill='white' d='M51 1l25 23 24 22H1l25-22z'/><path fill='white' opacity='.3' d='M51 101l25-23 24-22H1l25 22z'/></svg>") !default;
+$b-table-sort-icon-bg-dark-descending: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='101' height='101' view-box='0 0 101 101' preserveAspectRatio='none'><path fill='white' opacity='.3' d='M51 1l25 23 24 22H1l25-22z'/><path fill='white' d='M51 101l25-23 24-22H1l25 22z'/></svg>") !default;

@@ -1,0 +1,101 @@
+[v-cloak] {
+  display: none !important;
+}
+
+/* These styles are generated from project.scss. */
+.alert-debug {
+  color: black;
+  background-color: white;
+  border-color: #d6e9c6;
+}
+
+.alert-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+/* This is a fix for the bootstrap4 alpha release */
+@media (max-width: 47.9em) {
+  .navbar-nav .nav-item {
+    float: none;
+    width: 100%;
+    display: inline-block;
+  }
+
+  .navbar-nav .nav-item + .nav-item {
+    margin-left: 0;
+  }
+
+  .nav.navbar-nav.pull-xs-right {
+    float: none !important;
+  }
+}
+
+/* Display django-debug-toolbar.
+See https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
+and https://github.com/pydanny/cookiecutter-django/issues/317
+*/
+[hidden][style="display: block;"] {
+  display: block !important;
+}
+
+html, body {
+  position: relative;
+  height: 100%;
+}
+
+nav {
+  color: #fff;
+}
+
+nav form label {
+  color: #fff;
+}
+
+.collapsed > .when-opened,
+:not(.collapsed) > .when-closed {
+  display: none;
+}
+
+.serif {
+  font-family: 'PT Serif Regular';
+}
+
+strong.serif {
+  font-family: 'PT Serif Bold';
+}
+
+.strong {
+  font-weight: bold;
+}
+
+a {
+  color: #2999F4;
+}
+
+.custom-control {
+  background: none;
+}
+
+.custom-control .custom-checkbox {
+  display:block;
+}
+
+.table-striped tbody tr:nth-of-type(2n+1) {
+  background-color: rgba(65,190,232, 0.07);
+}
+
+#back-to-top {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+button.navbar-toggler {
+  border-radius: 0;
+}
+
+#maincontent.container {
+  margin-top: 100px;
+}
