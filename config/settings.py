@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'poodles.apps.PoodlesConfig'
+    'poodles.apps.PoodlesConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
