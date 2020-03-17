@@ -1,40 +1,38 @@
-from .forms import PoodleForm
-from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, ListView, DeleteView, FormView
-from poodles.forms import PoodleForm, PersonForm
-from poodles.models import Person, Poodle
-from poodles.serializers import PersonSerializer, PoodleSerializer
+from django.views.generic import TemplateView
+from .models import Poodle
+from .serializers import PoodleSerializer
 from pprint import pprint
-from rest_framework import generics
-import json
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import (
+    get_list_or_404,
+    get_object_or_404
+)
 
-class PoodleIndexView(TemplateView):
+
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+
+class PoodleIndex(TemplateView):
     template_name = 'poodles/index.html'
 
 
-class PoodleListView(ListView):
+class PoodleDetail(APIView):
+    template_name = 'poodles/detail.html'
+
+    def get(self, request, akc):
+        pood = get_object_or_404(Poodle, akc=akc)
+        s_pood = PoodleSerializer(pood, context={"request": request})
+        return Response(s_pood.data)
+
+
+class PoodleList(APIView):
     model = Poodle
     context_object_name = 'poodles'
     template_name = 'poodles/list.html'
     paginate_by = 20
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        dv_serializer = PoodleSerializer(Poodle.objects.all(), many=True)
-        dv = json.dumps(dv_serializer.data)
-        context['poodles'] = dv
-        context['url'] = reverse_lazy('poodles:list')
-        return context
-
-
-class PoodleUpdateView(UpdateView):
-    model = Poodle
-    form_class = PoodleForm
-    pk_url_kwarg = 'id'
-    context_object_name = 'form'
-    success_url = reverse_lazy('poodles:update')
-    template_name = 'poodles/update.html'
-
-    def form_valid(self, form):
-        return super().form_valid(form)
+    def get(self, request):
+        poods = get_list_or_404(Poodle)
+        s_poods = PoodleSerializer(
+            poods, many=True, context={"request": request})
+        return Response(s_poods.data)

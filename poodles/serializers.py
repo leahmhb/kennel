@@ -1,15 +1,22 @@
-from rest_framework import serializers
-from poodles.models import Poodle, Person
+from .models import Poodle, Person
+from rest_framework.serializers import (
+    HyperlinkedIdentityField,
+    ModelSerializer
+)
 
 
-class PoodleSerializer(serializers.ModelSerializer):
-    lookup_field = 'id'
+class PoodleSerializer(ModelSerializer):
+    url = HyperlinkedIdentityField(
+        lookup_field="akc",
+        view_name="poodles:detail"
+    )
+
     class Meta:
         model = Poodle
         fields = '__all__'
 
 
-class PersonSerializer(serializers.ModelSerializer):
+class PersonSerializer(ModelSerializer):
     lookup_field = 'id'
 
     class Meta:

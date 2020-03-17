@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from config.routers import router
+from poodles import urls as poodles_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('poodles.urls')),
+    path('', include(poodles_urls, namespace="poodles")),
     path('api/', include(router.urls))
 ]
