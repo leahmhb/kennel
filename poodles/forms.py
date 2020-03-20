@@ -1,12 +1,5 @@
 from django.forms import ModelForm
-from poodles.models import Person, Poodle
-
-
-class PersonForm(ModelForm):
-
-    class Meta:
-        model = Person
-        exclude = ['id']
+from poodles.models import Poodle
 
 
 class PoodleForm(ModelForm):

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Detail{% endblock %}
+
+{% block content %}
+<h1>
+	{% if poodle.titles_prefix %} {{ poodle.titles_prefix }} {% endif %} 
+	{{ poodle.name_registered }} 
+	{% if poodle.titles_suffix %} {{ poodle.titles_suffix }} {% endif %} 
+</h1>
+
+<h3 class="text-condensed">{{ poodle.name_call }}</h3>
+
+<table class="table">
+	{% for name, value in poodle.get_fields %}
+	{% if value and name != 'ID' %}
+	<tr>
+		<th>{{ name }}</th>
+		<td>{{ value }}</td>
+	</tr>
+	{% endif %}
+	{% endfor %}
+</table>
+
+
+{% lorem 3 p %}
+
+{% endblock content %}

@@ -1,4 +1,4 @@
-"""config URL Configuration
+"""kennel URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -14,12 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path
+from django.conf.urls import include
 from config.routers import router
-from poodles import urls as poodles_urls
 
 urlpatterns = [
+    path('', include('poodles.urls', namespace='project')),
+    path('', include('organizer.urls', namespace='more')),
     path('admin/', admin.site.urls),
-    path('', include(poodles_urls, namespace="poodles")),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
 ]

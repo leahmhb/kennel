@@ -13,7 +13,7 @@ django-environ>=0.4.5
 # Time zones support
 #pytz>=2018.4
 
-#django-extensions>=2.0.7
+django-extensions>=2.0.7
 
 # Your custom requirements go here
-#django-widget-tweaks==1.4.2
+django-widget-tweaks==1.4.2

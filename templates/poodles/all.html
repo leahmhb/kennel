@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}List{% endblock %}
+
+{% block content %}
+<h1>List</h1>
+
+<h3 class="text-condensed">{% lorem 10 w random %}</h3>
+
+<table class="">
+	<thead>
+		<tr>
+			<th>Call Name</th>
+			<th>Registered Name</th>			
+		</tr>
+	</thead>
+	<tbody>
+		{% for pood in poodles %}
+		<tr>
+			<td><a href="{{ pood.get_absolute_url }}">{{ pood.name_call }}</a></td>
+			<td>{{ pood.get_titled_name }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% include 'includes/pagination.html' %}
+
+
+
+{% endblock content %}

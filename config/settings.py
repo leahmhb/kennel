@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'poodles.apps.PoodlesConfig',
-    'rest_framework'
+    'organizer.apps.OrganizerConfig',
+    'rest_framework',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [

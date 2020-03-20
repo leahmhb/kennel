@@ -1,24 +1,26 @@
-from .models import Poodle, Person
 from rest_framework.serializers import (
-    HyperlinkedIdentityField,
-    ModelSerializer
+    HyperlinkedRelatedField,
+    ModelSerializer,
+    SerializerMethodField,
 )
-
+from poodles.models import Poodle
+from rest_framework.reverse import reverse
 
 class PoodleSerializer(ModelSerializer):
-    url = HyperlinkedIdentityField(
-        lookup_field="akc",
-        view_name="poodles:detail"
-    )
+    lookup_field = 'slug'
+    url = SerializerMethodField()
 
     class Meta:
         model = Poodle
         fields = '__all__'
 
 
-class PersonSerializer(ModelSerializer):
-    lookup_field = 'id'
-
-    class Meta:
-        model = Person
-        fields = '__all__'
+    def get_url(self, pood):
+        """Return full API URL for serialized POST object"""
+        return reverse(
+            "poodles:one",
+            kwargs=dict(
+                slug=pood.slug
+            ),
+            request=self.context["request"],
+        )

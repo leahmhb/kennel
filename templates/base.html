@@ -31,8 +31,10 @@
     <b-navbar-toggle target="headerCollapse"></b-navbar-toggle>
     <b-collapse id="headerCollapse" is-nav>
       <b-navbar-nav class="mr-auto">
-        <b-nav-item href="" :class="navBarActiveLink('api')"><i class="fas fa-home"></i> API</b-nav-item>
-        <b-nav-item href="" :class="navBarActiveLink('poodleList')"><i class="fas fa-users"></i> Poodles</b-nav-item>  
+        <b-nav-item href="{% url 'poodles:home' %}" :class="navBarActiveLink('home')"><i class="fas fa-home"></i> API</b-nav-item>
+        <b-nav-item href="{% url 'poodles:all' %}" :class="navBarActiveLink('all')"><i class="fas fa-users"></i> Poodles</b-nav-item>  
+        <b-nav-item href="{% url 'organizer:all-people' %}" :class="navBarActiveLink('allpeople')"><i class="fas fa-users"></i> People</b-nav-item>  
+        <b-nav-item href="{% url 'organizer:all-kennels' %}" :class="navBarActiveLink('allkennels')"><i class="fas fa-users"></i> Kennels</b-nav-item>  
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>

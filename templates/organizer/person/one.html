@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Detail{% endblock %}
+
+{% block content %}
+<h1>
+	
+	{{ person.get_full_name }} 
+
+</h1>
+
+
+
+<table class="table">
+	{% for name, value in person.get_fields %}
+	{% if value and name != 'ID' %}
+	<tr>
+		<th>{{ name }}</th>
+		<td>{{ value }}</td>
+	</tr>
+	{% endif %}
+	{% endfor %}
+</table>
+
+
+{% lorem 3 p %}
+
+{% endblock content %}

@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib import admin
-from django.urls import path, include, re_path
-
-from poodles.views import PoodleIndex, PoodleList, PoodleDetail
+from django.urls import path
+from poodles import views
 
 app_name = 'poodles'
 urlpatterns = [
-    path('', PoodleIndex.as_view(), name='index'),
-    path('poodle-list/', PoodleList.as_view(), name="list"),
-    path('poodle/<str:akc>/', PoodleDetail.as_view(), name="detail"),
+    path('', views.PoodleIndex.as_view(), name='home'),
+    path('poodles/', views.PoodleList.as_view(), name="all"),
+    path('poodle/<str:slug>/', views.PoodleDetail.as_view(), name="one"),
 ]

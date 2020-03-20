@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}List{% endblock %}
+
+{% block content %}
+<h1>List</h1>
+
+<h3 class="text-condensed">{% lorem 10 w random %}</h3>
+
+<table class="">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>City</th>			
+			<th>State</th>	
+			<th>Country</th>	
+		</tr>
+	</thead>
+	<tbody>
+		{% for ken in kennels %}
+		<tr>
+			<td><a href="{{ ken.get_absolute_url }}">{{ ken.name }}</a></td>
+			<td>{{ ken.city }}</td>
+			<td>{{ ken.state }}</td>
+			<td>{{ ken.country }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% include 'includes/pagination.html' %}
+
+
+
+{% endblock content %}
