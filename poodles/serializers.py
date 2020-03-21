@@ -18,7 +18,7 @@ class PoodleSerializer(ModelSerializer):
     def get_url(self, pood):
         """Return full API URL for serialized POST object"""
         return reverse(
-            "poodles:one",
+            "poodles:detail",
             kwargs=dict(
                 slug=pood.slug
             ),

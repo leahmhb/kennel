@@ -9,6 +9,14 @@
 	by <a href="{{ poodle.get_sire.get_absolute_url }}">{{ poodle.get_sire.get_titled_name }}</a> out of <a href="{{ poodle.get_dam.get_absolute_url }}">{{ poodle.get_dam.get_titled_name }}</a>
 </h3>
 
+<a href="{% url 'poodles:update' poodle.slug %}" 
+class="btn btn-sm btn-outline-success">
+<i class="fas fa-pencil"></i> Update
+</a>
+<a class="btn btn-sm btn-outline-danger">
+	<i class="fas fa-trash"></i> 
+	Delete
+</a>
 <table class="table">
 	{% for name, value in poodle.get_fields %}
 	{% with skip='ID slug Sire Dam' %}     

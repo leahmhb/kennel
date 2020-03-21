@@ -3,13 +3,19 @@
 {% block title %}{{ kennel.name }} Standard Poodles{% endblock %}
 
 {% block content %}
-<h1>
-	
-	{{ kennel.name}} 
-	
-</h1>
+<h1>{{ kennel.name}}</h1>
 
 <h3 class="text-condensed">{{ kennel.city }}, {{ kennel.state }}</h3>
+
+<a href="{% url 'organizer:update-kennel' kennel.slug %}" 
+class="btn btn-sm btn-outline-success">
+<i class="fas fa-pencil"></i> Update
+</a>
+
+<a class="btn btn-sm btn-outline-danger">
+	<i class="fas fa-trash"></i> 
+	Delete
+</a>
 
 <table class="table">
 	{% for name, value in kennel.get_fields %}
@@ -23,7 +29,6 @@
 	{% endwith %}
 	{% endfor %}
 </table>
-
 
 {% lorem 3 p %}
 

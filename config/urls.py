@@ -18,9 +18,12 @@ from django.urls import path
 from django.conf.urls import include
 from config.routers import router
 
+from poodles import urls as poodle_urls
+from organizer import urls as org_urls
+
 urlpatterns = [
-    path('', include('poodles.urls', namespace='project')),
-    path('', include('organizer.urls', namespace='more')),
+    path('', include(poodle_urls, namespace='project')),
+    path('', include(org_urls, namespace='more')),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
 ]

@@ -19,7 +19,7 @@ class PersonSerializer(ModelSerializer):
     def get_url(self, per):
         """Return full API URL for serialized POST object"""
         return reverse(
-            "organizer:one-person",
+            "organizer:detail-person",
             kwargs=dict(
                 slug=per.slug
             ),
@@ -38,7 +38,7 @@ class KennelSerializer(ModelSerializer):
     def get_url(self, ken):
         """Return full API URL for serialized POST object"""
         return reverse(
-            "organizer:one-kennel",
+            "organizer:detail-kennel",
             kwargs=dict(
                 slug=ken.slug
             ),

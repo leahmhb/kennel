@@ -7,7 +7,14 @@
 	{{ person.get_full_name }} 
 </h1>
 
-
+<a href="{% url 'organizer:update-person' person.slug %}" 
+class="btn btn-sm btn-outline-success">
+<i class="fas fa-pencil"></i> Update
+</a>
+<a class="btn btn-sm btn-outline-danger">
+	<i class="fas fa-trash"></i> 
+	Delete
+</a>
 <table class="table">
 	{% for name, value in person.get_fields %}
 	{% with skip='ID slug' %}     

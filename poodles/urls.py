@@ -7,6 +7,13 @@ from poodles import views
 app_name = 'poodles'
 urlpatterns = [
     path('', views.PoodleIndex.as_view(), name='home'),
-    path('poodles/', views.PoodleList.as_view(), name="all"),
-    path('poodle/<str:slug>/', views.PoodleDetail.as_view(), name="one"),
+    path('poodles/', views.PoodleList.as_view(), name="poodles"),
+    path('poodle/detail/<str:slug>/',
+         views.PoodleDetail.as_view(), name="detail"),
+    path('poodle/update/<str:slug>/',
+         views.PoodleUpdate.as_view(), name="update"),
+    path('poodle/create/<str:slug>/',
+         views.PoodleUpdate.as_view(), name="create"),
+    path('poodle/delete/<str:slug>/',
+         views.PoodleUpdate.as_view(), name="delete"),
 ]

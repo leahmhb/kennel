@@ -10,6 +10,8 @@ from django.views.generic import (
     FormView
 )
 from .forms import PoodleForm
+from django.urls import reverse
+from django.shortcuts import redirect
 
 
 class PoodleIndex(TemplateView):
@@ -26,9 +28,22 @@ class PoodleList(ListView):
 
 class PoodleDetail(DetailView):
     model = Poodle
-    form_class = PoodleForm
     queryset = Poodle.objects.all()
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
     context_object_name = 'poodle'
-    template_name = 'poodles/one.html'
+    template_name = 'poodles/detail.html'
+
+
+class PoodleUpdate(UpdateView):
+    model = Poodle
+    fields = '__all__'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    context_object_name = 'poodle'
+    template_name = 'poodles/update.html'
+
+    def form_valid(self, form):
+        poodle = form.save(commit=False)
+        poodle.save()
+        return redirect('poodles:detail', slug=poodle.slug)

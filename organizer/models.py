@@ -20,20 +20,19 @@ class Kennel(Model):
                          unique=True, populate_from='name')
     name = CharField(verbose_name="Name",
                      max_length=50)
-    prefix = CharField(verbose_name="Prefix",
-                       max_length=50, null=True, blank=True)
-    suffix = CharField(verbose_name="Suffix",
-                       max_length=50, null=True, blank=True)
-    city = CharField(verbose_name="City", max_length=100, null=True, blank=True)
-    state = CharField(verbose_name="State", max_length=2, null=True, blank=True)
-    country = CharField(verbose_name="Country", max_length=3, null=True, blank=True, default='USA')
+    city = CharField(verbose_name="City", max_length=100,
+                     null=True, blank=True)
+    state = CharField(verbose_name="State", max_length=2,
+                      null=True, blank=True)
+    country = CharField(verbose_name="Country", max_length=3,
+                        null=True, blank=True, default='USA')
 
     def __str__(self):
 
         return self.name
 
     def get_absolute_url(self):
-        return reverse('organizer:one-kennel', args=[str(self.slug)])
+        return reverse('organizer:detail-kennel', args=[str(self.slug)])
 
     def get_fields(self):
         return [
@@ -66,7 +65,7 @@ class Person(Model):
         return self.kennel
 
     def get_absolute_url(self):
-        return reverse('organizer:one-person', args=[str(self.slug)])
+        return reverse('organizer:detail-person', args=[str(self.slug)])
 
     def get_fields(self):
         return [

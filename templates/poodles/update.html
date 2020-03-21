@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ poodle.get_titled_name }}{% endblock %}
+
+{% block content %}
+<h1>{{ poodle.get_titled_name }} <b>"{{ poodle.name_call }}"</b></h1>
+
+<h3 class="text-condensed">
+	by <a href="{{ poodle.get_sire.get_absolute_url }}">{{ poodle.get_sire.get_titled_name }}</a> out of <a href="{{ poodle.get_dam.get_absolute_url }}">{{ poodle.get_dam.get_titled_name }}</a>
+</h3>
+
+ <form method="post" novalidate>
+    {% csrf_token %}
+    {% include 'includes/form.html' %}
+    <button type="submit" class="btn btn-success">Update</button>
+  </form>
+
+
+{% endblock content %}

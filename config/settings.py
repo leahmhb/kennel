@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'poodles.apps.PoodlesConfig',
     'organizer.apps.OrganizerConfig',
     'rest_framework',
-    'django_extensions'
+    'django_extensions',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

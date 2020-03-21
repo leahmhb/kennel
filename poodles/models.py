@@ -101,7 +101,7 @@ class Poodle(Model):
         ]
 
     def get_absolute_url(self):
-        return reverse('poodles:one', args=[str(self.slug)])
+        return reverse('poodles:detail', args=[str(self.slug)])
 
     class Meta:
         app_label = 'poodles'
