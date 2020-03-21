@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}List{% endblock %}
+{% block title %}Poodles{% endblock %}
 
 {% block content %}
-<h1>List</h1>
+<h1>Poodles</h1>
 
 <h3 class="text-condensed">{% lorem 10 w random %}</h3>
 
-<table class="">
+<table class="table">
 	<thead>
 		<tr>
 			<th>Call Name</th>
-			<th>Registered Name</th>			
+			<th>Registered Name</th>	
+			<th>Owners</th>
+			<th>Breeders</th>		
 		</tr>
 	</thead>
 	<tbody>
@@ -19,6 +21,22 @@
 		<tr>
 			<td><a href="{{ pood.get_absolute_url }}">{{ pood.name_call }}</a></td>
 			<td>{{ pood.get_titled_name }}</td>
+			<td>
+				{% for o in pood.get_owners %}
+				<a href="{{ o.get_absolute_url }}">{{ o }}</a>
+				{% if not forloop.last %}
+				<b>&</b> 
+				{% endif %}
+				{% endfor %}
+			</td>
+			<td>
+				{% for o in pood.get_breeders %}
+				<a href="{{ o.get_absolute_url }}">{{ o }}</a>
+				{% if not forloop.last %}
+				<b>&</b> 
+				{% endif %}
+				{% endfor %}
+			</td>
 		</tr>
 		{% endfor %}
 	</tbody>

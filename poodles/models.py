@@ -29,7 +29,8 @@ COLORS = (
 
 
 class Poodle(Model):
-    slug = AutoSlugField(null=True, default=None, unique=True, populate_from='name_registered')
+    slug = AutoSlugField(null=True, default=None,
+                         unique=True, populate_from='name_registered')
     name_call = CharField(verbose_name="Call Name", max_length=50)
     name_registered = CharField(verbose_name="Registered Name", max_length=50)
     person_owners = ManyToManyField(
@@ -80,6 +81,18 @@ class Poodle(Model):
 
     def get_titled_name(self):
         return '%s %s %s' % (self.titles_prefix, self.name_registered, self.titles_suffix)
+
+    def get_owners(self):
+        return self.person_owners.all()
+
+    def get_breeders(self):
+        return self.person_breeders.all()
+
+    def get_sire(self):
+        return self.poodle_sire
+
+    def get_dam(self):
+        return self.poodle_dam
 
     def get_fields(self):
         return [

@@ -1,24 +1,29 @@
 {% extends "base.html" %}
 
-{% block title %}Detail{% endblock %}
+{% block title %}{{ poodle.get_titled_name }}{% endblock %}
 
 {% block content %}
-<h1>
-	{% if poodle.titles_prefix %} {{ poodle.titles_prefix }} {% endif %} 
-	{{ poodle.name_registered }} 
-	{% if poodle.titles_suffix %} {{ poodle.titles_suffix }} {% endif %} 
-</h1>
+<h1>{{ poodle.get_titled_name }} <b>"{{ poodle.name_call }}"</b></h1>
 
-<h3 class="text-condensed">{{ poodle.name_call }}</h3>
+<h3 class="text-condensed">
+	by <a href="{{ poodle.get_sire.get_absolute_url }}">{{ poodle.get_sire.get_titled_name }}</a> out of <a href="{{ poodle.get_dam.get_absolute_url }}">{{ poodle.get_dam.get_titled_name }}</a>
+</h3>
 
 <table class="table">
 	{% for name, value in poodle.get_fields %}
-	{% if value and name != 'ID' %}
+	{% with skip='ID slug Sire Dam' %}     
+	{% if value and not name in skip %}
 	<tr>
 		<th>{{ name }}</th>
-		<td>{{ value }}</td>
+		<td>
+			
+			{{ value }}
+
+			
+		</td>
 	</tr>
 	{% endif %}
+	{% endwith %}
 	{% endfor %}
 </table>
 

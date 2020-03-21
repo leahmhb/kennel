@@ -24,9 +24,9 @@ class Kennel(Model):
                        max_length=50, null=True, blank=True)
     suffix = CharField(verbose_name="Suffix",
                        max_length=50, null=True, blank=True)
-    city = CharField(max_length=100, null=True, blank=True)
-    state = CharField(max_length=2, null=True, blank=True)
-    country = CharField(max_length=3, null=True, blank=True, default='USA')
+    city = CharField(verbose_name="City", max_length=100, null=True, blank=True)
+    state = CharField(verbose_name="State", max_length=2, null=True, blank=True)
+    country = CharField(verbose_name="Country", max_length=3, null=True, blank=True, default='USA')
 
     def __str__(self):
 
@@ -53,7 +53,7 @@ class Person(Model):
     last_name = CharField(verbose_name="Last Name", max_length=50)
     first_name = CharField(verbose_name="First Name", max_length=50)
     mi = CharField(verbose_name="MI", max_length=50, null=True, blank=True)
-    kennel = ForeignKey(Kennel, verbose_name="kennel", related_name='kennel',
+    kennel = ForeignKey(Kennel, verbose_name="Kennel", related_name='kennel',
                         on_delete=PROTECT, null=True, blank=True)
 
     def __str__(self):
@@ -61,6 +61,9 @@ class Person(Model):
 
     def get_full_name(self):
         return '%s, %s %s' % (self.last_name, self.first_name, self.mi)
+
+    def get_kennel(self):
+        return self.kennel
 
     def get_absolute_url(self):
         return reverse('organizer:one-person', args=[str(self.slug)])

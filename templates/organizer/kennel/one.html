@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Detail{% endblock %}
+{% block title %}{{ kennel.name }} Standard Poodles{% endblock %}
 
 {% block content %}
 <h1>
@@ -13,12 +13,14 @@
 
 <table class="table">
 	{% for name, value in kennel.get_fields %}
-	{% if value and name != 'ID' %}
+	{% with skip='ID slug' %}     
+	{% if value and not name in skip %}
 	<tr>
 		<th>{{ name }}</th>
 		<td>{{ value }}</td>
 	</tr>
 	{% endif %}
+	{% endwith %}
 	{% endfor %}
 </table>
 

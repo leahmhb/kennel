@@ -27,16 +27,18 @@
     toggleable="lg"
     type="light"
     variant="light">
+<b-container>
     <b-navbar-brand href="">Kennel</b-navbar-brand>
     <b-navbar-toggle target="headerCollapse"></b-navbar-toggle>
     <b-collapse id="headerCollapse" is-nav>
       <b-navbar-nav class="mr-auto">
-        <b-nav-item href="{% url 'poodles:home' %}" :class="navBarActiveLink('home')"><i class="fas fa-home"></i> API</b-nav-item>
+        <b-nav-item href="{% url 'poodles:home' %}" :class="navBarActiveLink('home')"><i class="fas fa-home"></i> Home</b-nav-item>
         <b-nav-item href="{% url 'poodles:all' %}" :class="navBarActiveLink('all')"><i class="fas fa-users"></i> Poodles</b-nav-item>  
         <b-nav-item href="{% url 'organizer:all-people' %}" :class="navBarActiveLink('allpeople')"><i class="fas fa-users"></i> People</b-nav-item>  
         <b-nav-item href="{% url 'organizer:all-kennels' %}" :class="navBarActiveLink('allkennels')"><i class="fas fa-users"></i> Kennels</b-nav-item>  
       </b-navbar-nav>
     </b-collapse>
+</b-container>
   </b-navbar>
 </div>
 
@@ -47,7 +49,6 @@
     <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
     {% endfor %}
     {% endif %}
-
     {% block content %}
     <p>Use this document as a way to quick start any new project.</p>
     {% endblock content %}

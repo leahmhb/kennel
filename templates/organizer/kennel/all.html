@@ -1,34 +1,97 @@
-{% extends "base.html" %}
+	{% extends "base.html" %}
 
-{% block title %}List{% endblock %}
+	{% block title %}List{% endblock %}
 
-{% block content %}
-<h1>List</h1>
+	{% block content %}
+	<h1>Kennels</h1>
 
-<h3 class="text-condensed">{% lorem 10 w random %}</h3>
+	<h3 class="text-condensed">{% lorem 10 w random %}</h3>
 
-<table class="">
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>City</th>			
-			<th>State</th>	
-			<th>Country</th>	
-		</tr>
-	</thead>
-	<tbody>
-		{% for ken in kennels %}
-		<tr>
-			<td><a href="{{ ken.get_absolute_url }}">{{ ken.name }}</a></td>
-			<td>{{ ken.city }}</td>
-			<td>{{ ken.state }}</td>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Actions</th>
+				<th>Name</th>
+				<th>City</th>			
+				<th>State</th>	
+				<th>Country</th>	
+			</tr>
+		</thead>
+		<tbody>
+			{% for ken in kennels %}
+			<tr data-kennel-slug="{{ ken.slug }}">
+				<td>				
+					<button class="btn btn-sm btn-outline-success" 
+					@click="getModal('{{ ken.slug }}')">
+					<i class="fas fa-pencil"></i>
+				</button>
+				<button class="btn btn-sm btn-outline-danger">
+					<i class="fas fa-trash"></i>
+				</button>
+			</td>
+			<td><a href="{{ ken.get_absolute_url }}">{{ ken.name }} Standard Poodles</a></td>
+			<td>{% if ken.city %}{{ ken.city }}{% endif %}</td>
+			<td>{% if ken.state %}{{ ken.state }}{% endif %}</td>
 			<td>{{ ken.country }}</td>
 		</tr>
 		{% endfor %}
 	</tbody>
 </table>
 {% include 'includes/pagination.html' %}
+<b-modal id="edit-kennel-modal" hide-footer>
+	<template v-slot:modal-title>
+		{$ kennel.name $}
+	</template>
+	<div class="d-block text-center">
+		<b-form-group
+		id="edit-kennel-name-fieldset"
+		description="Kennel name excluding breed"
+		label-align="left"
+		label="Name"
+		label-for="edit-kennel-name"		
+		label-size="sm">
+		<b-form-input 
+		id="edit-kennel-name" 
+		v-model="kennel.name" 
+		size="sm" 
+		trim></b-form-input></b-form-group>
+		<b-form-group
+		id="edit-kennel-city-fieldset"
+		label-align="left"
+		label="City"
+		label-for="edit-kennel-city"
+		label-size="sm">
+		<b-form-input 
+		id="edit-kennel-city" 
+		v-model="kennel.city" 
+		size="sm" 
+		trim></b-form-input></b-form-group>
+		<b-form-group
+		id="edit-kennel-state-fieldset"
+		label-align="left"
+		description="State as 2-letter code"
+		label="State"
+		label-for="edit-kennel-state"		
+		label-size="sm">
+		<b-form-input 
+		id="edit-kennel-state" 
+		v-model="kennel.state" 
+		size="sm" 
+		trim></b-form-input></b-form-group>
+		<b-form-group
+		id="edit-kennel-country-fieldset"
+		label-align="left"
+		description="Country as 3-letter code"
+		label="Country"
+		label-for="edit-kennel-country"
+		label-size="sm">
+		<b-form-input 
+		id="edit-kennel-country" 
+		v-model="kennel.country" 
+		size="sm" 
+		trim></b-form-input></b-form-group>
 
-
-
+	</div>
+	<b-button class="mt-3" block @click="$bvModal.hide('edit-kennel-modal')">Close Me</b-button>
+</b-modal>
 {% endblock content %}
