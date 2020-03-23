@@ -8,6 +8,8 @@ app_name = 'poodles'
 urlpatterns = [
     path('', views.PoodleIndex.as_view(), name='home'),
     path('poodles/', views.PoodleList.as_view(), name="poodles"),
+    path('poodle/new/',
+         views.PoodleNew.as_view(), name="new"),
     path('poodle/detail/<str:slug>/',
          views.PoodleDetail.as_view(), name="detail"),
     path('poodle/update/<str:slug>/',

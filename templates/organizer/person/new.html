@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}New Person{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>New Person</h1>
+
+
+{% crispy form %}
+
+{% endblock content %}

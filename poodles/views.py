@@ -1,5 +1,4 @@
 from .models import Poodle
-from rest_framework.response import Response
 from django.views.generic import (
     TemplateView,
     CreateView,
@@ -9,8 +8,8 @@ from django.views.generic import (
     DeleteView,
     FormView
 )
-from .forms import PoodleForm
-from django.urls import reverse
+from .forms import CrispyPoodleForm
+from django.urls import reverse, reverse_lazy
 from django.shortcuts import redirect
 
 
@@ -35,9 +34,16 @@ class PoodleDetail(DetailView):
     template_name = 'poodles/detail.html'
 
 
+class PoodleNew(CreateView):
+    model = Poodle
+    form_class = CrispyPoodleForm
+    success_url = reverse_lazy('poodles:poodles')
+    template_name = 'poodles/new.html'
+
+
 class PoodleUpdate(UpdateView):
     model = Poodle
-    fields = '__all__'
+    form_class = CrispyPoodleForm
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
     context_object_name = 'poodle'

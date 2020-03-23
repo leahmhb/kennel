@@ -47,10 +47,10 @@ class Poodle(Model):
     ukc = CharField(verbose_name="UKC#", max_length=50,
                     null=True, blank=True, default='')
     sex = CharField(verbose_name="Sex", max_length=1,
-                    choices=SEXES, null=True, blank=True)
+                    choices=SEXES)
     is_altered = BooleanField(verbose_name="Altered?", default=False)
     color = CharField(verbose_name="Color", max_length=2,
-                      choices=COLORS, null=True, blank=True, default='U')
+                      choices=COLORS, default='U')
     dob = DateField(verbose_name="Date of Birth",
                     null=True, blank=True, default='')
     dod = DateField(verbose_name="Date of Death",

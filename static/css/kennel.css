@@ -57,28 +57,13 @@ nav form label {
   font-family: 'PT Serif Regular';
 }
 
+
 strong.serif {
   font-family: 'PT Serif Bold';
 }
 
 .strong {
   font-weight: bold;
-}
-
-a {
-  color: #2999F4;
-}
-
-.custom-control {
-  background: none;
-}
-
-.custom-control .custom-checkbox {
-  display:block;
-}
-
-.table-striped tbody tr:nth-of-type(2n+1) {
-  background-color: rgba(65,190,232, 0.07);
 }
 
 #back-to-top {
@@ -92,5 +77,9 @@ button.navbar-toggler {
 }
 
 #maincontent.container {
-  margin-top: 100px;
+  margin: 100px auto;
+}
+
+#div_id_is_altered {
+  margin-top: 2rem;
 }

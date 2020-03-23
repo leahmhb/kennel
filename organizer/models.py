@@ -15,6 +15,61 @@ def XSTR(s): return s or ""
 # Create your models here.
 
 
+STATES = (
+    ('AL', 'Alabama'),
+    ('AK', 'Alaska'),
+    ('AZ', 'Arizona'),
+    ('AR', 'Arkansas'),
+    ('CA', 'California'),
+    ('CO', 'Colorado'),
+    ('CT', 'Connecticut'),
+    ('DE', 'Delaware'),
+    ('FL', 'Florida'),
+    ('GA', 'Georgia'),
+    ('HI', 'Hawaii'),
+    ('ID', 'Idaho'),
+    ('IL', 'Illinois'),
+    ('IN', 'Indiana'),
+    ('IA', 'Iowa'),
+    ('KS', 'Kansas'),
+    ('KY', 'Kentucky'),
+    ('LA', 'Louisiana'),
+    ('ME', 'Maine'),
+    ('MD', 'Maryland'),
+    ('MA', 'Massachusetts'),
+    ('MI', 'Michigan'),
+    ('MN', 'Minnesota'),
+    ('MS', 'Mississippi'),
+    ('MO', 'Missouri'),
+    ('MT', 'Montana'),
+    ('NE', 'Nebraska'),
+    ('NV', 'Nevada'),
+    ('NH', 'New Hampshire'),
+    ('NJ', 'New Jersey'),
+    ('NM', 'New Mexico'),
+    ('NY', 'New York'),
+    ('NC', 'North Carolina'),
+    ('ND', 'North Dakota'),
+    ('OH', 'Ohio'),
+    ('OK', 'Oklahoma'),
+    ('OR', 'Oregon'),
+    ('PA', 'Pennsylvania'),
+    ('RI', 'Rhode Island'),
+    ('SC', 'South Carolina'),
+    ('SD', 'South Dakota'),
+    ('TN', 'Tennessee'),
+    ('TX', 'Texas'),
+    ('UT', 'Utah'),
+    ('VT', 'Vermont'),
+    ('VA', 'Virginia'),
+    ('WA', 'Washington'),
+    ('WV', 'West Virginia'),
+    ('WI', 'Wisconsin'),
+    ('WY', 'Wyoming'),
+    ('DC', 'District of Columbia'),
+)
+
+
 class Kennel(Model):
     slug = AutoSlugField(null=True, default=None,
                          unique=True, populate_from='name')
@@ -23,7 +78,7 @@ class Kennel(Model):
     city = CharField(verbose_name="City", max_length=100,
                      null=True, blank=True)
     state = CharField(verbose_name="State", max_length=2,
-                      null=True, blank=True)
+                      choices=STATES, null=True, blank=True)
     country = CharField(verbose_name="Country", max_length=3,
                         null=True, blank=True, default='USA')
 
@@ -33,6 +88,9 @@ class Kennel(Model):
 
     def get_absolute_url(self):
         return reverse('organizer:detail-kennel', args=[str(self.slug)])
+
+    def get_person(self):
+        return Person.objects.filter(kennel=self.id)
 
     def get_fields(self):
         return [

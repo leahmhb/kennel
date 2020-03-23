@@ -1,19 +1,11 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
-{% block title %}{{ poodle.get_titled_name }}{% endblock %}
+{% block title %}Update {{ poodle.name_call }}{% endblock %}
 
 {% block content %}
-<h1>{{ poodle.get_titled_name }} <b>"{{ poodle.name_call }}"</b></h1>
+<h1><b>Update</b> {{ poodle.name_call }}</h1>
 
-<h3 class="text-condensed">
-	by <a href="{{ poodle.get_sire.get_absolute_url }}">{{ poodle.get_sire.get_titled_name }}</a> out of <a href="{{ poodle.get_dam.get_absolute_url }}">{{ poodle.get_dam.get_titled_name }}</a>
-</h3>
-
- <form method="post" novalidate>
-    {% csrf_token %}
-    {% include 'includes/form.html' %}
-    <button type="submit" class="btn btn-success">Update</button>
-  </form>
-
+{% crispy form %}
 
 {% endblock content %}
