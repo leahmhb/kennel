@@ -10,22 +10,7 @@ from django.db.models import (
 from django.urls import reverse
 from organizer.models import Person
 from django_extensions.db.fields import AutoSlugField
-
-SEXES = (
-    ('M', 'Dog'),
-    ('F', 'Bitch')
-)
-
-COLORS = (
-    ('MP', 'Multi/Parti'),
-    ('WH', 'White'),
-    ('BL', 'Black'),
-    ('BU', 'Blue'),
-    ('U', 'Unknown')
-)
-
-
-# Create your models here.
+from choices.choices import COLORS, SEXES
 
 
 class Poodle(Model):
@@ -58,12 +43,12 @@ class Poodle(Model):
     titles_prefix = CharField(
         verbose_name="Prefix Titles",
         max_length=50,
-        null=True, blank=True,
+        null=False, blank=True,
         default='')
     titles_suffix = CharField(
         verbose_name="Suffix Titles",
         max_length=50,
-        null=True, blank=True,
+        null=False, blank=True,
         default='')
     poodle_sire = ForeignKey('self',
                              verbose_name="Sire", related_name='sire',
@@ -77,7 +62,7 @@ class Poodle(Model):
                             null=True, blank=True)
 
     def __str__(self):
-        return self.name_call
+        return '%s %s "%s"' % (self.titles_prefix, self.name_registered, self.name_call)
 
     def get_titled_name(self):
         return '%s %s %s' % (self.titles_prefix, self.name_registered, self.titles_suffix)

@@ -18,4 +18,6 @@ urlpatterns = [
          views.PoodleUpdate.as_view(), name="create"),
     path('poodle/delete/<str:slug>/',
          views.PoodleUpdate.as_view(), name="delete"),
+
+
 ]

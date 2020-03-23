@@ -13,6 +13,7 @@ from django.views.generic import (
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 
+
 class PersonList(ListView):
     model = Person
     context_object_name = 'people'
@@ -28,6 +29,7 @@ class PersonDetail(DetailView):
     slug_url_kwarg = 'slug'
     context_object_name = 'person'
     template_name = 'organizer/person/detail.html'
+
 
 class PersonNew(CreateView):
     model = Person
@@ -56,6 +58,7 @@ class KennelList(ListView):
     template_name = 'organizer/kennel/all.html'
     paginate_by = 10
     queryset = Kennel.objects.all()
+
 
 class KennelNew(CreateView):
     model = Kennel

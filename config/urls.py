@@ -20,10 +20,16 @@ from config.routers import router
 
 from poodles import urls as poodle_urls
 from organizer import urls as org_urls
+from choices import urls as choice_urls
+
+
+app_name = 'config'
 
 urlpatterns = [
-    path('', include(poodle_urls, namespace='project')),
-    path('', include(org_urls, namespace='more')),
+    path('', include(poodle_urls, namespace='poodles')),
+    path('', include(org_urls, namespace='organizer')),
+    path('choices/', include(choice_urls, namespace="choices")),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+
 ]

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # mine
     'poodles.apps.PoodlesConfig',
     'organizer.apps.OrganizerConfig',
+    'choices.apps.ChoicesConfig',
     # others
     'rest_framework',
     'django_extensions',

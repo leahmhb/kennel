@@ -18,4 +18,6 @@ urlpatterns = [
          views.KennelDetail.as_view(), name="detail-kennel"),
     path('kennel/update/<str:slug>/',
          views.KennelUpdate.as_view(), name="update-kennel"),
+
+
 ]

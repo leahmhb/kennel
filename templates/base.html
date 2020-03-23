@@ -70,15 +70,14 @@
 
 {% block modal %}{% endblock modal %}
 
+{% block before_javascript %}{% endblock before_javascript %}
 
 {% block javascript %}
-
 <script src="{% static 'js/vue-2.6.11.min.js' %}"></script>
 <script src="{% static 'js/axios-0.19.0.min.js' %}"></script>
 <script src="{% static 'bootstrap-vue-2.4.2/bootstrap-vue.min.js' %}"></script>
 <script src="{% static 'js/popper.min.js' %}"></script>
 <script src="{% static 'js/project.js' %}"></script>
-
 {% endblock javascript %}
 {% block after_javascript %}{% endblock after_javascript %}
 </body>

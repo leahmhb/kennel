@@ -9,65 +9,7 @@ from django.db.models import (
     PROTECT)
 from django.urls import reverse
 from django_extensions.db.fields import AutoSlugField
-
-
-def XSTR(s): return s or ""
-# Create your models here.
-
-
-STATES = (
-    ('AL', 'Alabama'),
-    ('AK', 'Alaska'),
-    ('AZ', 'Arizona'),
-    ('AR', 'Arkansas'),
-    ('CA', 'California'),
-    ('CO', 'Colorado'),
-    ('CT', 'Connecticut'),
-    ('DE', 'Delaware'),
-    ('FL', 'Florida'),
-    ('GA', 'Georgia'),
-    ('HI', 'Hawaii'),
-    ('ID', 'Idaho'),
-    ('IL', 'Illinois'),
-    ('IN', 'Indiana'),
-    ('IA', 'Iowa'),
-    ('KS', 'Kansas'),
-    ('KY', 'Kentucky'),
-    ('LA', 'Louisiana'),
-    ('ME', 'Maine'),
-    ('MD', 'Maryland'),
-    ('MA', 'Massachusetts'),
-    ('MI', 'Michigan'),
-    ('MN', 'Minnesota'),
-    ('MS', 'Mississippi'),
-    ('MO', 'Missouri'),
-    ('MT', 'Montana'),
-    ('NE', 'Nebraska'),
-    ('NV', 'Nevada'),
-    ('NH', 'New Hampshire'),
-    ('NJ', 'New Jersey'),
-    ('NM', 'New Mexico'),
-    ('NY', 'New York'),
-    ('NC', 'North Carolina'),
-    ('ND', 'North Dakota'),
-    ('OH', 'Ohio'),
-    ('OK', 'Oklahoma'),
-    ('OR', 'Oregon'),
-    ('PA', 'Pennsylvania'),
-    ('RI', 'Rhode Island'),
-    ('SC', 'South Carolina'),
-    ('SD', 'South Dakota'),
-    ('TN', 'Tennessee'),
-    ('TX', 'Texas'),
-    ('UT', 'Utah'),
-    ('VT', 'Vermont'),
-    ('VA', 'Virginia'),
-    ('WA', 'Washington'),
-    ('WV', 'West Virginia'),
-    ('WI', 'Wisconsin'),
-    ('WY', 'Wyoming'),
-    ('DC', 'District of Columbia'),
-)
+from choices.choices import STATES, COUNTRIES
 
 
 class Kennel(Model):
@@ -76,11 +18,12 @@ class Kennel(Model):
     name = CharField(verbose_name="Name",
                      max_length=50)
     city = CharField(verbose_name="City", max_length=100,
-                     null=True, blank=True)
+                     null=True, blank=True, default='')
     state = CharField(verbose_name="State", max_length=2,
                       choices=STATES, null=True, blank=True)
     country = CharField(verbose_name="Country", max_length=3,
-                        null=True, blank=True, default='USA')
+                        choices=COUNTRIES, null=True, blank=True,
+                        default='USA')
 
     def __str__(self):
 
@@ -109,7 +52,7 @@ class Person(Model):
                          'last_name', 'first_name', 'mi'])
     last_name = CharField(verbose_name="Last Name", max_length=50)
     first_name = CharField(verbose_name="First Name", max_length=50)
-    mi = CharField(verbose_name="MI", max_length=50, null=True, blank=True)
+    mi = CharField(verbose_name="MI", max_length=50, null=True, blank=True, default='')
     kennel = ForeignKey(Kennel, verbose_name="Kennel", related_name='kennel',
                         on_delete=PROTECT, null=True, blank=True)
 
