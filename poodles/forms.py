@@ -67,6 +67,10 @@ class CrispyPoodleForm(PoodleForm):
                 Column('poodle_dam', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
+            Row(
+                Column('comments', css_class='form-group col-md-12 mb-0'),
+                css_class='form-row'
+            ),
             FormActions(
                 Submit('save', 'Save changes'),
                 Button('cancel', 'Cancel')
