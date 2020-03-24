@@ -23,59 +23,39 @@ var app = new Vue({
   el: "#maincontent",
   delimiters: ['{$', '$}'],
   data: {
-    kennel: {}
+    kennel: {},
+    states_select: [],
+    countries_select: [],
   },
-  computed: {
-    countries_select: { 
-      get: function(){
-        var self = this;
-        var url = CONFIG['url_countries'];
-        axios.get(url)
-        .then(function (response) {
-          console.log(response);
-          return response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      },
-    },
-    states_select: {
-      get: function(){
-        var self = this;
-        var url = CONFIG['url_states'];
-        axios.get(url)
-        .then(function (response) {
-          console.log(response);
-          return response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      },
-    }
+  mounted: function(){
+    this.states_select = CONFIG['selects']['states'];
+    this.countries_select = CONFIG['selects']['countries_select']
   },
   methods: {   
-
-   getModal: function(slug){
-    var self = this;
-    var url = CONFIG['url_item'];
-    url += slug + '/'
-    axios.get(url)
-    .then(function (response) {
+    getData: function(slug){
+     var self = this;
+     var url = CONFIG['url_item'];
+     url += slug + '/'
+     axios.get(url)
+     .then(function (response) {
       console.log(response);
       self.kennel = response.data;
-      self.$bvModal.show(CONFIG['edit_modal'])
+
     })
-    .catch(function (error) {
+     .catch(function (error) {
       console.log(error);
     });
+   },
+   getModal: function(slug){
+    this.getData(slug)
+    self.$bvModal.show(CONFIG['edit_modal'])
   },
   closeModal: function(){
     this.kennel = {};
     $bvModal.hide(CONFIG['edit_modal']);
   },
   confirmDelete: function(slug){
+    this.getData(slug);
     this.$bvModal.show(CONFIG['delete_modal']);      
   },
   realDelete: function(slug){
@@ -86,12 +66,12 @@ var app = new Vue({
    axios.delete(url)
    .then(function (response) {
     console.log(response);
-    self.kennel = {};
   })
    .catch(function (error) {
     console.log(error);
   })
    .then(function () {
+    this.kennel = {};
     self.$bvModal.hide(CONFIG['delete_modal']);
   });
  },
