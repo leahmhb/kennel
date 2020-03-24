@@ -67,7 +67,7 @@ realDelete: function(slug){
 })
  .then(function () {
   this.item = {};
-  self.$bvModal.hide(CONFIG['delete_modal']);
+  window.location.reload();
 });
 },
 }

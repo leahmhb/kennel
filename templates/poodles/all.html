@@ -22,41 +22,37 @@ class="btn btn-sm btn-outline-success mt-3">
 	</thead>
 	<tbody>
 		{% for pood in poodles %}
-		<tr data-kennel-slug="{{ poodle.slug }}">
-			<td>				
-				<button class="btn btn-sm" 
-				@click="getModal('{{ poodle.slug }}')">
-				<i class="fas fa-pencil text-success"></i>
+		<tr data-kennel-slug="{{ pood.slug }}">
+			<td>
+				<button class="btn btn-sm"
+				@click="confirmDelete('{{ pood.slug }}')">
+				<i class="fas fa-trash text-danger"></i>
 			</button>
-			<button class="btn btn-sm"
-			@click="confirmDelete('{{ poodle.slug }}')">
-			<i class="fas fa-trash text-danger"></i>
-		</button>
-	</td>
-	<td><a href="{{ pood.get_absolute_url }}">{{ pood.name_call }}</a></td>
-	<td>{{ pood.get_titled_name }}</td>
-	<td>
-		{% for o in pood.get_owners %}
-		<a href="{{ o.get_absolute_url }}">{{ o }}</a>
-		{% if not forloop.last %}
-		<b>&</b> 
-		{% endif %}
-		{% empty %}
-		NA
-		{% endfor %}
-	</td>
-	<td>
-		{% for o in pood.get_breeders %}
-		<a href="{{ o.get_absolute_url }}">{{ o }}</a>
-		{% if not forloop.last %}
-		<b>&</b> 
-		{% endif %}
-		{% empty %}
-		NA
-		{% endfor %}
-	</td>
-</tr>
-{% endfor %}
+		</td>
+		<td><a href="{{ pood.get_absolute_url }}">{{ pood.name_call }}</a></td>
+		<td>{{ pood.get_titled_name }}</td>
+		<td>
+			{% for o in pood.get_owners %}
+			<a href="{{ o.get_absolute_url }}">{{ o }}</a>
+			{% if not forloop.last %}
+			<b>&</b> 
+			{% endif %}
+			{% empty %}
+			NA
+			{% endfor %}
+		</td>
+		<td>
+			{% for o in pood.get_breeders %}
+			<a href="{{ o.get_absolute_url }}">{{ o }}</a>
+			{% if not forloop.last %}
+			<b>&</b> 
+			{% endif %}
+			{% empty %}
+			NA
+			{% endfor %}
+		</td>
+	</tr>
+	{% endfor %}
 </tbody>
 </table>
 {% include 'includes/pagination.html' %}

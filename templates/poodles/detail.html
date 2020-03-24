@@ -8,7 +8,7 @@
 	<span class="text-condensed">{{ poodle.get_titled_name }}</span>
 </h1>
 
-{% include 'poodles/carousel-vue.html' %}
+{% include 'poodles/carousel-vue.html' with images=poodle.get_images %}
 
 <h3 class="text-center text-condensed mt-2">
 	Sire 

@@ -93,6 +93,12 @@ class Poodle(Model):
     def get_dam(self):
         return self.poodle_dam
 
+    def get_documents(self):
+        return Document.objects.filter(poodle=self.id)
+
+    def get_images(self):
+        return Image.objects.filter(poodle=self.id)
+
     def get_fields(self):
         return [
             (field.verbose_name, field.value_to_string(self))
