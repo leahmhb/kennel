@@ -21,28 +21,12 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-  <div id="navbarSlot" v-cloak>
-    <b-navbar
-    fixed="top"
-    toggleable="sm"
-    type="light"
-    variant="light">
-<b-container>
-    <b-navbar-brand href="">Kennel</b-navbar-brand>
-    <b-navbar-toggle target="headerCollapse"></b-navbar-toggle>
-    <b-collapse id="headerCollapse" is-nav>
-      <b-navbar-nav class="mr-auto">
-        <b-nav-item href="{% url 'poodles:home' %}" :class="navBarActiveLink('home')"><i class="fas fa-home"></i> Home</b-nav-item>
-        <b-nav-item href="{% url 'poodles:poodles' %}" :class="navBarActiveLink('poodles')"><i class="fas fa-users"></i> Poodles</b-nav-item>  
-        <b-nav-item href="{% url 'organizer:people' %}" :class="navBarActiveLink('people')"><i class="fas fa-users"></i> People</b-nav-item>  
-        <b-nav-item href="{% url 'organizer:kennels' %}" :class="navBarActiveLink('kennels')"><i class="fas fa-users"></i> Kennels</b-nav-item>  
-      </b-navbar-nav>
-    </b-collapse>
-</b-container>
-  </b-navbar>
-</div>
 
-<main role="main" class="flex-shrink-0">
+  <div id="navbarSlot">
+   {% include 'includes/navbar.html' %}
+ </div>
+
+ <main role="main" class="flex-shrink-0">
   <div id="maincontent" class="container"> 
     {% if messages %}
     {% for message in messages %}

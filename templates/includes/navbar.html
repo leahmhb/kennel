@@ -1,0 +1,28 @@
+ <nav class="navbar navbar-light bg-light fixed-top navbar-expand-sm">
+      <div class="container">
+        <div class="navbar-brand">Kennel</div> 
+        <button type="button" aria-label="Toggle navigation" aria-controls="headerCollapse" aria-expanded="false" class="navbar-toggler">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="headerCollapse" class="navbar-collapse collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a target="_self" href="{% url 'poodles:home' %}" class="nav-link">
+                <i class="fas fa-home"></i> Home</a>
+              </li> 
+              <li class="nav-item {% if '/poodle' in request.path %}active{% endif %}">
+                <a target="_self" href="{% url 'poodles:poodles' %}" class="nav-link">
+                  <i class="fas fa-paw"></i> Poodles</a>
+                </li> 
+                <li class="nav-item {% if '/pe' in request.path %}active{% endif %}">
+                  <a target="_self" href="{% url 'organizer:people' %}" class="nav-link">
+                    <i class="fas fa-users"></i> People</a>
+                  </li> 
+                  <li class="nav-item {% if '/kennel' in request.path %}active{% endif %}">
+                    <a target="_self" href="{% url 'organizer:kennels' %}" class="nav-link">
+                      <i class="fas fa-paw"></i> Kennels</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
