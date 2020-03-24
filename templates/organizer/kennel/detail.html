@@ -3,18 +3,27 @@
 {% block title %}{{ kennel.name }} Standard Poodles{% endblock %}
 
 {% block content %}
-<h1>{{ kennel.name}}</h1>
+<h1>{{ kennel.name}} Standard Poodles</h1>
+<h2 class="text-condensed">
+	{% for o in kennel.get_person %}
+	<a href="{{ o.get_absolute_url }}">{{ o }}</a>
+	{% if not forloop.last %}
+	& 
+	{% endif %}
+	{% endfor %}
 
-<h3 class="text-condensed">{{ kennel.city }}, {{ kennel.state }}</h3>
+</h2>
+<h3 class="text-condensed">{{ kennel.city }}, {% if kennel.state %} {{ kennel.state }} {% endif %} {{ kennel.country }}</h3>
 
 <a href="{% url 'organizer:update-kennel' kennel.slug %}" 
-class="btn btn-sm btn-outline-success">
+class="btn btn-sm btn-outline-success mt-5">
 <i class="fas fa-pencil"></i> Update
 </a>
 
-<a class="btn btn-sm btn-outline-danger">
-	<i class="fas fa-trash"></i> 
-	Delete
+<a class="btn btn-sm btn-outline-danger mt-5"
+@click="confirmDelete('{{ kennel.slug }}')">
+<i class="fas fa-trash"></i> 
+Delete
 </a>
 
 <table class="table">
@@ -30,6 +39,24 @@ class="btn btn-sm btn-outline-success">
 	{% endfor %}
 </table>
 
-{% lorem 3 p %}
+<h2>Comments</h2>
+{% if kennel.comments %}
+{{ kennel.comments }}
+{% else %}
+{% lorem 1 p %}
+{% endif %}
+
+{% include 'organizer/kennel/modals.html' %}
 
 {% endblock content %}
+
+{% block before_javascript %}
+<script>
+	var CONFIG = {
+		"delete_modal": "delete-kennel-modal",
+		"edit_modal": "edit-kennel-modal",
+		'url_item': "{% url 'kennel-list' %}",
+		'selects': {},	
+	}
+</script>
+{% endblock before_javascript %}

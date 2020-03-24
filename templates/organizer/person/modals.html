@@ -1,0 +1,66 @@
+<b-modal id="delete-person-modal" hide-footer>
+	<template v-slot:modal-title>
+		Are you sure you want to delete {$ item.last_name $}, {$ item.first_name $} {$ item.mi $}?
+	</template>	
+	<b-button class="mt-3 mr-auto" 
+	variant="danger" 
+	@click="realDelete(item.slug)">Delete</b-button>
+	<b-button class="mt-3 float-right" 
+	@click="$bvModal.hide('delete-person-modal')">Cancel</b-button>
+</b-modal>
+
+<b-modal id="edit-person-modal" hide-footer>
+	<template v-slot:modal-title>
+		{$ item.last_name $}, {$ item.first_name $} {$ item.mi $}
+	</template>
+	<div class="d-block">
+
+		<b-form-group
+		id="edit-person-first-name-fieldset"
+		label="First Name"
+		label-for="edit-person-first-name"		
+		label-size="sm">
+		<b-form-input 
+		id="edit-person-first-name" 
+		v-model="item.first_name" 
+		size="sm" 
+		trim></b-form-input></b-form-group>
+
+		<b-form-group
+		id="edit-person-mi-fieldset"
+		label="MI"
+		label-for="edit-person-mi"		
+		label-size="sm">
+		<b-form-input 
+		id="edit-person-mi" 
+		v-model="item.mi" 
+		size="sm" 
+		trim></b-form-input></b-form-group>
+
+		<b-form-group
+		id="edit-person-last-name-fieldset"
+		label="Last Name"
+		label-for="edit-person-last-name"		
+		label-size="sm">
+		<b-form-input 
+		id="edit-person-last-name" 
+		v-model="item.last_name" 
+		size="sm" 
+		trim></b-form-input></b-form-group>
+
+
+		<b-form-group
+		id="edit-person-kennel-fieldset"
+		label="Kennel"
+		label-for="edit-person-kennel"		
+		label-size="sm">
+		<b-form-select 
+		id="edit-person-kennel" 
+		v-model="item.kennel"
+		:options="kennels_select"
+		size="sm" 
+		trim></b-form-select></b-form-group>
+
+	</div>
+	<b-button class="mt-3" block @click="closeModal()">Close</b-button>
+</b-modal>

@@ -1,0 +1,20 @@
+<b-modal id="delete-poodle-modal" hide-footer>
+	<template v-slot:modal-title>
+		Are you sure you want to delete {$ item.name_call $}?
+	</template>	
+	<b-button class="mt-3 mr-auto" 
+	variant="danger" 
+	@click="realDelete(item.slug)">Delete</b-button>
+	<b-button class="mt-3 float-right" 
+	@click="$bvModal.hide('delete-poodle-modal')">Cancel</b-button>
+</b-modal>
+
+<b-modal id="edit-poodle-modal" hide-footer>
+	<template v-slot:modal-title>
+		{$ item.name $}
+	</template>
+	<div class="d-block">		
+		wip
+	</div>
+	<b-button class="mt-3" block @click="closeModal()">Close</b-button>
+</b-modal>

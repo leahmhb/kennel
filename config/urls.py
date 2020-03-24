@@ -21,7 +21,8 @@ from config.routers import router
 from poodles import urls as poodle_urls
 from organizer import urls as org_urls
 from choices import urls as choice_urls
-
+import config.settings as config_settings
+from django.conf.urls.static import static
 
 app_name = 'config'
 
@@ -31,5 +32,8 @@ urlpatterns = [
     path('choices/', include(choice_urls, namespace="choices")),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-
 ]
+
+if config_settings.DEBUG:
+    urlpatterns += static(config_settings.MEDIA_URL,
+                          document_root=config_settings.MEDIA_ROOT)

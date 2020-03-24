@@ -7,6 +7,8 @@ from organizer import views
 app_name = 'organizer'
 urlpatterns = [
     path('people/', views.PersonList.as_view(), name="people"),
+    path('person/new/',
+         views.PersonNew.as_view(), name="new-person"),
     path('person/detail/<str:slug>/',
          views.PersonDetail.as_view(), name="detail-person"),
     path('person/update/<str:slug>/',
@@ -14,6 +16,8 @@ urlpatterns = [
 
 
     path('kennels/', views.KennelList.as_view(), name="kennels"),
+    path('kennel/new/',
+         views.KennelNew.as_view(), name="new-kennel"),
     path('kennel/detail/<str:slug>/',
          views.KennelDetail.as_view(), name="detail-kennel"),
     path('kennel/update/<str:slug>/',

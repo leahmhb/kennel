@@ -1,0 +1,69 @@
+<b-modal id="delete-person-modal" hide-footer>
+	<template v-slot:modal-title>
+		Are you sure you want to delete {$ item.get_full_name $}?
+	</template>	
+	<b-button class="mt-3 mr-auto" 
+	variant="danger" 
+	@click="realDelete(item.slug)">Delete</b-button>
+	<b-button class="mt-3 float-right" 
+	@click="$bvModal.hide('delete-person-modal')">Cancel</b-button>
+</b-modal>
+
+<b-modal id="edit-person-modal" hide-footer>
+	<template v-slot:modal-title>
+		{$ item.get_full_name $}
+	</template>
+	<div class="d-block">
+		<b-form-group
+		id="edit-person-name-fieldset"
+		description="person name excluding breed"
+		label-align="left"
+		label="Name"
+		label-for="edit-person-name"		
+		label-size="sm">
+		<b-form-input 
+		id="edit-person-name" 
+		v-model="item.name" 
+		size="sm" 
+		trim></b-form-input></b-form-group>
+		<b-form-group
+		id="edit-person-city-fieldset"
+		label-align="left"
+		label="City"
+		label-for="edit-person-city"
+		label-size="sm">
+		<b-form-input 
+		id="edit-person-city" 
+		v-model="item.city" 
+		size="sm" 
+		trim></b-form-input></b-form-group>
+		<b-form-group
+		id="edit-person-state-fieldset"
+		label-align="left"
+		description="State as 2-letter code"
+		label="State"
+		label-for="edit-person-state"		
+		label-size="sm">
+		<b-form-select 
+		id="edit-person-state" 
+		v-model="item.state"
+		:options="states_select"
+		size="sm" 
+		trim></b-form-select></b-form-group>
+		<b-form-group
+		id="edit-person-country-fieldset"
+		label-align="left"
+		description="Country as 3-letter code"
+		label="Country"
+		label-for="edit-person-country"
+		label-size="sm">
+		<b-form-select 
+		id="edit-person-country" 
+		v-model="item.country" 
+		:options="countries_select"
+		size="sm" 
+		trim></b-form-select></b-form-group>
+
+	</div>
+	<b-button class="mt-3" block @click="closeModal()">Close</b-button>
+</b-modal>

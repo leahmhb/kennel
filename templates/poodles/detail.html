@@ -3,40 +3,97 @@
 {% block title %}{{ poodle.name_call }}{% endblock %}
 
 {% block content %}
-<h1>{{ poodle.name_call }}</h1>
-<h2>{{ poodle.get_titled_name }}</h2>
+<h1 class="text-center">
+	{{ poodle.name_call }}
+	<span class="text-condensed">{{ poodle.get_titled_name }}</span>
+</h1>
 
-<h3 class="text-condensed mb-5">
-	by <a href="{{ poodle.get_sire.get_absolute_url }}">{{ poodle.get_sire }}</a> out of <a href="{{ poodle.get_dam.get_absolute_url }}">{{ poodle.get_dam }}</a>
+{% include 'poodles/carousel-vue.html' %}
+
+<h3 class="text-center text-condensed mt-2">
+	Sire 
+	{% if poodle.poodle_sire %}
+	<a href="{{ poodle.get_sire.get_absolute_url }}">{{ poodle.get_sire }}</a> 
+	{% else %}
+	NA
+	{% endif %}
+	|
+	Dam 
+	{% if poodle.poodle_dam %}
+	<a href="{{ poodle.get_dam.get_absolute_url }}">{{ poodle.get_dam }}</a>
+	{% else %}
+	NA
+	{% endif %}
 </h3>
 
-<a href="{% url 'poodles:update' poodle.slug %}" 
-class="btn btn-sm btn-outline-success">
-<i class="fas fa-pencil"></i> Update
-</a>
-<a class="btn btn-sm btn-outline-danger">
-	<i class="fas fa-trash"></i> 
-	Delete
-</a>
+<h4 class="text-center text-condensed">
+	Owner(s)
+	{% for o in poodle.get_owners %}
+	<a href="{{ o.get_absolute_url }}">{{ o }}</a>
+	{% if not forloop.last %}
+	& 
+	{% endif %}
+	{% empty %}
+	NA
+	{% endfor %}
+	|
+	Breeder(s)
+	{% for o in poodle.get_breeders %}
+	<a href="{{ o.get_absolute_url }}">{{ o }}</a>
+	{% if not forloop.last %}
+	& 
+	{% endif %}
+	{% empty %}
+	NA
+	{% endfor %}
+</h4>
+
 <table class="table">
 	{% for name, value in poodle.get_fields %}
 	{% with skip='ID slug Sire Dam' %}     
 	{% if value and not name in skip %}
 	<tr>
 		<th>{{ name }}</th>
-		<td>
-			
-			{{ value }}
-
-			
+		<td>			
+			{{ value }}			
 		</td>
+
 	</tr>
 	{% endif %}
 	{% endwith %}
 	{% endfor %}
 </table>
+<div class="float-right">
+<a href="{% url 'poodles:update' poodle.slug %}" 
+class="btn btn-sm btn-outline-success">
+<i class="fas fa-pencil"></i> Update
+</a>
+<a @click="confirmDelete('{{ poodle.slug }}')"
+class="btn btn-sm btn-outline-danger">
+<i class="fas fa-trash"></i> 
+Delete
+</a>
+</div>
+<h2>Comments</h2>
+{% if poodle.comments %}
+{{ poodle.comments }}
+{% else %}
+{% lorem 1 p %}
+{% endif %}
 
+{% include 'poodles/modals.html' %}
 
-{% lorem 3 p %}
 
 {% endblock content %}
+
+{% block before_javascript %}
+
+<script>
+	var CONFIG = {
+		"delete_modal": "delete-poodle-modal",
+		"edit_modal": "edit-poodle-modal",
+		'url_item': "{% url 'poodle-list' %}",
+		'selects': {},		
+	}
+</script>
+{% endblock before_javascript %}

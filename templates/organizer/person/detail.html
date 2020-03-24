@@ -6,13 +6,19 @@
 <h1>	
 	{{ person.get_full_name }} 
 </h1>
-<h2><a href="{{ person.get_kennel.get_absolute_url }}">{{ person.get_kennel.name }} Standard Poodles</a></h2>
+{% if person.kennel %}
+<h2>
+	<a href="{{ person.get_kennel.get_absolute_url }}">
+		{{ person.get_kennel.name }} Standard Poodles
+	</a>
+</h2>
+{% endif %}
 
 <a href="{% url 'organizer:update-person' person.slug %}" 
-class="btn btn-sm btn-outline-success">
+class="btn btn-sm btn-outline-success mt-5">
 <i class="fas fa-pencil"></i> Update
 </a>
-<a class="btn btn-sm btn-outline-danger">
+<a class="btn btn-sm btn-outline-danger mt-5">
 	<i class="fas fa-trash"></i> 
 	Delete
 </a>
@@ -28,6 +34,12 @@ class="btn btn-sm btn-outline-success">
 	{% endwith %}
 	{% endfor %}
 </table>
+<h2>Comments</h2>
 
+{% if person.comments %}
+{{ person.comments }}
+{% else %}
+{% lorem 1 p %}
+{% endif %}
 
 {% endblock content %}

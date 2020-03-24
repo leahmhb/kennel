@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}New Document{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>New Document</h1>
+  <form method="post" novalidate  enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+	<input type="submit" name="save" value="Save changes" id="submit-id-save" class="btn btn-primary"> 
+	<input type="button" name="cancel" value="Cancel" id="button-id-cancel" class="btn">
+  </form>
+
+{% endblock content %}

@@ -1,8 +1,20 @@
 from django.forms import ModelForm
-from poodles.models import Poodle
+from poodles.models import Poodle, Document, Image
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Submit, Row, Column, Button
 from crispy_forms.bootstrap import FormActions
+
+
+class DocumentForm(ModelForm):
+    class Meta:
+        model = Document
+        exclude = ['id']
+
+
+class ImageForm(ModelForm):
+    class Meta:
+        model = Image
+        exclude = ['id']
 
 
 class PoodleForm(ModelForm):
@@ -24,7 +36,8 @@ class CrispyPoodleForm(PoodleForm):
                 Column('name_call', css_class='col-md-3 mb-0'),
                 Column(Field('color'), css_class='col-md-3 mb-0'),
                 Column(Field('sex'), css_class='col-md-3 mb-0'),
-                Column(Field('is_altered', wrapper_class="form-check"), css_class='col-md-3 mb-0'),
+                Column(Field('is_altered', wrapper_class="form-check"),
+                       css_class='col-md-3 mb-0'),
                 css_class='form-row'
             ),
             Row(

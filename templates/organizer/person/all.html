@@ -6,17 +6,31 @@
 <h1>People</h1>
 
 <h3 class="text-condensed">{% lorem 10 w random %}</h3>
-
+<a href="{% url 'organizer:new-person' %}" 
+class="btn btn-sm btn-outline-success mt-3">
+<i class="fas fa-plus"></i> Create New
+</a>
 <table class="table">
 	<thead>
 		<tr>
+			<th>Actions</th>
 			<th>Name</th>
 			<th>Kennel</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for per in people %}
-		<tr>
+		<tr data-kennel-slug="{{ per.slug }}">
+			<td>				
+				<button class="btn btn-sm" 
+				@click="getModal('{{ per.slug }}')">
+				<i class="fas fa-pencil text-success"></i>
+			</button>
+			<button class="btn btn-sm"
+			@click="confirmDelete('{{ per.slug }}')">
+			<i class="fas fa-trash text-danger"></i>
+		</button>
+	</td>
 			<td><a href="{{ per.get_absolute_url }}">{{ per.get_full_name }}</a></td>
 			<td>
 				{% if per.kennel %}
@@ -32,5 +46,22 @@
 {% include 'includes/pagination.html' %}
 
 
+{% include 'organizer/person/modals.html' %}
 
 {% endblock content %}
+
+{% block before_javascript %}
+
+<script>
+	var CONFIG = {
+		"delete_modal": "delete-person-modal",
+		"edit_modal": "edit-person-modal",
+
+		'url_item': "{% url 'person-list' %}",
+
+		'selects': {
+			'kennels': []
+		}
+	}
+</script>
+{% endblock before_javascript %}

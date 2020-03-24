@@ -1,4 +1,4 @@
-from .models import Poodle
+from .models import Poodle, Document, Image
 from django.views.generic import (
     TemplateView,
     CreateView,
@@ -8,7 +8,7 @@ from django.views.generic import (
     DeleteView,
     FormView
 )
-from .forms import CrispyPoodleForm
+from .forms import CrispyPoodleForm, DocumentForm, ImageForm
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import redirect
 
@@ -53,3 +53,15 @@ class PoodleUpdate(UpdateView):
         poodle = form.save(commit=False)
         poodle.save()
         return redirect('poodles:detail', slug=poodle.slug)
+
+class DocumentNew(CreateView):
+    model = Document
+    form_class = DocumentForm
+    success_url = reverse_lazy('poodles:document')
+    template_name = 'poodles/document.html'
+
+class ImageNew(CreateView):
+    model = Image
+    form_class = ImageForm
+    success_url = reverse_lazy('poodles:image')
+    template_name = 'poodles/image.html'
