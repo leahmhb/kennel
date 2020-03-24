@@ -12,6 +12,7 @@ from django.views.generic import (
 
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
+from choices.views import get_states, get_countries
 
 
 class PersonList(ListView):
@@ -58,6 +59,16 @@ class KennelList(ListView):
     template_name = 'organizer/kennel/all.html'
     paginate_by = 10
     queryset = Kennel.objects.all()
+    states = get_states()
+    countries = get_countries()
+
+    def get_context_data(self, **kwargs):
+
+        context = super(KennelList, self).get_context_data(**kwargs)
+        context['selects'] = {}
+        context['selects']['states'] = self.states
+        context['selects']['countries'] = self.countries
+        return context
 
 
 class KennelNew(CreateView):
