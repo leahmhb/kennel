@@ -92,3 +92,4 @@ class Poodle(Model):
         app_label = 'poodles'
         db_table = 'poodle'
         verbose_name_plural = 'Poodles'
+        ordering = ['name_call']

@@ -45,6 +45,7 @@ class Kennel(Model):
         app_label = 'organizer'
         db_table = 'kennel'
         verbose_name_plural = 'Kennels'
+        ordering = ['name']
 
 
 class Person(Model):
@@ -78,3 +79,4 @@ class Person(Model):
         app_label = 'organizer'
         db_table = 'person'
         verbose_name_plural = 'People'
+        ordering = ['last_name']
