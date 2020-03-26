@@ -1,69 +1,67 @@
-<b-modal id="delete-person-modal" hide-footer>
+{% block modal %}
+<b-modal id="delete-kennel-modal" hide-footer>
 	<template v-slot:modal-title>
-		Are you sure you want to delete {$ item.get_full_name $}?
+		Are you sure you want to delete {$ item.name $} Standard Poodles?
 	</template>	
 	<b-button class="mt-3 mr-auto" 
 	variant="danger" 
 	@click="realDelete(item.slug)">Delete</b-button>
 	<b-button class="mt-3 float-right" 
-	@click="$bvModal.hide('delete-person-modal')">Cancel</b-button>
+	@click="closeModal('delete-kennel-modal')">Cancel</b-button>
 </b-modal>
 
-<b-modal id="edit-person-modal" hide-footer>
+<b-modal id="edit-kennel-modal" hide-footer>
 	<template v-slot:modal-title>
-		{$ item.get_full_name $}
+		{$ item.name $} Standard Poodles
 	</template>
 	<div class="d-block">
 		<b-form-group
-		id="edit-person-name-fieldset"
-		description="person name excluding breed"
-		label-align="left"
+		id="edit-kennel-name-fieldset"
+		description="Kennel name excluding breed"
 		label="Name"
-		label-for="edit-person-name"		
+		label-for="edit-kennel-name"		
 		label-size="sm">
 		<b-form-input 
-		id="edit-person-name" 
+		id="edit-kennel-name" 
 		v-model="item.name" 
 		size="sm" 
 		trim></b-form-input></b-form-group>
 		<b-form-group
-		id="edit-person-city-fieldset"
-		label-align="left"
+		id="edit-kennel-city-fieldset"
 		label="City"
-		label-for="edit-person-city"
+		label-for="edit-kennel-city"
 		label-size="sm">
 		<b-form-input 
-		id="edit-person-city" 
+		id="edit-kennel-city" 
 		v-model="item.city" 
 		size="sm" 
 		trim></b-form-input></b-form-group>
 		<b-form-group
-		id="edit-person-state-fieldset"
-		label-align="left"
+		id="edit-kennel-state-fieldset"
 		description="State as 2-letter code"
 		label="State"
-		label-for="edit-person-state"		
+		label-for="edit-kennel-state"		
 		label-size="sm">
 		<b-form-select 
-		id="edit-person-state" 
+		id="edit-kennel-state" 
 		v-model="item.state"
 		:options="states_select"
 		size="sm" 
 		trim></b-form-select></b-form-group>
 		<b-form-group
-		id="edit-person-country-fieldset"
-		label-align="left"
+		id="edit-kennel-country-fieldset"
 		description="Country as 3-letter code"
 		label="Country"
-		label-for="edit-person-country"
+		label-for="edit-kennel-country"
 		label-size="sm">
 		<b-form-select 
-		id="edit-person-country" 
+		id="edit-kennel-country" 
 		v-model="item.country" 
 		:options="countries_select"
 		size="sm" 
 		trim></b-form-select></b-form-group>
 
 	</div>
-	<b-button class="mt-3" block @click="closeModal()">Close</b-button>
+	<b-button class="mt-3" block @click="closeModal('edit-kennel-modal')">Close</b-button>
 </b-modal>
+{% endblock modal %}

@@ -15,9 +15,9 @@
   <link href="{% static 'fonts/fontawesome-pro-5.0.1/web-fonts-with-css/css/fontawesome-all.min.css' %}" rel="stylesheet">
   <!-- This file stores project-specific CSS -->
   <link href="{% static 'css/kennel.css' %}" rel="stylesheet">
-  {% endblock %}
-  {% block after_css %}
-  {% endblock %}
+  <link href="{% static 'css/crispy-overrides.css' %}" rel="stylesheet">
+  {% endblock css %}
+  {% block after_css %}{% endblock after_css%}
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -55,13 +55,11 @@
 {% block modal %}{% endblock modal %}
 
 {% block before_javascript %}{% endblock before_javascript %}
-
 {% block javascript %}
 <script src="{% static 'js/vue-2.6.11.min.js' %}"></script>
 <script src="{% static 'js/axios-0.19.0.min.js' %}"></script>
-<script src="{% static 'bootstrap-vue-2.4.2/bootstrap-vue.min.js' %}"></script>
+<script src="{% static 'bootstrap-vue-2.8/bootstrap-vue.min.js' %}"></script>
 <script src="{% static 'js/popper.min.js' %}"></script>
-<script src="{% static 'js/project.js' %}"></script>
 {% endblock javascript %}
 {% block after_javascript %}{% endblock after_javascript %}
 </body>

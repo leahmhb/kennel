@@ -1,14 +1,15 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}List{% endblock %}
 
 {% block content %}
-<h1>People</h1>
+<div id="list">
+	<h1>People</h1>
 
-<h3 class="text-condensed">{% lorem 10 w random %}</h3>
-<a href="{% url 'organizer:new-person' %}" 
-class="btn btn-sm btn-outline-success mt-3">
-<i class="fas fa-plus"></i> Create New
+	<h3 class="text-condensed">{% lorem 10 w random %}</h3>
+	<a href="{% url 'organizer:new-person' %}" 
+	class="btn btn-sm btn-outline-success mt-3">
+	<i class="fas fa-plus"></i> Create New
 </a>
 <table class="table">
 	<thead>
@@ -31,26 +32,25 @@ class="btn btn-sm btn-outline-success mt-3">
 			<i class="fas fa-trash text-danger"></i>
 		</button>
 	</td>
-			<td><a href="{{ per.get_absolute_url }}">{{ per.get_full_name }}</a></td>
-			<td>
-				{% if per.kennel %}
-				<a href="{{ per.get_kennel.get_absolute_url }}">{{ per.get_kennel.name }} Standard Poodles</a>
-				{% else %}
-				NA
-				{% endif %}
-			</td>
-		</tr>
-		{% endfor %}
-	</tbody>
+	<td><a href="{{ per.get_absolute_url }}">{{ per.get_full_name }}</a></td>
+	<td>
+		{% if per.kennel %}
+		<a href="{{ per.get_kennel.get_absolute_url }}">{{ per.get_kennel.name }} Standard Poodles</a>							
+		{% endif %}
+	</td>
+</tr>
+{% endfor %}
+</tbody>
 </table>
-{% include 'includes/pagination.html' %}
 
+{% include 'includes/pagination.html' %}
 
 {% include 'organizer/person/modals.html' %}
 
+</div>
 {% endblock content %}
 
-{% block before_javascript %}
+{% block after_javascript %}
 
 <script>
 	var CONFIG = {
@@ -60,8 +60,9 @@ class="btn btn-sm btn-outline-success mt-3">
 		'url_item': "{% url 'person-list' %}",
 
 		'selects': {
-			'kennels': []
+			'kennels': {{ selects.kennels | safe }}
 		}
 	}
 </script>
-{% endblock before_javascript %}
+<script src="{% static 'js/organizer-person.js' %}"></script>
+{% endblock after_javascript %}

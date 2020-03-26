@@ -5,7 +5,7 @@
     <b-carousel
     id="carousel"
     v-model="slide"
-    :interval="4000"
+    :interval="9000"
     controls
     indicators
     background="#ababab"
@@ -19,7 +19,7 @@
     <!-- Text slides with image -->
     <b-carousel-slide
     caption="{{ img.description | title }}"
-    img-src="/media/{{ img.image }}"
+    img-src="/media/{{ img.path }}"
     img-alt="{{ img.description | title }}"
     >         
   </b-carousel-slide>    

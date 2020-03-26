@@ -79,7 +79,14 @@ button.navbar-toggler {
 #maincontent.container {
   margin: 100px auto;
 }
-
-#div_id_is_altered {
-  margin-top: 2rem;
+/*  pages */
+section {
+  margin: 2rem auto;
+}
+.section-header {
+  margin-top: 1rem;
+}
+.page-header {
+  border-bottom: 3px solid;
+  margin-bottom: 2rem;
 }

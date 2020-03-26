@@ -1,14 +1,16 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Poodles{% endblock %}
 
 {% block content %}
-<h1>Poodles</h1>
+<div id="list">
 
-<h3 class="text-condensed">{% lorem 10 w random %}</h3>
-<a href="{% url 'poodles:new' %}" 
-class="btn btn-sm btn-outline-success mt-3">
-<i class="fas fa-plus"></i> Create New
+	<h1>Poodles</h1>
+
+	<h3 class="text-condensed">{% lorem 10 w random %}</h3>
+	<a href="{% url 'poodles:new' %}" 
+	class="btn btn-sm btn-outline-success mt-3">
+	<i class="fas fa-plus"></i> Create New
 </a>
 <table class="table">
 	<thead>
@@ -24,51 +26,63 @@ class="btn btn-sm btn-outline-success mt-3">
 		{% for pood in poodles %}
 		<tr data-kennel-slug="{{ pood.slug }}">
 			<td>
+				<button class="btn btn-sm" 
+				@click="getModal('{{ pood.slug }}')">
+				<i class="fas fa-pencil text-success"></i></button>
 				<button class="btn btn-sm"
 				@click="confirmDelete('{{ pood.slug }}')">
-				<i class="fas fa-trash text-danger"></i>
-			</button>
-		</td>
-		<td><a href="{{ pood.get_absolute_url }}">{{ pood.name_call }}</a></td>
-		<td>{{ pood.get_titled_name }}</td>
-		<td>
-			{% for o in pood.get_owners %}
-			<a href="{{ o.get_absolute_url }}">{{ o }}</a>
-			{% if not forloop.last %}
-			<b>&</b> 
-			{% endif %}
-			{% empty %}
-			NA
-			{% endfor %}
-		</td>
-		<td>
-			{% for o in pood.get_breeders %}
-			<a href="{{ o.get_absolute_url }}">{{ o }}</a>
-			{% if not forloop.last %}
-			<b>&</b> 
-			{% endif %}
-			{% empty %}
-			NA
-			{% endfor %}
-		</td>
-	</tr>
-	{% endfor %}
-</tbody>
+				<i class="fas fa-trash text-danger"></i></button>
+			</td>
+			<td><a href="{{ pood.get_absolute_url }}">{{ pood.name_call }}</a></td>
+			<td>{{ pood.get_titled_name }}</td>
+			<td>
+				{% for o in pood.get_owners %}
+				<a href="{{ o.get_absolute_url }}">{{ o }}</a>
+				{% if not forloop.last %}
+				<b>&</b> 
+				{% endif %}
+				{% empty %}
+				NA
+				{% endfor %}
+			</td>
+			<td>
+				{% for o in pood.get_breeders %}
+				<a href="{{ o.get_absolute_url }}">{{ o }}</a>
+				{% if not forloop.last %}
+				<b>&</b> 
+				{% endif %}
+				{% empty %}
+				NA
+				{% endfor %}
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
 </table>
 {% include 'includes/pagination.html' %}
+
 {% include 'poodles/modals.html' %}
-
-
+</div>
 {% endblock content %}
 
-{% block before_javascript %}
+{% block after_javascript %}
 
 <script>
 	var CONFIG = {
 		"delete_modal": "delete-poodle-modal",
 		"edit_modal": "edit-poodle-modal",
 		'url_item': "{% url 'poodle-list' %}",
-		'selects': {},		
+		'selects': {
+			'person_owner': {{ selects.person_owner | safe }},
+			'person_breeder': {{ selects.person_breeder | safe }},
+
+			'poodle_sire': {{ selects.poodle_sire | safe }},
+			'poodle_dam': {{ selects.poodle_dam | safe }},
+
+			'color': {{ selects.color | safe }},
+			'sex': {{ selects.sex | safe }},
+		},		
 	}
 </script>
-{% endblock before_javascript %}
+<script src="{% static 'js/poodles-list.js' %}"></script>
+{% endblock after_javascript %}

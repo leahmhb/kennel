@@ -1,12 +1,9 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %}New Poodle{% endblock %}
-{% load crispy_forms_tags %}
 
 {% block content %}
 <h1>New Poodle</h1>
-
-
 {% crispy form %}
-
 {% endblock content %}

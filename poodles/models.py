@@ -12,7 +12,7 @@ from django.db.models import (
     PROTECT)
 from django.urls import reverse
 from django_extensions.db.fields import AutoSlugField
-from choices.choices import COLORS, SEXES
+from choices.views import get_tuple
 
 
 class Poodle(Model):
@@ -34,10 +34,10 @@ class Poodle(Model):
     ukc = CharField(verbose_name="UKC#", max_length=50,
                     blank=True, default='')
     sex = CharField(verbose_name="Sex", max_length=1,
-                    choices=SEXES)
+                    choices=get_tuple('sex'))
     is_altered = BooleanField(verbose_name="Altered?", default=False)
     color = CharField(verbose_name="Color", max_length=2,
-                      choices=COLORS, default='U')
+                      choices=get_tuple('color'), default='U')
     dob = DateField(verbose_name="Date of Birth",
                     null=True, blank=True, default='')
     dod = DateField(verbose_name="Date of Death",
@@ -107,16 +107,24 @@ class Poodle(Model):
 
 
 class Document(Model):
-    poodle = ForeignKey(Poodle, verbose_name="Poodle", related_name='poodles_documents',
+    poodle = ForeignKey(Poodle, verbose_name="Poodle",
+                        related_name='poodles_documents',
                         on_delete=PROTECT)
-    description = CharField(max_length=255, blank=True)
-    document = FileField(upload_to='documents/')
+    title = CharField(max_length=255, blank=True)
+    description = TextField(blank=True)
+    category = CharField(
+        max_length=255, choices=get_tuple('category'), blank=True)
+    path = FileField(upload_to='documents/')
+    is_viewable = BooleanField(verbose_name="Altered?", default=True)
     uploaded_at = DateTimeField(auto_now_add=True)
 
 
 class Image(Model):
-    poodle = ForeignKey(Poodle, verbose_name="Poodle", related_name='poodles_images',
+    poodle = ForeignKey(Poodle, verbose_name="Poodle",
+                        related_name='poodles_images',
                         on_delete=PROTECT)
-    description = CharField(max_length=255, blank=True)
-    image = ImageField(upload_to='images/')
+    title = CharField(max_length=255, blank=True)
+    description = TextField(blank=True)
+    path = ImageField(upload_to='images/')
+    is_viewable = BooleanField(verbose_name="Altered?", default=True)
     uploaded_at = DateTimeField(auto_now_add=True)

@@ -32,7 +32,7 @@ class CrispyPersonForm(PersonForm):
                 css_class='form-row'
             ),
             FormActions(
-                Submit('save', 'Save changes'),
+                Submit('save', 'Save'),
                 Button('cancel', 'Cancel')
             )
         )

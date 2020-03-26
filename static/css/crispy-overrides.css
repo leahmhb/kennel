@@ -1,0 +1,8 @@
+/* CrispyForms */
+#div_id_is_altered {
+  margin-top: 2rem;
+}
+
+#submit-id-save, #button-id-cancel {
+  float: right;
+}

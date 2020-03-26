@@ -20,9 +20,9 @@ urlpatterns = [
          views.PoodleUpdate.as_view(), name="delete"),
 
 
-    path('poodle/document/',
+    path('poodle/document/<str:slug>/',
          views.DocumentNew.as_view(), name="document"),
-    path('poodle/image/',
+    path('poodle/image/<str:slug>/',
          views.ImageNew.as_view(), name="image"),
 
 ]

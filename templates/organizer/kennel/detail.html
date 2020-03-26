@@ -1,23 +1,24 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}{{ kennel.name }} Standard Poodles{% endblock %}
 
 {% block content %}
-<h1>{{ kennel.name}} Standard Poodles</h1>
-<h2 class="text-condensed">
-	{% for o in kennel.get_person %}
-	<a href="{{ o.get_absolute_url }}">{{ o }}</a>
-	{% if not forloop.last %}
-	& 
-	{% endif %}
-	{% endfor %}
+<div id="detail">
+	<h1>{{ kennel.name}} Standard Poodles</h1>
+	<h2 class="text-condensed">
+		{% for o in kennel.get_person %}
+		<a href="{{ o.get_absolute_url }}">{{ o }}</a>
+		{% if not forloop.last %}
+		& 
+		{% endif %}
+		{% endfor %}
 
-</h2>
-<h3 class="text-condensed">{{ kennel.city }}, {% if kennel.state %} {{ kennel.state }} {% endif %} {{ kennel.country }}</h3>
+	</h2>
+	<h3 class="text-condensed">{{ kennel.city }}, {{ kennel.state|default_if_none:"" }} {{ kennel.country }}</h3>
 
-<a href="{% url 'organizer:update-kennel' kennel.slug %}" 
-class="btn btn-sm btn-outline-success mt-5">
-<i class="fas fa-pencil"></i> Update
+	<a href="{% url 'organizer:update-kennel' kennel.slug %}" 
+	class="btn btn-sm btn-outline-success mt-5">
+	<i class="fas fa-pencil"></i> Update
 </a>
 
 <a class="btn btn-sm btn-outline-danger mt-5"
@@ -32,7 +33,7 @@ Delete
 	{% if value and not name in skip %}
 	<tr>
 		<th>{{ name }}</th>
-		<td>{{ value }}</td>
+		<td>{{ value|default_if_none:"" }}</td>
 	</tr>
 	{% endif %}
 	{% endwith %}
@@ -47,16 +48,20 @@ Delete
 {% endif %}
 
 {% include 'organizer/kennel/modals.html' %}
-
+</div>
 {% endblock content %}
 
-{% block before_javascript %}
+{% block after_javascript %}
 <script>
 	var CONFIG = {
 		"delete_modal": "delete-kennel-modal",
 		"edit_modal": "edit-kennel-modal",
 		'url_item': "{% url 'kennel-list' %}",
-		'selects': {},	
+		'selects': {
+			'states': {{ selects.states | safe }},
+			'countries': {{ selects.countries | safe }},
+		}
 	}
 </script>
-{% endblock before_javascript %}
+<script src="{% static 'js/organizer-kennel.js' %}"></script>
+{% endblock after_javascript %}

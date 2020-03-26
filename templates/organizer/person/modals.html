@@ -1,3 +1,4 @@
+{% block modal %}
 <b-modal id="delete-person-modal" hide-footer>
 	<template v-slot:modal-title>
 		Are you sure you want to delete {$ item.last_name $}, {$ item.first_name $} {$ item.mi $}?
@@ -6,7 +7,8 @@
 	variant="danger" 
 	@click="realDelete(item.slug)">Delete</b-button>
 	<b-button class="mt-3 float-right" 
-	@click="$bvModal.hide('delete-person-modal')">Cancel</b-button>
+	variant="default"
+	@click="closeModal('delete-person-modal')">Cancel</b-button>
 </b-modal>
 
 <b-modal id="edit-person-modal" hide-footer>
@@ -62,5 +64,13 @@
 		trim></b-form-select></b-form-group>
 
 	</div>
-	<b-button class="mt-3" block @click="closeModal()">Close</b-button>
+	<div>
+		<b-button class="mt-3 mr-auto" 
+		variant="default" 
+		@click="closeModal('edit-person-modal')">Close</b-button>
+		<b-button class="mt-3 float-right" 
+		variant="success" 
+		@click="submitData(item.slug)">Save</b-button>
+	</div>
 </b-modal>
+{% endblock modal %}

@@ -3,9 +3,8 @@
 {% block title %}{{ person.get_full_name }} {% endblock %}
 
 {% block content %}
-<h1>	
-	{{ person.get_full_name }} 
-</h1>
+<div id="detail">
+<h1>{{ person.get_full_name }}</h1>
 {% if person.kennel %}
 <h2>
 	<a href="{{ person.get_kennel.get_absolute_url }}">
@@ -14,32 +13,63 @@
 </h2>
 {% endif %}
 
-<a href="{% url 'organizer:update-person' person.slug %}" 
-class="btn btn-sm btn-outline-success mt-5">
-<i class="fas fa-pencil"></i> Update
-</a>
-<a class="btn btn-sm btn-outline-danger mt-5">
-	<i class="fas fa-trash"></i> 
-	Delete
-</a>
-<table class="table">
-	{% for name, value in person.get_fields %}
-	{% with skip='ID slug Kennel' %}     
-	{% if value and not name in skip %}
-	<tr>
-		<th>{{ name }}</th>
-		<td>{{ value }}</td>
-	</tr>
-	{% endif %}
-	{% endwith %}
-	{% endfor %}
+<section>
+	<h2 class="page-section-header">
+		Information
+		<div class="float-right">
+			<a href="{% url 'organizer:update-person' person.slug %}" 
+			class="btn btn-sm btn-outline-success mt-5">
+			<i class="fas fa-pencil"></i> Update
+		</a>
+		<a class="btn btn-sm btn-outline-danger mt-5">
+			<i class="fas fa-trash"></i> 
+			Delete
+		</a>
+	</div>
+</h2>
+
+<table class="table table-sm">
+	<caption>
+		Created {{ person.created_at|date:"l F j, Y" }} {{ person.created_at|time:"P" }}
+		<span class="float-right">Last Updated {{ person.updated_at|date:"l F j, Y" }} {{ person.updated_at|time:"P" }}</span>
+	</caption>
+	<tbody>
+		{% for name, value in person.get_fields %}
+		{% with skip='ID slug Kennel Created Updated' %}     
+		{% if value and not name in skip %}
+		<tr>
+			<th>{{ name }}</th>
+			<td>{{ value|default_if_none:"" }}</td>
+		</tr>
+		{% endif %}
+		{% endwith %}
+		{% endfor %}
+	</tbody>
 </table>
-<h2>Comments</h2>
+<h4>Comments</h4>
 
 {% if person.comments %}
 {{ person.comments }}
 {% else %}
 {% lorem 1 p %}
 {% endif %}
-
+</section>
+</div>
 {% endblock content %}
+
+{% block after_javascript %}
+
+<script>
+	var CONFIG = {
+		"delete_modal": "delete-person-modal",
+		"edit_modal": "edit-person-modal",
+
+		'url_item': "{% url 'person-list' %}",
+
+		'selects': {
+			'kennels': {{ selects.kennels | safe }}
+		}
+	}
+</script>
+<script src="{% static 'js/organizer-person.js' %}"></script>
+{% endblock after_javascript %}

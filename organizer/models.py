@@ -7,7 +7,7 @@ from django.db.models import (
     PROTECT)
 from django.urls import reverse
 from django_extensions.db.fields import AutoSlugField
-from choices.choices import STATES, COUNTRIES
+from choices.views import get_tuple
 
 
 class Kennel(Model):
@@ -18,9 +18,9 @@ class Kennel(Model):
     city = CharField(verbose_name="City", max_length=100,
                      null=True, blank=True, default='')
     state = CharField(verbose_name="State", max_length=2,
-                      choices=STATES, null=True, blank=True)
+                      choices=get_tuple('state'), null=True, blank=True)
     country = CharField(verbose_name="Country", max_length=3,
-                        choices=COUNTRIES, null=True, blank=True,
+                        choices=get_tuple('country'), null=True, blank=True,
                         default='USA')
     comments = TextField(blank=True, default='')
     created_at = DateTimeField(verbose_name="Created", auto_now_add=True)

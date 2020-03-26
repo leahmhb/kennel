@@ -1,18 +1,40 @@
 from .models import Person, Kennel
 from .forms import CrispyPersonForm, CrispyKennelForm
 from django.views.generic import (
-    TemplateView,
     CreateView,
     DetailView,
     UpdateView,
     ListView,
-    DeleteView,
-    FormView
 )
 
 from django.shortcuts import redirect
-from django.urls import reverse, reverse_lazy
-from choices.views import get_states, get_countries
+from django.urls import reverse_lazy
+from choices.views import get_json
+import json
+
+
+def get_kennel_json():
+    q = Kennel.objects.all()
+    new_lst = []
+    obj = {}
+    for c in q:
+        txt_val = c.name + 'Standard Poodles'
+        new_lst.append({'value': c.id, 'text': txt_val})
+        obj['data'] = new_lst
+        j = json.dumps(new_lst)
+    return j
+
+
+def get_person_json():
+    q = Person.objects.filter()
+    new_lst = []
+    obj = {}
+    for c in q:
+        txt_val = str(c)
+        new_lst.append({'value': c.id, 'text': txt_val})
+        obj['data'] = new_lst
+        j = json.dumps(new_lst)
+    return j
 
 
 class PersonList(ListView):
@@ -21,6 +43,12 @@ class PersonList(ListView):
     template_name = 'organizer/person/all.html'
     paginate_by = 10
     queryset = Person.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(PersonList, self).get_context_data(**kwargs)
+        context['selects'] = {}
+        context['selects']['kennels'] = get_kennel_json()
+        return context
 
 
 class PersonDetail(DetailView):
@@ -59,15 +87,13 @@ class KennelList(ListView):
     template_name = 'organizer/kennel/all.html'
     paginate_by = 10
     queryset = Kennel.objects.all()
-    states = get_states()
-    countries = get_countries()
 
     def get_context_data(self, **kwargs):
-
         context = super(KennelList, self).get_context_data(**kwargs)
         context['selects'] = {}
-        context['selects']['states'] = self.states
-        context['selects']['countries'] = self.countries
+        context['selects']['states'] = get_json('state')
+        context['selects']['countries'] = get_json('country')
+        print(context)
         return context
 
 
