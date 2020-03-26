@@ -1,0 +1,16 @@
+// --- BootstrapVue Custom SCSS ---
+
+// Requires at least the Bootstrap functions, variables and
+// mixins to be imported first
+// Bootstrap and its default variables
+@import "incl-bootstrap";
+
+@import "kennel";
+
+// Include variables and utilities first
+@import "../../bootstrap-vue-2.8/variables";
+@import "../../bootstrap-vue-2.8/utilities";
+// General styling needed for special form controls
+@import "../../bootstrap-vue-2.8/custom-controls";
+// Include custom SCSS for components
+@import "components/index";
