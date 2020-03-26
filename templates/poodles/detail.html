@@ -139,8 +139,17 @@
 		"delete_modal": "delete-poodle-modal",
 		"edit_modal": "edit-poodle-modal",
 		'url_item': "{% url 'poodle-list' %}",
-		'selects': {},	
-		'document_modal': 'document-poodle-modal'	
+		'document_modal': 'document-poodle-modal',
+		'selects': {
+			'person_owner': {{ selects.person_owner | safe }},
+			'person_breeder': {{ selects.person_breeder | safe }},
+
+			'poodle_sire': {{ selects.poodle_sire | safe }},
+			'poodle_dam': {{ selects.poodle_dam | safe }},
+
+			'color': {{ selects.color | safe }},
+			'sex': {{ selects.sex | safe }},
+		},		
 	}
 </script>
 <script src="{% static 'js/poodles-detail.js' %}"></script>
