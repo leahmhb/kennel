@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'crispy_forms',
+    'coverage',
+    'selenium'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

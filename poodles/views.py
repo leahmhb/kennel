@@ -26,6 +26,19 @@ def get_poodle_json(f_sex):
     return j
 
 
+def get_vue_selects(context):
+    context['selects'] = {}
+    context['selects']['poodle_sire'] = get_poodle_json('M')
+    context['selects']['poodle_dam'] = get_poodle_json('F')
+
+    context['selects']['sex'] = get_json('sex')
+    context['selects']['color'] = get_json('color')
+
+    context['selects']['person_owner'] = get_person_json()
+    context['selects']['person_breeder'] = get_person_json()
+    return context
+
+
 class PoodleIndex(TemplateView):
     template_name = 'poodles/index.html'
 
@@ -39,16 +52,7 @@ class PoodleList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(PoodleList, self).get_context_data(**kwargs)
-        context['selects'] = {}
-        context['selects']['poodle_sire'] = get_poodle_json('M')
-        context['selects']['poodle_dam'] = get_poodle_json('F')
-
-        context['selects']['sex'] = get_json('sex')
-        context['selects']['color'] = get_json('color')
-
-        context['selects']['person_owner'] = get_person_json()
-        context['selects']['person_breeder'] = get_person_json()
-
+        context = get_vue_selects(context)
         return context
 
 
@@ -59,6 +63,11 @@ class PoodleDetail(DetailView):
     slug_url_kwarg = 'slug'
     context_object_name = 'poodle'
     template_name = 'poodles/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PoodleDetail, self).get_context_data(**kwargs)
+        context = get_vue_selects(context)
+        return context
 
 
 class PoodleNew(CreateView):
