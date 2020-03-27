@@ -1,11 +1,11 @@
 {% block modal %}
 <b-modal id="delete-person-modal" hide-footer>
 	<template v-slot:modal-title>
-		Are you sure you want to delete {$ item.last_name $}, {$ item.first_name $} {$ item.mi $}?
+		Are you sure you want to delete {$ person.last_name $}, {$ person.first_name $} {$ person.mi $}?
 	</template>	
 	<b-button class="mt-3 mr-auto" 
 	variant="danger" 
-	@click="realDelete(item.slug)">Delete</b-button>
+	@click="realDelete(person.slug)">Delete</b-button>
 	<b-button class="mt-3 float-right" 
 	variant="default"
 	@click="closeModal('delete-person-modal')">Cancel</b-button>
@@ -13,7 +13,7 @@
 
 <b-modal id="edit-person-modal" hide-footer>
 	<template v-slot:modal-title>
-		{$ item.last_name $}, {$ item.first_name $} {$ item.mi $}
+		{$ person.last_name $}, {$ person.first_name $} {$ person.mi $}
 	</template>
 	<div class="d-block">
 
@@ -24,7 +24,7 @@
 		label-size="sm">
 		<b-form-input 
 		id="edit-person-first-name" 
-		v-model="item.first_name" 
+		v-model="person.first_name" 
 		size="sm" 
 		trim></b-form-input></b-form-group>
 
@@ -35,7 +35,7 @@
 		label-size="sm">
 		<b-form-input 
 		id="edit-person-mi" 
-		v-model="item.mi" 
+		v-model="person.mi" 
 		size="sm" 
 		trim></b-form-input></b-form-group>
 
@@ -46,23 +46,40 @@
 		label-size="sm">
 		<b-form-input 
 		id="edit-person-last-name" 
-		v-model="item.last_name" 
+		v-model="person.last_name" 
 		size="sm" 
 		trim></b-form-input></b-form-group>
-
-
-		<b-form-group
-		id="edit-person-kennel-fieldset"
-		label="Kennel"
-		label-for="edit-person-kennel"		
-		label-size="sm">
-		<b-form-select 
-		id="edit-person-kennel" 
-		v-model="item.kennel"
-		:options="kennels_select"
-		size="sm" 
-		trim></b-form-select></b-form-group>
-
+		<hr>
+		<b-button @click="toggleNewKennel" variant="info" size="sm" class="float-right">
+			New
+		</b-button>
+		<div v-if="!newKennel">
+			<b-form-group		
+			id="edit-person-kennel-fieldset-exists"
+			description="If person's kennel is unlisted, click the new button."
+			label="Kennel"
+			label-for="edit-person-kennel"		
+			label-size="sm">
+			<b-form-select 
+			id="edit-person-kennel" 
+			v-model="person.kennel"
+			:options="kennels_select"
+			size="sm" 
+			trim></b-form-select></b-form-group>
+		</div>
+		<div v-else>
+			<b-form-group		
+			id="edit-person-kennel-fieldset-new"
+			description="Enter the kennel name excluding the breed"
+			label="Kennel"
+			label-for="edit-person-kennel"		
+			label-size="sm">
+			<b-form-input 
+			id="edit-person-kennel-new" 
+			v-model="kennel.name" 
+			size="sm" 
+			trim></b-form-input></b-form-group>
+		</div>	
 	</div>
 	<div>
 		<b-button class="mt-3 mr-auto" 
@@ -70,7 +87,7 @@
 		@click="closeModal('edit-person-modal')">Close</b-button>
 		<b-button class="mt-3 float-right" 
 		variant="success" 
-		@click="submitData(item.slug)">Save</b-button>
+		@click="submitData(person.slug)">Save</b-button>
 	</div>
 </b-modal>
 {% endblock modal %}

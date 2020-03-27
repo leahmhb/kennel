@@ -2,22 +2,35 @@ var app = new Vue({
   el: "#list",
   delimiters: ['{$', '$}'],
   data: {
-    item: {},
+    newKennel: false,
+    person: {},
+    kennel: {},
     kennels_select: [],
+    states_select: [],
+    countries_select: [],
   },
   mounted: function(){
     if('kennels' in CONFIG['selects']){
       this.kennels_select = CONFIG['selects']['kennels'];
     }
+    if('states' in CONFIG['selects']){
+      this.states_select = CONFIG['selects']['states'];
+    }
+    if('countries' in CONFIG['selects']){
+      this.countries_select = CONFIG['selects']['countries'];
+    }
   },
   methods: {   
-    getData: function(slug){
+    toggleNewKennel: function(){
+      this.newKennel = !this.newKennel;
+    },
+    getPerson: function(slug){
      var self = this;
-     var url = CONFIG['url_item'];
+     var url = CONFIG['url_person'];
      url += slug + '/'
      axios.get(url)
      .then(function (response) {
-      self.item = response.data;
+      self.person = response.data;
     })
      .catch(function (error) {
       console.log(error);
@@ -26,9 +39,9 @@ var app = new Vue({
    },
    submitData: function(slug) {
     var self = this;
-    var url = CONFIG['url_item'];
+    var url = CONFIG['url_person'];
     url += slug + '/'
-    axios.put(url, self.item)
+    axios.put(url, self.person)
     .then(function (response) {
       console.log(response.data);
     })
@@ -38,21 +51,21 @@ var app = new Vue({
     window.location.reload();
   },
   getModal: function(slug){
-    this.getData(slug);
+    this.getPerson(slug);
     this.$bvModal.show(CONFIG['edit_modal']);
   },
   closeModal: function(id){
-    this.item = {};
+    this.person = {};
     this.$bvModal.hide(id);
   },
   confirmDelete: function(slug){
-    this.getData(slug);
+    this.getPerson(slug);
     this.$bvModal.show(CONFIG['delete_modal']);      
   },
   realDelete: function(slug){
    var self = this;
    var id = CONFIG['delete_modal'];
-   var url = CONFIG['url_item'];
+   var url = CONFIG['url_person'];
    url += slug + '/'
    axios.delete(url)
    .then(function (response) {
@@ -61,7 +74,7 @@ var app = new Vue({
     console.log(error);
   })
    .then(function () {
-    this.item = {};
+    this.person = {};
     window.location.reload();
   });
  },

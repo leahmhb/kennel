@@ -18,7 +18,7 @@ def get_kennel_json():
     new_lst = []
     obj = {}
     for c in q:
-        txt_val = c.name + 'Standard Poodles'
+        txt_val = c.name + ' Standard Poodles'
         new_lst.append({'value': c.id, 'text': txt_val})
         obj['data'] = new_lst
         j = json.dumps(new_lst)
@@ -48,6 +48,8 @@ class PersonList(ListView):
         context = super(PersonList, self).get_context_data(**kwargs)
         context['selects'] = {}
         context['selects']['kennels'] = get_kennel_json()
+        context['selects']['states'] = get_json('state')
+        context['selects']['countries'] = get_json('country')
         return context
 
 

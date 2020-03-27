@@ -9,14 +9,18 @@
 	<h3 class="text-condensed">{% lorem 10 w random %}</h3>
 	<a href="{% url 'organizer:new-person' %}" 
 	class="btn btn-sm btn-outline-success mt-3">
-	<i class="fas fa-plus"></i> Create New
+	<i class="fas fa-plus"></i> New Person
 </a>
+
 <table class="table">
 	<thead>
 		<tr>
 			<th>Actions</th>
 			<th>Name</th>
 			<th>Kennel</th>
+			<th>City</th>
+			<th>State</th>
+			<th>Country</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -35,9 +39,12 @@
 	<td><a href="{{ per.get_absolute_url }}">{{ per.get_full_name }}</a></td>
 	<td>
 		{% if per.kennel %}
-		<a href="{{ per.get_kennel.get_absolute_url }}">{{ per.get_kennel.name }} Standard Poodles</a>							
+		<a href="{{ per.kennel.get_absolute_url }}">{{ per.kennel.name }} Standard Poodles</a>							
 		{% endif %}
 	</td>
+	<td>{{ per.kennel.city|default_if_none:"" }}</td>
+	<td>{{ per.kennel.state|default_if_none:"" }}</td>
+	<td>{{ per.kennel.country }}</td>
 </tr>
 {% endfor %}
 </tbody>
@@ -57,7 +64,7 @@
 		"delete_modal": "delete-person-modal",
 		"edit_modal": "edit-person-modal",
 
-		'url_item': "{% url 'person-list' %}",
+		'url_person': "{% url 'person-list' %}",
 
 		'selects': {
 			'kennels': {{ selects.kennels | safe }}
