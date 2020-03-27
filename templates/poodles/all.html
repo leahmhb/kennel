@@ -18,6 +18,7 @@
 			<th>Actions</th>
 			<th>Call Name</th>
 			<th>Registered Name</th>	
+			<th>Sex</th>
 			<th>Owners</th>
 			<th>Breeders</th>		
 		</tr>
@@ -35,6 +36,13 @@
 			</td>
 			<td><a href="{{ pood.get_absolute_url }}">{{ pood.name_call }}</a></td>
 			<td>{{ pood.get_titled_name }}</td>
+			<td>
+				{% if pood.sex == 'M' %}
+				<i class="fas fa-mars" title="Dog"></i>
+				{% elif pood.sex == 'F' %}
+				<i class="fas fa-venus" title="Bitch"></i>
+				{% endif %}
+			</td>
 			<td>
 				{% for o in pood.get_owners %}
 				<a href="{{ o.get_absolute_url }}">{{ o }}</a>

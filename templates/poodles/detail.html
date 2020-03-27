@@ -100,57 +100,169 @@
 		</table>
 	</section>
 
-
 	<section>
-		<h2 class="section-header">
-			Documents
-			<div class="float-right">
-				<a href="{% url 'poodles:document' poodle.slug %}"
-				class="btn btn-sm btn-outline-success">
-				<i class="fas fa-sticky-note"></i> Add</a>
-			</div>
-		</h2>
+		<h2 class="section-header">Pedigree</h2>
 
-
-		<ul class="list-group">
-			{% for doc in poodle.get_documents %}
-
-			<a href="/media/{{ doc.path }}" class="list-group-item list-group-item-action">
-				<div class="d-flex w-100 justify-content-between">
-					<h5 class="mb-1"><i class="fas fa-sticky-note"></i> {{ doc.category }}</h5>
-					<small>{{ doc.uploaded_at }}</small>
+		<div class="container">
+			
+			<div class="row d-flex align-items-center">
+				<div class="col col-sm-2">
+					{{ poodle }}
 				</div>
-				<p class="mb-1">{{ doc.title }}</p>
-				<small>{{ doc.description }}</small>
-			</a>
-			{% empty %}
-			<li class="list-group-item list-group-item-action">No documents</li>
-			{% endfor %}
-		</ul>
-	</section>
-	{% include 'poodles/modals.html' %}
-</div>
-{% endblock content %}
+				<div class="col col-sm-3">
+					<i class="fas fa-mars"></i>
+					{% if poodle.get_sire %}
+					<a href="{{ poodle.get_sire.get_absolute_url }}" class="d-block">
+						{{ poodle.get_sire }}
+					</a>
+					{% endif %}
+					<hr>
+					<i class="fas fa-venus"></i>
+					{% if poodle.get_dam %}
+					<a href="{{ poodle.get_dam.get_absolute_url }}" class="d-block">
+						{{ poodle.get_dam }}
+					</a>	
+					{% endif %}
+				</div>
+				<div class="col col-sm-3">
+					<i class="fas fa-mars"></i> 
+					{% if poodle.get_sire.get_sire %}
+					<a href="{{ poodle.get_sire.get_sire.get_absolute_url}}" class="d-block">
+						{{ poodle.get_sire.get_sire }}
+					</a>
+					{% endif %}
+					<i class="fas fa-venus"></i>
+					{% if poodle.get_sire.get_dam %}
+					<a href="{{ poodle.get_sire.get_dam.get_absolute_url }}" class="d-block">
+						{{ poodle.get_sire.get_dam }}				
+					</a>
+					{% endif %}
+					<hr>
+					<i class="fas fa-mars"></i>
+					{% if  poodle.get_dam.get_sire%}
+					<a href="{{ poodle.get_dam.get_sire.get_absolute_url }}" class="d-block">
+						{{ poodle.get_dam.get_sire }}
+					</a>
+					{% endif %}
+					<i class="fas fa-venus"></i> 
+					{% if poodle.get_dam.get_dam %}
+					<a href="{{ poodle.get_dam.get_dam.get_absolute_url}}" class="d-block">
+						{{ poodle.get_dam.get_dam }}
+					</a>
+					{% endif %}
 
-{% block after_javascript %}
+				</div>
+				<div class="col col-sm-4">
+					<i class="fas fa-mars"></i>
+					{% if poodle.get_sire.get_sire.get_sire %}
+					<a href="{{ poodle.get_sire.get_sire.get_sire.get_absolute_url}}" class="d-block">
+						{{ poodle.get_sire.get_sire.get_sire }}
+					</a>
+					{% endif %}
+					<i class="fas fa-venus"></i>
+					{% if poodle.get_sire.get_sire.get_dam %}
+					<a href="{{ poodle.get_sire.get_sire.get_dam.get_absolute_url }}" class="d-block">
+						{{ poodle.get_sire.get_sire.get_dam }}				
+					</a>
+					{% endif %}
 
-<script>
-	var CONFIG = {
-		"delete_modal": "delete-poodle-modal",
-		"edit_modal": "edit-poodle-modal",
-		'url_item': "{% url 'poodle-list' %}",
-		'document_modal': 'document-poodle-modal',
-		'selects': {
-			'person_owner': {{ selects.person_owner | safe }},
-			'person_breeder': {{ selects.person_breeder | safe }},
+					<hr>
+					<i class="fas fa-mars"></i>
+					{% if poodle.get_sire.get_dam.get_sire %}
+					<a href="{{ poodle.get_sire.get_dam.get_sire.get_absolute_url}}" class="d-block">
+						{{ poodle.get_sire.get_dam.get_sire }}
+					</a>
+					{% endif %}
+					<i class="fas fa-venus"></i>
+					{% if poodle.get_sire.get_dam.get_dam %}
+					<a href="{{ poodle.get_sire.get_dam.get_dam.get_absolute_url }}" class="d-block">
+						{{ poodle.get_sire.get_dam.get_dam }}				
+					</a>
+					{% endif %}
 
-			'poodle_sire': {{ selects.poodle_sire | safe }},
-			'poodle_dam': {{ selects.poodle_dam | safe }},
+					<hr>
+					<i class="fas fa-mars"></i>
+					{% if poodle.get_dam.get_sire.get_sire %}
+					<a href="{{ poodle.get_dam.get_sire.get_sire.get_absolute_url }}" class="d-block">
+						{{ poodle.get_dam.get_sire.get_sire }}
+					</a>
+					{% endif %}
+					<i class="fas fa-venus"></i> 
+					{% if poodle.get_dam.get_sire.get_dam %}
+					<a href="{{ poodle.get_dam.get_sire.get_dam.get_absolute_url}}" class="d-block">
+						{{ poodle.get_dam.get_sire.get_dam }}
+					</a>
+					{% endif %}
 
-			'color': {{ selects.color | safe }},
-			'sex': {{ selects.sex | safe }},
-		},		
-	}
-</script>
-<script src="{% static 'js/poodles-detail.js' %}"></script>
-{% endblock after_javascript %}
+					<hr>
+					<i class="fas fa-mars"></i>
+					{% if poodle.get_dam.get_dam.get_sire %}
+					<a href="{{ poodle.get_dam.get_dam.get_sire.get_absolute_url }}" class="d-block">
+						{{ poodle.get_dam.get_dam.get_sire }}
+					</a>
+					{% endif %}
+					<i class="fas fa-venus"></i> 
+					{% if poodle.get_dam.get_dam.get_dam %}
+					<a href="{{ poodle.get_dam.get_dam.get_dam.get_absolute_url}}" class="d-block">
+						{{ poodle.get_dam.get_dam.get_dam }}
+					</a>				
+					{% endif %}
+
+				</div>		
+			</div>
+			<span class="help-text">* Performance titled removed for brevity</span>
+		</section>
+
+		<section>
+			<h2 class="section-header">
+				Documents
+				<div class="float-right">
+					<a href="{% url 'poodles:document' poodle.slug %}"
+					class="btn btn-sm btn-outline-success">
+					<i class="fas fa-sticky-note"></i> Add</a>
+				</div>
+			</h2>
+
+
+			<ul class="list-group">
+				{% for doc in poodle.get_documents %}
+
+				<a href="/media/{{ doc.path }}" class="list-group-item list-group-item-action">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1"><i class="fas fa-sticky-note"></i> {{ doc.category }}</h5>
+						<small>{{ doc.uploaded_at }}</small>
+					</div>
+					<p class="mb-1">{{ doc.title }}</p>
+					<small>{{ doc.description }}</small>
+				</a>
+				{% empty %}
+				<li class="list-group-item list-group-item-action">No documents</li>
+				{% endfor %}
+			</ul>
+		</section>
+		{% include 'poodles/modals.html' %}
+	</div>
+	{% endblock content %}
+
+	{% block after_javascript %}
+
+	<script>
+		var CONFIG = {
+			"delete_modal": "delete-poodle-modal",
+			"edit_modal": "edit-poodle-modal",
+			'url_item': "{% url 'poodle-list' %}",
+			'document_modal': 'document-poodle-modal',
+			'selects': {
+				'person_owner': {{ selects.person_owner | safe }},
+				'person_breeder': {{ selects.person_breeder | safe }},
+
+				'poodle_sire': {{ selects.poodle_sire | safe }},
+				'poodle_dam': {{ selects.poodle_dam | safe }},
+
+				'color': {{ selects.color | safe }},
+				'sex': {{ selects.sex | safe }},
+			},		
+		}
+	</script>
+	<script src="{% static 'js/poodles-detail.js' %}"></script>
+	{% endblock after_javascript %}
