@@ -1,59 +1,113 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}{{ person.get_full_name }} {% endblock %}
 
 {% block content %}
 <div id="detail">
-<h1>{{ person.get_full_name }}</h1>
-{% if person.kennel %}
-<h2>
-	<a href="{{ person.get_kennel.get_absolute_url }}">
-		{{ person.get_kennel.name }} Standard Poodles
-	</a>
-</h2>
-{% endif %}
+	<h1>{{ person.get_full_name }}</h1>
+	{% if person.kennel %}
+	<h2>
+		<a href="{{ person.get_kennel.get_absolute_url }}">
+			{{ person.get_kennel.name }} Standard Poodles
+		</a>
+	</h2>
+	{% endif %}
+
+	<section>
+		<h2 class="page-section-header">
+			Information
+			<div class="float-right">
+				<a href="{% url 'organizer:update-person' person.slug %}" 
+				class="btn btn-sm btn-outline-success mt-5">
+				<i class="fas fa-pencil"></i> Update
+			</a>
+			<a class="btn btn-sm btn-outline-danger mt-5">
+				<i class="fas fa-trash"></i> 
+				Delete
+			</a>
+		</div>
+	</h2>
+
+	<table class="table table-sm">
+		<caption>
+			Created {{ person.created_at|date:"l F j, Y" }} {{ person.created_at|time:"P" }}
+			<span class="float-right">Last Updated {{ person.updated_at|date:"l F j, Y" }} {{ person.updated_at|time:"P" }}</span>
+		</caption>
+		<tbody>
+			{% for name, value in person.get_fields %}
+			{% with skip='ID slug Kennel Created Updated' %}     
+			{% if value and not name in skip %}
+			<tr>
+				<th>{{ name }}</th>
+				<td>{{ value|default_if_none:"" }}</td>
+			</tr>
+			{% endif %}
+			{% endwith %}
+			{% endfor %}
+		</tbody>
+	</table>
+	<h4>Comments</h4>
+	{% if person.comments %}
+	{{ person.comments }}
+	{% else %}
+	{% lorem 1 p %}
+	{% endif %}
+</section>
 
 <section>
-	<h2 class="page-section-header">
-		Information
-		<div class="float-right">
-			<a href="{% url 'organizer:update-person' person.slug %}" 
-			class="btn btn-sm btn-outline-success mt-5">
-			<i class="fas fa-pencil"></i> Update
-		</a>
-		<a class="btn btn-sm btn-outline-danger mt-5">
-			<i class="fas fa-trash"></i> 
-			Delete
-		</a>
-	</div>
-</h2>
+	<div class="row">
+		<div class="col">
+			<h2>Owns</h2>
 
-<table class="table table-sm">
-	<caption>
-		Created {{ person.created_at|date:"l F j, Y" }} {{ person.created_at|time:"P" }}
-		<span class="float-right">Last Updated {{ person.updated_at|date:"l F j, Y" }} {{ person.updated_at|time:"P" }}</span>
-	</caption>
-	<tbody>
-		{% for name, value in person.get_fields %}
-		{% with skip='ID slug Kennel Created Updated' %}     
-		{% if value and not name in skip %}
-		<tr>
-			<th>{{ name }}</th>
-			<td>{{ value|default_if_none:"" }}</td>
-		</tr>
-		{% endif %}
-		{% endwith %}
-		{% endfor %}
-	</tbody>
-</table>
-<h4>Comments</h4>
 
-{% if person.comments %}
-{{ person.comments }}
-{% else %}
-{% lorem 1 p %}
+
+			<ul class="list-group">
+				{% for pood in person.get_owns %}
+				<a href="{{ pood.get_absolute_url }}" class="list-group-item d-flex justify-content-between align-items-center
+				{% if pood in person.get_bred %}
+list-group-item-info
+{% endif %}">
+					{{ pood }}
+					<span class="badge badge-secondary badge-pill">
+						{% if pood.sex == 'M' %}
+						<i class="fas fa-mars" title="Dog"></i>
+						{% elif pood.sex == 'F' %}
+						<i class="fas fa-venus" title="Bitch"></i>
+						{% endif %}
+					</span>
+				</a>
+				{% endfor %}			
+			</ul>
+
+
+			
+
+
+		</div>
+		<div class="col">
+			<h2>Bred</h2>
+			{% for pood in person.get_bred %}
+			<a href="{{ pood.get_absolute_url }}" 
+			class="list-group-item d-flex justify-content-between align-items-center
+{% if pood in person.get_owns %}
+list-group-item-info
 {% endif %}
+			">
+				{{ pood }}
+				<span class="badge badge-secondary badge-pill">
+					{% if pood.sex == 'M' %}
+					<i class="fas fa-mars" title="Dog"></i>
+					{% elif pood.sex == 'F' %}
+					<i class="fas fa-venus" title="Bitch"></i>
+					{% endif %}
+				</span>
+			</a>
+			{% endfor %}		
+		</div>
+	</div>
 </section>
+
+
 </div>
 {% endblock content %}
 
@@ -67,7 +121,7 @@
 		'url_item': "{% url 'person-list' %}",
 
 		'selects': {
-			'kennels': {{ selects.kennels | safe }}
+			'kennels': ''
 		}
 	}
 </script>

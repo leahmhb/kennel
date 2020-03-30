@@ -73,7 +73,7 @@ class Poodle(Model):
         ordering = ['name_call']
 
     def __str__(self):
-        return '%s %s "%s"' % (self.titles_prefix, self.name_registered, self.name_call)
+        return '%s %s %s "%s"' % (self.titles_prefix, self.name_registered, self.titles_suffix, self.name_call)
 
     def get_absolute_url(self):
         return reverse('poodles:detail', args=[str(self.slug)])

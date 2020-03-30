@@ -8,6 +8,7 @@ from django.db.models import (
 from django.urls import reverse
 from django_extensions.db.fields import AutoSlugField
 from choices.views import get_tuple
+from poodles.models import Poodle
 
 
 class Kennel(Model):
@@ -77,8 +78,11 @@ class Person(Model):
     def get_full_name(self):
         return '%s, %s %s' % (self.last_name, self.first_name, self.mi)
 
-    def get_kennel(self):
-        return self.kennel
+    def get_owns(self):
+        return Poodle.objects.filter(person_owners=self.id)
+
+    def get_bred(self):
+        return Poodle.objects.filter(person_breeders=self.id)
 
     def get_fields(self):
         return [
