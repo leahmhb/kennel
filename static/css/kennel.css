@@ -90,3 +90,7 @@ section {
   border-bottom: 3px solid;
   margin-bottom: 2rem;
 }
+
+#carousel {
+  text-shadow: 1px 1px 2px #333;
+}

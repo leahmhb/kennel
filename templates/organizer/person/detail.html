@@ -7,8 +7,8 @@
 	<h1>{{ person.get_full_name }}</h1>
 	{% if person.kennel %}
 	<h2>
-		<a href="{{ person.get_kennel.get_absolute_url }}">
-			{{ person.get_kennel.name }} Standard Poodles
+		<a href="{{ person.kennel.get_absolute_url }}">
+			{{ person.kennel.name }} Standard Poodles
 		</a>
 	</h2>
 	{% endif %}
@@ -65,34 +65,8 @@
 				{% for pood in person.get_owns %}
 				<a href="{{ pood.get_absolute_url }}" class="list-group-item d-flex justify-content-between align-items-center
 				{% if pood in person.get_bred %}
-list-group-item-info
-{% endif %}">
-					{{ pood }}
-					<span class="badge badge-secondary badge-pill">
-						{% if pood.sex == 'M' %}
-						<i class="fas fa-mars" title="Dog"></i>
-						{% elif pood.sex == 'F' %}
-						<i class="fas fa-venus" title="Bitch"></i>
-						{% endif %}
-					</span>
-				</a>
-				{% endfor %}			
-			</ul>
-
-
-			
-
-
-		</div>
-		<div class="col">
-			<h2>Bred</h2>
-			{% for pood in person.get_bred %}
-			<a href="{{ pood.get_absolute_url }}" 
-			class="list-group-item d-flex justify-content-between align-items-center
-{% if pood in person.get_owns %}
-list-group-item-info
-{% endif %}
-			">
+				list-group-item-info
+				{% endif %}">
 				{{ pood }}
 				<span class="badge badge-secondary badge-pill">
 					{% if pood.sex == 'M' %}
@@ -102,9 +76,35 @@ list-group-item-info
 					{% endif %}
 				</span>
 			</a>
-			{% endfor %}		
-		</div>
+			{% endfor %}			
+		</ul>
+
+
+		
+
+
 	</div>
+	<div class="col">
+		<h2>Bred</h2>
+		{% for pood in person.get_bred %}
+		<a href="{{ pood.get_absolute_url }}" 
+		class="list-group-item d-flex justify-content-between align-items-center
+		{% if pood in person.get_owns %}
+		list-group-item-info
+		{% endif %}
+		">
+		{{ pood }}
+		<span class="badge badge-secondary badge-pill">
+			{% if pood.sex == 'M' %}
+			<i class="fas fa-mars" title="Dog"></i>
+			{% elif pood.sex == 'F' %}
+			<i class="fas fa-venus" title="Bitch"></i>
+			{% endif %}
+		</span>
+	</a>
+	{% endfor %}		
+</div>
+</div>
 </section>
 
 
@@ -113,17 +113,5 @@ list-group-item-info
 
 {% block after_javascript %}
 
-<script>
-	var CONFIG = {
-		"delete_modal": "delete-person-modal",
-		"edit_modal": "edit-person-modal",
 
-		'url_item': "{% url 'person-list' %}",
-
-		'selects': {
-			'kennels': ''
-		}
-	}
-</script>
-<script src="{% static 'js/organizer-person.js' %}"></script>
 {% endblock after_javascript %}

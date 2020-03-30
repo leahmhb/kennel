@@ -63,13 +63,17 @@
 	var CONFIG = {
 		"delete_modal": "delete-person-modal",
 		"edit_modal": "edit-person-modal",
+		"kennel_modal": "edit-kennel-modal",
 
 		'url_person': "{% url 'person-list' %}",
+		'url_kennel': "{% url 'kennel-list' %}",
 
 		'selects': {
-			'kennels': {{ selects.kennels | safe }}
+			'kennels': {{ selects.kennels | safe }},		
+			'states': {{ selects.states | safe }},
+			'countries': {{ selects.countries | safe }},
 		}
 	}
 </script>
-<script src="{% static 'js/organizer-person.js' %}"></script>
+<script src="{% static 'js/organizer-person-list.js' %}"></script>
 {% endblock after_javascript %}

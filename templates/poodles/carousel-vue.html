@@ -9,16 +9,16 @@
     controls
     indicators
     background="#ababab"
-    img-width="1024"
-    img-height="480"
-    style="text-shadow: 1px 1px 2px #333;"
+    img-width="800"
+    img-height="600"
     @sliding-start="onSlideStart"
     @sliding-end="onSlideEnd"
     >
     {% for img in images %}
     <!-- Text slides with image -->
     <b-carousel-slide
-    caption="{{ img.description | title }}"
+    caption="{{ img.title | title }}"
+    text="{{ img.description | title }}"
     img-src="/media/{{ img.path }}"
     img-alt="{{ img.description | title }}"
     >         

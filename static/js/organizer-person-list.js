@@ -21,8 +21,8 @@ var app = new Vue({
     }
   },
   methods: {   
-    toggleNewKennel: function(){
-      this.newKennel = !this.newKennel;
+    newKennelModal: function(){
+      this.$bvModal.show(CONFIG['kennel_modal']);
     },
     getPerson: function(slug){
      var self = this;
@@ -37,7 +37,33 @@ var app = new Vue({
     });
 
    },
-   submitData: function(slug) {
+   submitKennel: function(slug) {
+    var self = this;
+    var url = CONFIG['url_kennel'];
+
+    axios.post(url, self.kennel)
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    window.location.reload();
+  },
+  submitNewPerson: function(slug) {
+    var self = this;
+    var url = CONFIG['url_person'];
+
+    axios.post(url, self.person)
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    window.location.reload();
+  },
+  submitPerson: function(slug) {
     var self = this;
     var url = CONFIG['url_person'];
     url += slug + '/'

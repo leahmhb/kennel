@@ -13,6 +13,14 @@ from choices.views import get_json
 import json
 
 
+def get_selects(context):
+    selects = {}
+    selects['kennels'] = get_kennel_json()
+    selects['states'] = get_json('state')
+    selects['countries'] = get_json('country')
+    return selects
+
+
 def get_kennel_json():
     q = Kennel.objects.all()
     new_lst = []
@@ -46,10 +54,8 @@ class PersonList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(PersonList, self).get_context_data(**kwargs)
-        context['selects'] = {}
-        context['selects']['kennels'] = get_kennel_json()
-        context['selects']['states'] = get_json('state')
-        context['selects']['countries'] = get_json('country')
+        context['selects'] = get_selects(context)
+
         return context
 
 
@@ -92,10 +98,7 @@ class KennelList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(KennelList, self).get_context_data(**kwargs)
-        context['selects'] = {}
-        context['selects']['states'] = get_json('state')
-        context['selects']['countries'] = get_json('country')
-        print(context)
+        context['selects'] = get_selects(context)
         return context
 
 
@@ -113,6 +116,11 @@ class KennelDetail(DetailView):
     slug_url_kwarg = 'slug'
     context_object_name = 'kennel'
     template_name = 'organizer/kennel/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(KennelDetail, self).get_context_data(**kwargs)
+        context['selects'] = get_selects(context)
+        return context
 
 
 class KennelUpdate(UpdateView):

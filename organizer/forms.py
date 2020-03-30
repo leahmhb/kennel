@@ -22,9 +22,9 @@ class CrispyPersonForm(PersonForm):
         self.helper.html5_required = True
         self.helper.layout = Layout(
             Row(
-                Column('first_name', css_class='col-md-3 mb-0'),
-                Column('mi', css_class='col-md-3 mb-0'),
-                Column('last_name', css_class='col-md-3 mb-0'),
+                Column('first_name', css_class='col-md-5 mb-0'),
+                Column('mi', css_class='col-md-2 mb-0'),
+                Column('last_name', css_class='col-md-5 mb-0'),
                 css_class='form-row'
             ),
             Row(
@@ -53,4 +53,28 @@ class CrispyKennelForm(KennelForm):
         self.helper.form_class = 'form'
         self.helper.form_id = 'kennel-form'
         self.helper.html5_required = True
-        self.helper.layout = Layout()
+        self.helper.layout = Layout(
+            Row(
+                Column('name'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('city', css_class='col-md-4 mb-0'),
+                Column('state', css_class='col-md-4 mb-0'),
+                Column('country', css_class='col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('web_url', css_class='col-md-6 mb-0'),
+                Column('fb_url', css_class='col-md-6 mb-0'),
+
+                css_class='form-row'
+            ),
+            Row(
+                Column('comments'),
+                css_class='form-row'
+            ),
+            FormActions(
+                Submit('save', 'Save'),
+                Button('cancel', 'Cancel')
+            ))
