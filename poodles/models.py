@@ -115,7 +115,7 @@ class Document(Model):
     category = CharField(
         max_length=255, choices=get_tuple('category'), blank=True)
     path = FileField(upload_to='documents/')
-    is_viewable = BooleanField(verbose_name="Altered?", default=True)
+    is_viewable = BooleanField(verbose_name="Viewable?", default=True)
     uploaded_at = DateTimeField(auto_now_add=True)
 
 
@@ -126,5 +126,5 @@ class Image(Model):
     title = CharField(max_length=255, blank=True)
     description = TextField(blank=True)
     path = ImageField(upload_to='images/')
-    is_viewable = BooleanField(verbose_name="Altered?", default=True)
+    is_viewable = BooleanField(verbose_name="Viewable?", default=True)
     uploaded_at = DateTimeField(auto_now_add=True)

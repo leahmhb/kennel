@@ -4,6 +4,7 @@ from django.db.models import (
     ForeignKey,
     TextField,
     DateTimeField,
+    URLField,
     PROTECT)
 from django.urls import reverse
 from django_extensions.db.fields import AutoSlugField
@@ -23,6 +24,8 @@ class Kennel(Model):
     country = CharField(verbose_name="Country", max_length=3,
                         choices=get_tuple('country'), null=True, blank=True,
                         default='USA')
+    web_url = URLField(verbose_name="Website", blank=True, default='')
+    fb_url = URLField(verbose_name="Facebook", blank=True, default='')
     comments = TextField(blank=True, default='')
     created_at = DateTimeField(verbose_name="Created", auto_now_add=True)
     updated_at = DateTimeField(verbose_name="Updated", auto_now=True)
