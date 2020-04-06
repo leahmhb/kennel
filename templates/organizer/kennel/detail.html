@@ -5,49 +5,89 @@
 {% block content %}
 <div id="detail">
 	<h1>{{ kennel.name}} Standard Poodles</h1>
-	<h2 class="text-condensed">
-		{% for o in kennel.get_person %}
-		<a href="{{ o.get_absolute_url }}">{{ o }}</a>
-		{% if not forloop.last %}
-		& 
+
+	<section>
+		<h2 class="page-section-header">
+			Information
+			<div class="float-right">			
+				<a 
+				href="{% url 'organizer:update-kennel' kennel.slug %}" 
+				class="btn btn-sm btn-outline-success mt-5">
+				<i class="fas fa-pencil"></i> Update</a>
+
+				<a 
+				class="btn btn-sm btn-outline-danger mt-5"
+				@click="confirmDelete('{{ kennel.slug }}')">
+				<i class="fas fa-trash"></i> Delete</a>
+			</div>
+		</h2>
+
+		<table class="table">
+			<caption>
+				Created {{ kennel.created_at|date:"l F j, Y" }} {{ kennel.created_at|time:"P" }}
+				<span class="float-right">Last Updated {{ kennel.updated_at|date:"l F j, Y" }} {{ kennel.updated_at|time:"P" }}</span>
+			</caption>
+			<tr>
+				<th>People</th>
+				<td>	{% for o in kennel.get_person %}
+					<a href="{{ o.get_absolute_url }}">{{ o }}</a>
+					{% if not forloop.last %}
+					& 
+					{% endif %}
+					{% endfor %}
+				</td>
+			</tr>
+			{% for name, value in kennel.get_fields %}
+			{% with skip='ID Name slug Created Updated' %}     
+			{% if value and not name in skip %}
+			<tr>
+				<th>{{ name }}</th>
+				<td>
+					{% if value == 'True' %}
+					<i class="fas fa-check"></i>
+					{% elif value == 'False' %}
+					<i class="fas fa-times"></i>
+					{% else %}
+					{{ value|default_if_none:"" }}
+					{% endif %}
+				</td>
+			</tr>
+			{% endif %}
+			{% endwith %}
+			{% endfor %}
+
+		</table>
+
+		<h2>Comments</h2>
+		{% if kennel.comments %}
+		{{ kennel.comments }}
+		{% else %}
+		{% lorem 1 p %}
 		{% endif %}
-		{% endfor %}
+	</section>
 
-	</h2>
-	<h3 class="text-condensed">{{ kennel.city }}, {{ kennel.state|default_if_none:"" }} {{ kennel.country }}</h3>
+	<section>
+		<div class="row">
+			<div class="col">
+				<h2>Owns</h2>
+				<ul class="list-group">
+					{% for pood in kennel.get_owns %}
+					{% include 'includes/poodle-list-item.html' with pood=pood %}						
+					{% endfor %}			
+				</ul>
+			</div>
+			<div class="col">
+				<h2>Bred</h2>
+				<ul class="list-group">
+					{% for pood in kennel.get_bred %}
+					{% include 'includes/poodle-list-item.html' with pood=pood %}			
+					{% endfor %}	
+				</ul>	
+			</div>
+		</div>
+	</section>
 
-	<a href="{% url 'organizer:update-kennel' kennel.slug %}" 
-	class="btn btn-sm btn-outline-success mt-5">
-	<i class="fas fa-pencil"></i> Update
-</a>
-
-<a class="btn btn-sm btn-outline-danger mt-5"
-@click="confirmDelete('{{ kennel.slug }}')">
-<i class="fas fa-trash"></i> 
-Delete
-</a>
-
-<table class="table">
-	{% for name, value in kennel.get_fields %}
-	{% with skip='ID slug' %}     
-	{% if value and not name in skip %}
-	<tr>
-		<th>{{ name }}</th>
-		<td>{{ value|default_if_none:"" }}</td>
-	</tr>
-	{% endif %}
-	{% endwith %}
-	{% endfor %}
-</table>
-
-<h2>Comments</h2>
-{% if kennel.comments %}
-{{ kennel.comments }}
-{% else %}
-{% lorem 1 p %}
-{% endif %}
-
-{% include 'organizer/kennel/modals.html' %}
+	{% include 'organizer/kennel/modals.html' %}
 </div>
 
 {% endblock content %}

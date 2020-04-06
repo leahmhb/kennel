@@ -5,12 +5,7 @@
 {% block content %}
 <div id="detail">
 	<h1>{{ person.get_full_name }}</h1>
-	{% if person.kennel %}
-	<h2>
-		<a href="{{ person.kennel.get_absolute_url }}">
-			{{ person.kennel.name }} Standard Poodles
-		</a>
-	</h2>
+	{% if person.kennel %}	
 	{% endif %}
 
 	<section>
@@ -34,16 +29,28 @@
 			<span class="float-right">Last Updated {{ person.updated_at|date:"l F j, Y" }} {{ person.updated_at|time:"P" }}</span>
 		</caption>
 		<tbody>
+			<tr>
+				<th>Kennel</th>
+				<td><a href="{{ person.kennel.get_absolute_url }}">{{ person.kennel.name }} Standard Poodles</a></td>
+			</tr>			
 			{% for name, value in person.get_fields %}
-			{% with skip='ID slug Kennel Created Updated' %}     
+			{% with skip='ID slug First Name Last Name MI Created Updated Kennel' %}     
 			{% if value and not name in skip %}
 			<tr>
 				<th>{{ name }}</th>
-				<td>{{ value|default_if_none:"" }}</td>
+				<td>
+					{% if value == 'True' %}
+					<i class="fas fa-check"></i>
+					{% elif value == 'False' %}
+					<i class="fas fa-times"></i>
+					{% else %}
+					{{ value|default_if_none:"" }}
+					{% endif %}
+				</td>
 			</tr>
 			{% endif %}
 			{% endwith %}
-			{% endfor %}
+			{% endfor %}	
 		</tbody>
 	</table>
 	<h4>Comments</h4>
@@ -58,53 +65,21 @@
 	<div class="row">
 		<div class="col">
 			<h2>Owns</h2>
-
-
-
 			<ul class="list-group">
 				{% for pood in person.get_owns %}
-				<a href="{{ pood.get_absolute_url }}" class="list-group-item d-flex justify-content-between align-items-center
-				{% if pood in person.get_bred %}
-				list-group-item-info
-				{% endif %}">
-				{{ pood }}
-				<span class="badge badge-secondary badge-pill">
-					{% if pood.sex == 'M' %}
-					<i class="fas fa-mars" title="Dog"></i>
-					{% elif pood.sex == 'F' %}
-					<i class="fas fa-venus" title="Bitch"></i>
-					{% endif %}
-				</span>
-			</a>
-			{% endfor %}			
-		</ul>
-
-
-		
-
-
+				{% include 'includes/poodle-list-item.html' with pood=pood %}			
+				{% endfor %}			
+			</ul>
+		</div>
+		<div class="col">
+			<h2>Bred</h2>
+			<ul class="list-group">
+				{% for pood in person.get_bred %}
+				{% include 'includes/poodle-list-item.html' with pood=pood %}			
+				{% endfor %}	
+			</ul>	
+		</div>
 	</div>
-	<div class="col">
-		<h2>Bred</h2>
-		{% for pood in person.get_bred %}
-		<a href="{{ pood.get_absolute_url }}" 
-		class="list-group-item d-flex justify-content-between align-items-center
-		{% if pood in person.get_owns %}
-		list-group-item-info
-		{% endif %}
-		">
-		{{ pood }}
-		<span class="badge badge-secondary badge-pill">
-			{% if pood.sex == 'M' %}
-			<i class="fas fa-mars" title="Dog"></i>
-			{% elif pood.sex == 'F' %}
-			<i class="fas fa-venus" title="Bitch"></i>
-			{% endif %}
-		</span>
-	</a>
-	{% endfor %}		
-</div>
-</div>
 </section>
 
 

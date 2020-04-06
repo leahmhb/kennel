@@ -5,6 +5,7 @@ from django.db.models import (
     TextField,
     DateTimeField,
     URLField,
+    BooleanField,
     PROTECT)
 from django.urls import reverse
 from django_extensions.db.fields import AutoSlugField
@@ -46,6 +47,16 @@ class Kennel(Model):
     def get_person(self):
         return Person.objects.filter(kennel=self.id)
 
+    def get_owns(self):
+        p = list(Person.objects.filter(
+            kennel=self.id).values_list('id', flat=True))
+        return Poodle.objects.filter(person_owners__in=p).distinct()
+
+    def get_bred(self):
+        p = list(Person.objects.filter(
+            kennel=self.id).values_list('id', flat=True))
+        return Poodle.objects.filter(person_breeders__in=p).distinct()
+
     def get_fields(self):
         return [
             (field.verbose_name, field.value_to_string(self))
@@ -62,6 +73,12 @@ class Person(Model):
                    null=False, blank=True, default='')
     kennel = ForeignKey(Kennel, verbose_name="Kennel", related_name='kennel',
                         on_delete=PROTECT, null=True, blank=True)
+    akc_bred_with_heart = BooleanField(
+        verbose_name="AKC Bred with H.E.A.R.T", default=False)
+    akc_breeder_of_merit = BooleanField(
+        verbose_name="AKC Breeder of Merit", default=False)
+    yr_started = CharField(verbose_name="Started",
+                           max_length=4, null=False, blank=True, default='')
     comments = TextField(blank=True, default='')
     created_at = DateTimeField(verbose_name="Created", auto_now_add=True)
     updated_at = DateTimeField(verbose_name="Updated", auto_now=True)

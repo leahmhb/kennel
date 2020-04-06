@@ -1,0 +1,15 @@
+<a href="{{ pood.get_absolute_url }}" class="list-group-item d-flex justify-content-between align-items-center
+{% if pood in kennel.get_bred %}
+list-group-item-info
+{% endif %}">
+{{ pood }}
+{% if pood.sex == 'M' %}
+<span class="badge  male-bg badge-pill">
+    <i class="fas fa-mars" title="Dog"></i>  
+</span>
+{% elif pood.sex == 'F' %}
+<span class="badge female-bg badge-pill">
+    <i class="fas fa-venus " title="Bitch"></i>
+</span>
+{% endif %}
+</a>

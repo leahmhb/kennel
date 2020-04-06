@@ -1,10 +1,9 @@
 from .models import Person, Kennel
 from rest_framework.serializers import (
-    HyperlinkedRelatedField,
     ModelSerializer,
     SerializerMethodField,
 )
-
+from django.shortcuts import get_object_or_404
 from rest_framework.reverse import reverse
 
 
@@ -17,7 +16,6 @@ class PersonSerializer(ModelSerializer):
         fields = '__all__'
 
     def get_url(self, per):
-        """Return full API URL for serialized POST object"""
         return reverse(
             "organizer:detail-person",
             kwargs=dict(
@@ -25,6 +23,17 @@ class PersonSerializer(ModelSerializer):
             ),
             request=self.context["request"],
         )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        print(self.kennel)
+        tmp_kennel = KennelSerializer(self, Kennel.objects.get(id=self.kennel))
+        tmp_kennel_valid = tmp_kennel.is_valid()
+        if tmp_kennel_valid:
+            tmp_kennel = tmp_kennel.data
+
+        data['kennel'] = tmp_kennel
+        return data
 
 
 class KennelSerializer(ModelSerializer):
@@ -36,7 +45,6 @@ class KennelSerializer(ModelSerializer):
         fields = '__all__'
 
     def get_url(self, ken):
-        """Return full API URL for serialized POST object"""
         return reverse(
             "organizer:detail-kennel",
             kwargs=dict(

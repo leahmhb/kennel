@@ -31,6 +31,12 @@ class CrispyPersonForm(PersonForm):
                 Column('kennel'),
                 css_class='form-row'
             ),
+            Row(
+                Column('yr_started', css_class='col-md-4 mb-0'),
+                Column('akc_breeder_of_merit', css_class='col-md-4 mb-0'),
+                Column('akc_bred_with_heart', css_class='col-md-4 mb-0'),
+                css_class='form-row'
+            ),
             FormActions(
                 Submit('save', 'Save'),
                 Button('cancel', 'Cancel')

@@ -20,35 +20,56 @@ var app = new Vue({
       this.countries_select = CONFIG['selects']['countries'];
     }
   },
-  methods: {   
+
+  methods: { 
+    convertToSlug: function(txt){
+      return txt
+      .toLowerCase()
+      .replace(/ /g,'-')
+      .replace(/[^\w-]+/g,'')
+      ;
+    },  
     newKennelModal: function(){
       this.$bvModal.show(CONFIG['kennel_modal']);
     },
-    getPerson: function(slug){
+    getKennel: function(){
+     var self = this;
+     var url = CONFIG['url_kennel'];
+     url += slug + '/'
+     axios.get(url)
+     .then(function (response) {
+      self.kennel = response.data;
+    })
+     .catch(function (error) {
+      console.log(error);
+    });
+   },
+   getPerson: function(slug){
      var self = this;
      var url = CONFIG['url_person'];
      url += slug + '/'
      axios.get(url)
      .then(function (response) {
-      self.person = response.data;
+      self.person = response.data;    
+      self.getKennel();  
     })
      .catch(function (error) {
       console.log(error);
     });
-
    },
-   submitKennel: function(slug) {
+   submitKennel: function() {
     var self = this;
     var url = CONFIG['url_kennel'];
+    console.log(self.kennel);
 
     axios.post(url, self.kennel)
-    .then(function (response) {
-      console.log(response.data);
+    .then(function (response) {      
+      self.person.kennel = response.data.id;  
+      self.submitPerson(self.person.slug);
     })
     .catch(function (error) {
       console.log(error);
     });
-    window.location.reload();
   },
   submitNewPerson: function(slug) {
     var self = this;

@@ -91,7 +91,15 @@
 				{% if value and not name in skip %}
 				<tr>
 					<th>{{ name }}</th>
-					<td>{{ value|default_if_none:"" }}</td>
+					<td>
+						{% if value == 'True' %}
+						<i class="fas fa-check"></i>
+						{% elif value == 'False' %}
+						<i class="fas fa-times"></i>
+						{% else %}
+						{{ value|default_if_none:"" }}
+						{% endif %}
+					</td>
 				</tr>
 				{% endif %}
 				{% endwith %}
