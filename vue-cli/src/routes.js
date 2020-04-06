@@ -1,60 +1,9 @@
-import Home from './components/Home.vue';
-import Header from './components/Header.vue';
-
-const User = resolve => {
-    require.ensure(['./components/user/User.vue'], () => {
-        resolve(require('./components/user/User.vue'));
-    }, 'user');
-};
-const UserStart = resolve => {
-    require.ensure(['./components/user/UserStart.vue'], () => {
-        resolve(require('./components/user/UserStart.vue'));
-    }, 'user');
-};
-const UserEdit = resolve => {
-    require.ensure(['./components/user/UserEdit.vue'], () => {
-        resolve(require('./components/user/UserEdit.vue'));
-    }, 'user');
-};
-const UserDetail = resolve => {
-    require.ensure(['./components/user/UserDetail.vue'], () => {
-        resolve(require('./components/user/UserDetail.vue'));
-    }, 'user');
-};
-const UserAdditional = resolve => {
-    require.ensure(['./components/user/UserAdditional.vue'], () => {
-        resolve(require('./components/user/UserAdditional.vue'));
-    }, 'user');
-};
+import Home from './components/Home.vue'
+import Portfolio from './components/portfolio/Portfolio.vue'
+import Stocks from './components/stocks/Stocks.vue'
 
 export const routes = [
-    {
-        path: '', name: 'home', 
-        components: {
-            default: Home,
-            'header-top': Header
-        }
-    },
-    {
-        path: '/user', 
-        components: {
-            default: User,
-            'header-bottom': Header
-        }, 
-        children: [
-            {path: '', component: UserStart},
-            {
-                path: ':id', 
-                component: UserDetail, 
-                beforeEnter: (to, from, next) => {
-                    console.log('inside route setup');
-                    next();
-                }
-            },
-            {path: ':id/edit', component: UserEdit, name: 'userEdit'},
-            {path: ':id/additional', component: UserAdditional, name: 'userAdditional'}
-        ]
-    },
-    {path: '/redirect-me', redirect: {name: 'home'}},
-    {path: '*', redirect: '/'}
-];
+    { path: '/', component: Home },
+    { path: '/portfolio', component: Portfolio },
+    { path: '/stocks', component: Stocks }
+]

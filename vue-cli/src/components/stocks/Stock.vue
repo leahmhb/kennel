@@ -1,3 +1,3 @@
 <template>
-<h1>Header</h1>
+<h1>Stock</h1>
 </template>
