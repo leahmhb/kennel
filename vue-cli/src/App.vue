@@ -15,24 +15,24 @@
 
 </style>
 <template>
-<div class="container">
-<app-header></app-header>
-<div class="row">
-<div class="col-sm-12">
-<router-view></router-view>
-</div>
-</div>
+    <div class="container">
+        <app-header></app-header>
+        <div class="row">
+            <div class="col-sm-12">
+                <router-view></router-view>
+            </div>
+        </div>
 
-</div>
+    </div>
 </template>
 
 <script>
-import Header from './components/Header.vue'
-export default {
-    components: {
-        appHeader: Header
+    import Header from './components/Header.vue'
+    export default {
+        components: {
+            appHeader: Header
+        }
     }
-}
 </script>
 
 <style>
