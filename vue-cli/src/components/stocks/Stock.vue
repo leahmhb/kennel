@@ -40,7 +40,7 @@
                     stockPrice: this.stock.price,
                     qtyy: this.qty,
                 };
-                console.log(order);
+                this.$store.dispatch('buyStock', order);
                 this.qty = 0;
             }
         }
