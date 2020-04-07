@@ -37,30 +37,52 @@
 					{% endfor %}
 				</td>
 			</tr>
-			{% for name, value in kennel.get_fields %}
-			{% with skip='ID Name slug Created Updated' %}     
-			{% if value and not name in skip %}
+
 			<tr>
-				<th>{{ name }}</th>
-				<td>
-					{% if value == 'True' %}
-					<i class="fas fa-check"></i>
-					{% elif value == 'False' %}
-					<i class="fas fa-times"></i>
-					{% else %}
-					{{ value|default_if_none:"" }}
-					{% endif %}
+				<th>City</th>
+				<td>				
+					{{ kennel.city|default_if_none:"" }}				
+				</td>
+			</tr>
+			<tr>
+				<th>State</th>
+				<td>				
+					{{ kennel.state|default_if_none:"" }}				
+				</td>
+			</tr>
+			<tr>
+				<th>Country</th>
+				<td>				
+					{{ kennel.country|default_if_none:"" }}				
+				</td>
+			</tr>
+			{% if kennel.web_url %}
+			<tr>
+				<th>Website</th>
+				<td>				
+					<a target="_blank" href="{{ kennel.web_url|default_if_none:'' }}"><i class="fas fa-external-link-alt"></i></a>				
 				</td>
 			</tr>
 			{% endif %}
-			{% endwith %}
-			{% endfor %}
+			{% if kennel.fb_url %}
+			<tr>
+				<th>FaceBook</th>
+				<td>				
+					<a target="_blank" href="{{ kennel.fv_url|default_if_none:'' }}"><i class="fas fa-facebook"></i></a>				
+				</td>
+			</tr>
+			{% endif %}
+
 
 		</table>
 
 		<h2>Comments</h2>
 		{% if kennel.comments %}
-		{{ kennel.comments }}
+
+		<pre>{% spaceless %}			
+			{{ kennel.comments }}
+		{% endspaceless %}</pre>
+
 		{% else %}
 		{% lorem 1 p %}
 		{% endif %}

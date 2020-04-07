@@ -33,29 +33,29 @@
 				<th>Kennel</th>
 				<td><a href="{{ person.kennel.get_absolute_url }}">{{ person.kennel.name }} Standard Poodles</a></td>
 			</tr>			
-			{% for name, value in person.get_fields %}
-			{% with skip='ID slug First Name Last Name MI Created Updated Kennel' %}     
-			{% if value and not name in skip %}
+			{% if person.kennel.country == 'USA' %}
 			<tr>
-				<th>{{ name }}</th>
-				<td>
-					{% if value == 'True' %}
-					<i class="fas fa-check"></i>
-					{% elif value == 'False' %}
-					<i class="fas fa-times"></i>
-					{% else %}
-					{{ value|default_if_none:"" }}
-					{% endif %}
-				</td>
+				<th>AKC Bred with H.E.A.R.T</th>
+				<td>		
+					{% include 'includes/display-boolean-field.html' with value=person.akc_bred_with_heart %}
+				</td>				
+			</tr>
+			<tr>
+				<th>AKC Breeder of Merit</th>
+				<td>		
+					{% include 'includes/display-boolean-field.html' with value=person.akc_breeder_of_merit %}			
+				</td>				
 			</tr>
 			{% endif %}
-			{% endwith %}
-			{% endfor %}	
 		</tbody>
 	</table>
 	<h4>Comments</h4>
 	{% if person.comments %}
-	{{ person.comments }}
+	
+	<pre>{% spaceless %}			
+		{{ person.comments }}
+	{% endspaceless %}</pre>
+	
 	{% else %}
 	{% lorem 1 p %}
 	{% endif %}

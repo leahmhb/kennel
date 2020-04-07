@@ -27,7 +27,7 @@ class Kennel(Model):
                         default='USA')
     web_url = URLField(verbose_name="Website", blank=True, default='')
     fb_url = URLField(verbose_name="Facebook", blank=True, default='')
-    comments = TextField(blank=True, default='')
+    comments = TextField(verbose_name="Comments", blank=True, default='')
     created_at = DateTimeField(verbose_name="Created", auto_now_add=True)
     updated_at = DateTimeField(verbose_name="Updated", auto_now=True)
 
@@ -79,7 +79,7 @@ class Person(Model):
         verbose_name="AKC Breeder of Merit", default=False)
     yr_started = CharField(verbose_name="Started",
                            max_length=4, null=False, blank=True, default='')
-    comments = TextField(blank=True, default='')
+    comments = TextField(verbose_name="Comments", blank=True, default='')
     created_at = DateTimeField(verbose_name="Created", auto_now_add=True)
     updated_at = DateTimeField(verbose_name="Updated", auto_now=True)
 

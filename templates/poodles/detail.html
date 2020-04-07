@@ -11,18 +11,7 @@
 		{{ poodle.name_call }} | <span class="text-condensed">{{ poodle.get_titled_name }}</span>
 	</h1>
 
-	<section>
-		<h2 class="section-header">
-			Images
-			<div class="float-right">
-				<a href="{% url 'poodles:image' poodle.slug %}"
-				class="btn btn-sm btn-outline-success">
-				<i class="fas fa-file-image"></i> Add</a>
-			</div>
-		</h2>
-		{% include 'poodles/carousel-vue.html' with images=poodle.get_images %}
-	</section>
-
+	
 	<section>
 		<h2 class="section-header">
 			Information
@@ -74,8 +63,10 @@
 		</h4>
 
 		<h4 class="">Comments</h4>
-		{% if poodle.comments %}
-		{{ poodle.comments }}
+		{% if poodle.comments %}		
+		<pre>{% spaceless %}			
+			{{ poodle.comments }}
+		{% endspaceless %}</pre>
 		{% else %}
 		{% lorem 1 p %}
 		{% endif %}
@@ -87,7 +78,7 @@
 			</caption>
 			<tbody>
 				{% for name, value in poodle.get_fields %}
-				{% with skip='ID slug Sire Dam Created Updated' %}     
+				{% with skip='ID slug Sire Dam Comments Created Updated' %}     
 				{% if value and not name in skip %}
 				<tr>
 					<th>{{ name }}</th>
@@ -107,6 +98,19 @@
 			</tbody>
 		</table>
 	</section>
+
+	<section>
+		<h2 class="section-header">
+			Images
+			<div class="float-right">
+				<a href="{% url 'poodles:image' poodle.slug %}"
+				class="btn btn-sm btn-outline-success">
+				<i class="fas fa-file-image"></i> Add</a>
+			</div>
+		</h2>
+		{% include 'poodles/carousel-vue.html' with images=poodle.get_images %}
+	</section>
+
 
 	<section>
 		<h2 class="section-header">Pedigree</h2>

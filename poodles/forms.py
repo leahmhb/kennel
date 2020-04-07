@@ -57,9 +57,10 @@ class CrispyPoodleForm(PoodleForm):
                 css_class='form-row'
             ),
             Row(
-                Column('akc', css_class='form-group col-md-4 mb-0'),
-                Column('chic', css_class='form-group col-md-4 mb-0'),
-                Column('ukc', css_class='form-group col-md-4 mb-0'),
+                Column('akc', css_class='form-group col-md-3 mb-0'),
+                Column('chic', css_class='form-group col-md-3 mb-0'),
+                Column('addtl', css_class='form-group col-md-3 mb-0'),
+                Column('ukc', css_class='form-group col-md-3 mb-0'),
                 css_class='form-row'
             ),
             Row(

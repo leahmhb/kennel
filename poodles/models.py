@@ -33,6 +33,8 @@ class Poodle(Model):
                      blank=True, default='')
     ukc = CharField(verbose_name="UKC#", max_length=50,
                     blank=True, default='')
+    addtl = CharField(verbose_name="Additional #",
+                      max_length=50, blank=True, default='')
     sex = CharField(verbose_name="Sex", max_length=1,
                     choices=get_tuple('sex'))
     is_altered = BooleanField(verbose_name="Altered?", default=False)
@@ -62,7 +64,7 @@ class Poodle(Model):
                             on_delete=PROTECT,
                             limit_choices_to={'sex': 'F'},
                             null=True, blank=True)
-    comments = TextField(blank=True, default='')
+    comments = TextField(verbose_name="Comments", blank=True, default='')
     created_at = DateTimeField(verbose_name="Created", auto_now_add=True)
     updated_at = DateTimeField(verbose_name="Updated", auto_now=True)
 
