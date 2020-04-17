@@ -122,7 +122,7 @@ var app = new Vue({
   })
    .then(function () {
     this.person = {};
-    window.location.reload();
+    window.location.assign('/people/');
   });
  },
 }

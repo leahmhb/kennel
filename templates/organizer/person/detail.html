@@ -29,10 +29,12 @@
 			<span class="float-right">Last Updated {{ person.updated_at|date:"l F j, Y" }} {{ person.updated_at|time:"P" }}</span>
 		</caption>
 		<tbody>
+			{% if person.kennel %}
 			<tr>
 				<th>Kennel</th>
 				<td><a href="{{ person.kennel.get_absolute_url }}">{{ person.kennel.name }} Standard Poodles</a></td>
-			</tr>			
+			</tr>
+			{% endif %}
 			{% if person.kennel.country == 'USA' %}
 			<tr>
 				<th>AKC Bred with H.E.A.R.T</th>

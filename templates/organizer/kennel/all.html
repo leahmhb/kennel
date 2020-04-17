@@ -7,12 +7,12 @@
 
 
 
-<h1>Kennels</h1>
+	<h1>Kennels</h1>
 
-<h3 class="text-condensed">{% lorem 10 w random %}</h3>
-<a href="{% url 'organizer:new-kennel' %}" 
-class="btn btn-sm btn-outline-success mt-3">
-<i class="fas fa-plus"></i> Create New
+	<h3 class="text-condensed">{% lorem 10 w random %}</h3>
+	<a href="{% url 'organizer:new-kennel' %}" 
+	class="btn btn-sm btn-outline-success mt-3">
+	<i class="fas fa-plus"></i> Create New
 </a>
 <table class="table">
 	<thead>
@@ -28,13 +28,14 @@ class="btn btn-sm btn-outline-success mt-3">
 	<tbody>
 		{% for ken in kennels %}
 		<tr data-kennel-slug="{{ ken.slug }}">
-			<td>				
-				<button class="btn btn-sm" 
-				@click="getModal('{{ ken.slug }}')">
+			<td>
+				<a 
+				href="{% url 'organizer:update-kennel' ken.slug %}" 
+				class="btn btn-sm">
 				<i class="fas fa-pencil text-success"></i>
-			</button>
+			</a>
 			<button class="btn btn-sm"
-			@click="confirmDelete('{{ ken.slug }}')">
+			@click="confirmDelete('{{ ken.slug }}', '{{ ken.get_person }}')">
 			<i class="fas fa-trash text-danger"></i>
 		</button>
 	</td>
@@ -53,10 +54,6 @@ class="btn btn-sm btn-outline-success mt-3">
 </tbody>
 </table>
 
-
-
-
-{% include 'organizer/kennel/modals.html' %}
 {% include 'includes/pagination.html' %}
 
 </div>
@@ -69,6 +66,7 @@ class="btn btn-sm btn-outline-success mt-3">
 		"delete_modal": "delete-kennel-modal",
 		"edit_modal": "edit-kennel-modal",
 		'url_item': "{% url 'kennel-list' %}",
+		'url_person': "{% url 'person-list' %}",
 		'selects': {
 			'states': {{ selects.states | safe }},
 			'countries': {{ selects.countries | safe }},

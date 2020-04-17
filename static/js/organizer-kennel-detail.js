@@ -66,7 +66,7 @@ var app = new Vue({
   })
    .then(function () {
     this.item = {};
-    window.location.reload();
+    window.location.assign('/kennels/');
   });
  },
 }

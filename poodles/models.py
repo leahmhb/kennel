@@ -72,7 +72,7 @@ class Poodle(Model):
         app_label = 'poodles'
         db_table = 'poodle'
         verbose_name_plural = 'Poodles'
-        ordering = ['name_call']
+        ordering = ['updated_at']
 
     def __str__(self):
         return '%s %s %s "%s"' % (self.titles_prefix, self.name_registered, self.titles_suffix, self.name_call)

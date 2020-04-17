@@ -128,20 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#vue things
-vue-cli/.DS_Store
-vue-cli/node_modules/
-vue-cli/dist/
-vue-cli/npm-debug.log
-vue-cli/yarn-error.log
-
-# Editor directories and files
-vue-cli/.idea
-vue-cli/*.suo
-vue-cli/*.ntvs*
-vue-cli/*.njsproj
-vue-cli/*.sln
-
 #media
 media/documents/
 media/images/

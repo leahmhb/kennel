@@ -27,10 +27,11 @@
 		{% for per in people %}
 		<tr data-kennel-slug="{{ per.slug }}">
 			<td>				
-				<button class="btn btn-sm" 
-				@click="getModal('{{ per.slug }}')">
+				<a 
+				href="{% url 'organizer:update-person' per.slug %}" 
+				class="btn btn-sm">
 				<i class="fas fa-pencil text-success"></i>
-			</button>
+			</a>
 			<button class="btn btn-sm"
 			@click="confirmDelete('{{ per.slug }}')">
 			<i class="fas fa-trash text-danger"></i>
@@ -52,7 +53,7 @@
 
 {% include 'includes/pagination.html' %}
 
-{% include 'organizer/person/modals.html' %}
+
 
 </div>
 {% endblock content %}

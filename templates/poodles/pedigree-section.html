@@ -1,0 +1,144 @@
+<div class="container">
+    <div class="row d-flex align-items-center">
+        <div class="col">
+            <div class="row d-flex align-items-center">
+                <div class="col-2">
+                    {{ poodle }}
+                </div><!-- THIS poodle -->
+                <div class="col-10">
+                    <div class="row d-flex align-items-center">
+                        <div class="col">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-4">
+                                    {% if poodle.get_sire %}                    
+                                    <a href="{{ poodle.get_sire.get_absolute_url }}" class="d-block">
+                                        <i class="fas fa-mars male-text"></i>
+                                        {{ poodle.get_sire }}
+                                    </a>
+                                    {% endif %}
+                                </div><!-- SIRE -->
+                                <div class="col-8">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-6">
+                                            {% if poodle.get_sire.get_sire %}                   
+                                            <a href="{{ poodle.get_sire.get_sire.get_absolute_url}}" class="d-block">
+                                                <i class="fas fa-mars male-text"></i>
+                                                {{ poodle.get_sire.get_sire }}
+                                            </a>
+                                            {% endif %} 
+                                        </div><!-- SIRE's SIRE -->
+                                        <div class="col-6">
+                                            {% if poodle.get_sire.get_sire.get_sire %}              
+                                            <a href="{{ poodle.get_sire.get_sire.get_sire.get_absolute_url}}" class="d-block">
+                                                <i class="fas fa-mars male-text"></i>
+                                                {{ poodle.get_sire.get_sire.get_sire }}
+                                            </a>
+                                            {% endif %} 
+                                            {% if poodle.get_sire.get_sire.get_dam %}                   
+                                            <a href="{{ poodle.get_sire.get_sire.get_dam.get_absolute_url}}" class="d-block">
+                                                <i class="fas fa-venus female-text"></i>
+                                                {{ poodle.get_sire.get_sire.get_dam }}
+                                            </a>
+                                            {% endif %} 
+                                        </div><!-- SIRE's SIRE's side -->
+                                    </div>
+                                    <hr>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-6">
+                                            {% if poodle.get_sire.get_dam %}                    
+                                            <a href="{{ poodle.get_sire.get_dam.get_absolute_url }}" class="d-block">
+                                                <i class="fas fa-venus female-text"></i>
+                                                {{ poodle.get_sire.get_dam }}               
+                                            </a>
+                                            {% endif %}
+                                        </div><!-- SIRE's DAM -->
+                                        <div class="col-6">
+                                            {% if poodle.get_sire.get_dam.get_sire %}               
+                                            <a href="{{ poodle.get_sire.get_dam.get_sire.get_absolute_url}}" class="d-block">
+                                                <i class="fas fa-mars male-text"></i>
+                                                {{ poodle.get_sire.get_dam.get_sire }}
+                                            </a>
+                                            {% endif %}
+                                            {% if poodle.get_sire.get_dam.get_dam %}
+                                            <a href="{{ poodle.get_sire.get_dam.get_dam.get_absolute_url }}" class="d-block">
+                                                <i class="fas fa-venus female-text"></i>
+                                                {{ poodle.get_sire.get_dam.get_dam }}               
+                                            </a>
+                                            {% endif %}
+                                        </div><!-- SIRE's DAM's side -->
+                                    </div>
+                                </div><!-- SIRE's side -->
+                            </div>
+                        </div>
+                    </div><!-- end SIRE -->
+                    <hr>
+                    <div class="row d-flex align-items-center">
+                        <div class="col">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-4">
+                                    {% if poodle.get_dam %}                    
+                                    <a href="{{ poodle.get_dam.get_absolute_url }}" class="d-block">
+                                        <i class="fas fa-venus female-text"></i>
+                                        {{ poodle.get_dam }}
+                                    </a>
+                                    {% endif %}
+                                </div><!-- DAM -->
+                                <div class="col-8">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-6">
+                                            {% if poodle.get_dam.get_sire %}                   
+                                            <a href="{{ poodle.get_dam.get_sire.get_absolute_url}}" class="d-block">
+                                                <i class="fas fa-mars male-text"></i>
+                                                {{ poodle.get_dam.get_sire }}
+                                            </a>
+                                            {% endif %} 
+                                        </div><!-- DAM's SIRE -->
+                                        <div class="col-6">
+                                            {% if poodle.get_dam.get_sire.get_sire %}              
+                                            <a href="{{ poodle.get_dam.get_sire.get_sire.get_absolute_url}}" class="d-block">
+                                                <i class="fas fa-mars male-text"></i>
+                                                {{ poodle.get_dam.get_sire.get_sire }}
+                                            </a>
+                                            {% endif %} 
+                                            {% if poodle.get_dam.get_sire.get_dam %}                   
+                                            <a href="{{ poodle.get_dam.get_sire.get_dam.get_absolute_url}}" class="d-block">
+                                                <i class="fas fa-venus female-text"></i>
+                                                {{ poodle.get_dam.get_sire.get_dam }}
+                                            </a>
+                                            {% endif %} 
+                                        </div><!-- DAM's SIRE's side -->
+                                    </div>
+                                    <hr>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-6">
+                                            {% if poodle.get_dam.get_dam %}                    
+                                            <a href="{{ poodle.get_dam.get_dam.get_absolute_url }}" class="d-block">
+                                                <i class="fas fa-venus female-text"></i>
+                                                {{ poodle.get_dam.get_dam }}               
+                                            </a>
+                                            {% endif %}
+                                        </div><!-- DAM's DAM -->
+                                        <div class="col-6">
+                                            {% if poodle.get_dam.get_dam.get_sire %}               
+                                            <a href="{{ poodle.get_dam.get_dam.get_sire.get_absolute_url}}" class="d-block">
+                                                <i class="fas fa-mars male-text"></i>
+                                                {{ poodle.get_dam.get_dam.get_sire }}
+                                            </a>
+                                            {% endif %}
+                                            {% if poodle.get_dam.get_dam.get_dam %}
+                                            <a href="{{ poodle.get_dam.get_dam.get_dam.get_absolute_url }}" class="d-block">
+                                                <i class="fas fa-venus female-text"></i>
+                                                {{ poodle.get_dam.get_dam.get_dam }}               
+                                            </a>
+                                            {% endif %}
+                                        </div><!-- DAM's DAM's side -->
+                                    </div>
+                                </div><!-- DAM's side -->
+                            </div>
+                        </div>
+                    </div><!--end DAM -->
+                </div><!-- THIS poodle's side -->
+            </div>      
+        </div> 
+    </div>
+</div>

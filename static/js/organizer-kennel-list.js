@@ -49,13 +49,22 @@ var app = new Vue({
     this.item = {};
     this.$bvModal.hide(id);
   },
-  confirmDelete: function(slug){
+  confirmDelete: function(slug, people){
     this.getData(slug);
+    this.people = people;    
     this.$bvModal.show(CONFIG['delete_modal']);      
   },
   realDelete: function(slug){
    var self = this;
-   var id = CONFIG['delete_modal'];
+   //remove fk in person records
+   console.log(this.people);
+   for o in this.people{
+    
+   }
+
+
+
+   /*var id = CONFIG['delete_modal'];
    var url = CONFIG['url_item'];
    url += slug + '/'
    axios.delete(url)
@@ -67,7 +76,7 @@ var app = new Vue({
    .then(function () {
     this.item = {};
     window.location.reload();
-  });
+  });*/
  },
 }
 });
