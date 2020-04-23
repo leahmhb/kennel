@@ -1,0 +1,36 @@
+{% block modal %}
+<b-modal id="delete-poodle-modal" ref="delete-poodle-modal" hide-footer>
+	<template v-slot:modal-title>
+		Are you sure you want to delete {$ poodle.name_call $}?
+	</template>
+	<b-button class="mt-3 mr-auto" variant="danger" @click="realDelete(poodle.slug)">Delete</b-button>
+	<b-button class="mt-3 float-right" @click="closeModal('delete-poodle-modal')">Cancel</b-button>
+</b-modal>
+
+<b-modal id="document-poodle-modal" ref="document-poodle-modal" hide-footer>
+	<template v-slot:modal-title>
+		Add Documents for {$ poodle.name_call $}
+	</template>
+	<div class="d-block">
+		<template>
+			<b-form-file v-model="document" placeholder="Choose a file or drop it here..."></b-form-file>
+
+			<b-form-group id="title-fieldset" label="Document Title" label-for="title" label-size="sm">
+				<b-form-input id="title" v-model="document.title" size="sm" trim></b-form-input>
+			</b-form-group>
+
+			<b-form-group id="doc_type-fieldset" label="Document Type" label-for="doc_type" label-size="sm">
+				<b-form-input id="doc_type" v-model="document.doc_type" size="sm" trim></b-form-input>
+			</b-form-group>
+
+			<b-form-group id="description-fieldset" label="Document Description" label-for="description"
+				label-size="sm">
+				<b-form-textarea id="description" v-model="document.description" placeholder="Enter something..."
+					size="small" rows="3" max-rows="6"></b-form-textarea>
+			</b-form-group>
+		</template>
+	</div>
+	<b-button class="mt-3 mr-auto" variant="default" @click="closeModal('document-poodle-modal')">Close</b-button>
+	<b-button class="mt-3 float-right" variant="success" @click="submitData(document.slug)">Save</b-button>
+</b-modal>
+{% endblock modal %}

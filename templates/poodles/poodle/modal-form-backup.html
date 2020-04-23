@@ -1,0 +1,108 @@
+<b-modal id="edit-poodle-modal" ref="edit-poodle-modal" hide-footer>
+	<template v-slot:modal-title>
+		{$ poodle.name_call $}
+	</template>
+
+	<b-form-row>
+		<b-col>
+			<b-form-group label="Call Name" label-for="call-name" label-size="sm">
+				<b-form-input id="call-name" v-model="poodle.name_call" size="sm" trim></b-form-input>
+			</b-form-group>
+		</b-col>
+		<b-col>
+			<b-form-group label="Sex" label-for="sex" label-size="sm">
+				<b-form-select id="sex" v-model="poodle.sex" size="sm" :options="sex_select" trim></b-form-select>
+			</b-form-group>
+		</b-col>
+		<b-col>
+			<b-form-group label="Color" label-for="color" label-size="sm">
+				<b-form-select id="color" v-model="poodle.color" size="sm" :options="color_select" trim></b-form-select>
+			</b-form-group>
+		</b-col>
+	</b-form-row>
+	<b-form-row>
+		<b-col>
+			<b-form-group label="Prefix Titles" label-for="prefix" label-size="sm">
+				<b-form-input id="prefix" v-model="poodle.titles_prefix" size="sm" trim></b-form-input>
+			</b-form-group>
+		</b-col>
+		<b-col>
+			<b-form-group label="Registered Name" label-for="registered-name" label-size="sm">
+				<b-form-input id="registered-name" v-model="poodle.name_registered" size="sm" trim></b-form-input>
+			</b-form-group>
+		</b-col>
+		<b-col>
+			<b-form-group label="Suffix Titles" label-for="suffix" label-size="sm">
+				<b-form-input id="suffix" v-model="poodle.titles_suffix" size="sm" trim></b-form-input>
+			</b-form-group>
+		</b-col>
+	</b-form-row>
+	<b-form-row>
+		<b-col>
+			<b-form-group label="Owner" label-for="person_owner" label-size="sm">
+				<b-form-select multiple id="person_owner" v-model="poodle.person_owner" size="sm"
+					:options="person_owner_select" trim></b-form-select>
+			</b-form-group>
+		</b-col>
+		<b-col>
+			<b-form-group label="Breeder" label-for="person_breeder" label-size="sm">
+				<b-form-select multiple id="person_breeder" v-model="poodle.person_breeder" size="sm"
+					:options="person_breeder_select" trim></b-form-select>
+			</b-form-group>
+		</b-col>
+	</b-form-row>
+	<b-form-row>
+		<b-col>
+			<b-form-group label="Born" label-for="dob" label-size="sm">
+				<b-form-datepicker id="dob" v-model="poodle.dob" size="sm" trim></b-form-datepicker>
+			</b-form-group>
+		</b-col>
+		<b-col>
+			<b-form-group label="Died" label-for="dod" label-size="sm">
+				<b-form-datepicker id="dod" v-model="poodle.dod" size="sm" trim></b-form-datepicker>
+			</b-form-group>
+		</b-col>
+	</b-form-row>
+	<b-form-row>
+		<b-col>
+			<b-form-group label="AKC" label-for="akc" label-size="sm">
+				<b-form-input id="akc" v-model="poodle.akc" size="sm" trim></b-form-input>
+			</b-form-group>
+		</b-col>
+		<b-col>
+			<b-form-group label="CHIC" label-for="chic" label-size="sm">
+				<b-form-input id="chic" v-model="poodle.chic" size="sm" trim></b-form-input>
+			</b-form-group>
+		</b-col>
+		<b-col>
+			<b-form-group label="UKC" label-for="ukc" label-size="sm">
+				<b-form-input id="ukc" v-model="poodle.ukc" size="sm" trim></b-form-input>
+			</b-form-group>
+		</b-col>
+	</b-form-row>
+	<b-form-row>
+		<b-col>
+			<b-form-group label="Sire" label-for="poodle_sire" label-size="sm">
+				<b-form-select id="poodle_sire" v-model="poodle.poodle_sire" size="sm" :options="poodle_sire_select" trim>
+				</b-form-select>
+			</b-form-group>
+		</b-col>
+		<b-col>
+			<b-form-group label="Dam" label-for="poodle_dam" label-size="sm">
+				<b-form-select id="poodle_dam" v-model="poodle.poodle_dam" size="sm" :options="poodle_dam_select" trim>
+				</b-form-select>
+			</b-form-group>
+		</b-col>
+	</b-form-row>
+	<b-form-row>
+		<b-col>
+			<b-form-group label="Comments" label-for="comments" label-size="sm">
+				<b-form-textarea id="comments" v-model="poodle.comments" size="sm" trim></b-form-textarea>
+			</b-form-group>
+		</b-col>
+	</b-form-row>
+
+
+	<b-button class="mt-3 mr-auto" variant="default" @click="closeModal('edit-poodle-modal')">Close</b-button>
+	<b-button class="mt-3 float-right" variant="success" @click="submitData(poodle.slug)">Save</b-button>
+</b-modal>

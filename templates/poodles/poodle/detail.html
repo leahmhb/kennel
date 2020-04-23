@@ -8,7 +8,7 @@
 {% block content %}
 <div id="detail">
 	<h1 class="page-header">
-		{{ poodle.name_call }} | <span class="text-condensed">{{ poodle.get_titled_name }}</span>
+		{{ poodle.name_call }} | <span class="text-condensed">{{ poodle.titled_name }}</span>
 	</h1>
 
 
@@ -16,46 +16,49 @@
 		<h2 class="section-header">
 			Information
 			<div class="float-right">
-				<a href="{% url 'poodles:update' poodle.slug %}" 
-				class="btn btn-sm btn-outline-success">
-				<i class="fas fa-pencil"></i> Update</a>
-				<a @click="confirmDelete('{{ poodle.slug }}')"
-				class="btn btn-sm btn-outline-danger">
-				<i class="fas fa-trash"></i> Delete</a>
+				<a href="{% url 'poodles:update' poodle.slug %}" class="btn btn-sm btn-outline-success">
+					<i class="fas fa-pencil"></i> Update</a>
+				<a @click="confirmDelete('{{ poodle.slug }}')" class="btn btn-sm btn-outline-danger">
+					<i class="fas fa-trash"></i> Delete</a>
 			</div>
 		</h2>
 
 		<h3 class="section-header text-center text-condensed">
-			Sire 
+			Sire
 			{% if poodle.poodle_sire %}
 			<a href="{{ poodle.get_sire.get_absolute_url }}">
 				{{ poodle.get_sire|default_if_none:"NA" }}
-			</a> 	
+			</a>
 			{% endif %}
 			x
-			Dam 
+			Dam
 			{% if poodle.poodle_dam %}
 			<a href="{{ poodle.get_dam.get_absolute_url }}">
 				{{ poodle.get_dam |default_if_none:""}}
-			</a>		
+			</a>
 			{% endif %}
 		</h3>
 		<h4 class="section-header text-center text-condensed">
-			Owner(s)
-			{% for o in poodle.get_owners %}
+			Owner{% if poodle.owners|length > 1 %}s{% endif %}
+			{% for o in poodle.owners %}
 			<a href="{{ o.get_absolute_url }}">{{ o }}</a>
+			{% if o.kennel %}
+			<small><a class="text-muted" href="{{ o.kennel.get_absolute_url }}">{{ o.kennel.name }} Standard Poodles</a></small>
+			{% endif %}
 			{% if not forloop.last %}
-			& 
+			&
 			{% endif %}
 			{% empty %}
 			NA
 			{% endfor %}
-			|
-			Breeder(s)
-			{% for o in poodle.get_breeders %}
+			<p>
+			Breeder{% if poodle.breeders|length > 1 %}s{% endif %}
+			{% for o in poodle.breeders %}
 			<a href="{{ o.get_absolute_url }}">{{ o }}</a>
+			<small><a class="text-muted" href="{{ o.kennel.get_absolute_url }}">{{ o.kennel.name }} Standard
+					Poodles</a></small>
 			{% if not forloop.last %}
-			& 
+			&
 			{% endif %}
 			{% empty %}
 			NA
@@ -63,7 +66,7 @@
 		</h4>
 
 		<h4 class="">Comments</h4>
-		{% if poodle.comments %}		
+		{% if poodle.comments %}
 		<pre>{% spaceless %}			
 			{{ poodle.comments }}
 		{% endspaceless %}</pre>
@@ -74,11 +77,12 @@
 		<table class="table table-sm">
 			<caption>
 				Created {{ poodle.created_at|date:"l F j, Y" }} {{ poodle.created_at|time:"P" }}
-				<span class="float-right">Last Updated {{ poodle.updated_at|date:"l F j, Y" }} {{ poodle.updated_at|time:"P" }}</span>
+				<span class="float-right">Last Updated {{ poodle.updated_at|date:"l F j, Y" }}
+					{{ poodle.updated_at|time:"P" }}</span>
 			</caption>
 			<tbody>
 				{% for name, value in poodle.get_fields %}
-				{% with skip='ID slug Sire Dam Comments Created Updated' %}     
+				{% with skip='ID slug Sire Dam Comments Created Updated' %}
 				{% if value and not name in skip %}
 				<tr>
 					<th>{{ name }}</th>
@@ -102,34 +106,32 @@
 	<section>
 		<h2 class="section-header">Pedigree</h2>
 
-		{% include 'poodles/pedigree-section.html' with poodle=poodle %}
+		{% include 'poodles/poodle/pedigree-section.html' with poodle=poodle %}
 	</section>
 
 	<section>
 		<h2 class="section-header">
 			Images
 			<div class="float-right">
-				<a href="{% url 'poodles:image' poodle.slug %}"
-				class="btn btn-sm btn-outline-success">
-				<i class="fas fa-file-image"></i> Add</a>
+				<a href="{% url 'poodles:image-new' poodle.slug %}" class="btn btn-sm btn-outline-success">
+					<i class="fas fa-file-image"></i> Add</a>
 			</div>
 		</h2>
-		{% include 'poodles/carousel-vue.html' with images=poodle.get_images %}
+		{% include 'poodles/poodle/carousel-vue.html' with images=poodle.images %}
 	</section>
 
 	<section>
 		<h2 class="section-header">
 			Documents
 			<div class="float-right">
-				<a href="{% url 'poodles:document' poodle.slug %}"
-				class="btn btn-sm btn-outline-success">
-				<i class="fas fa-file"></i> Add</a>
+				<a href="{% url 'poodles:document-new' poodle.slug %}" class="btn btn-sm btn-outline-success">
+					<i class="fas fa-file"></i> Add</a>
 			</div>
 		</h2>
 
 
 		<ul class="list-group">
-			{% for doc in poodle.get_documents %}
+			{% for doc in poodle.documents %}
 
 			<a href="/media/{{ doc.path }}" class="list-group-item list-group-item-action">
 				<div class="d-flex w-100 justify-content-between">
@@ -144,7 +146,7 @@
 			{% endfor %}
 		</ul>
 	</section>
-	{% include 'poodles/modals.html' %}
+	{% include 'poodles/poodle/modals.html' %}
 </div>
 {% endblock content %}
 
@@ -157,15 +159,39 @@
 		'url_item': "{% url 'poodle-list' %}",
 		'document_modal': 'document-poodle-modal',
 		'selects': {
-			'person_owner': {{ selects.person_owner | safe }},
-			'person_breeder': {{ selects.person_breeder | safe }},
+			'person_owner': {
+				{
+					selects.person_owner | safe
+				}
+			},
+			'person_breeder': {
+				{
+					selects.person_breeder | safe
+				}
+			},
 
-			'poodle_sire': {{ selects.poodle_sire | safe }},
-			'poodle_dam': {{ selects.poodle_dam | safe }},
+			'poodle_sire': {
+				{
+					selects.poodle_sire | safe
+				}
+			},
+			'poodle_dam': {
+				{
+					selects.poodle_dam | safe
+				}
+			},
 
-			'color': {{ selects.color | safe }},
-			'sex': {{ selects.sex | safe }},
-		},		
+			'color': {
+				{
+					selects.color | safe
+				}
+			},
+			'sex': {
+				{
+					selects.sex | safe
+				}
+			},
+		},
 	}
 </script>
 <script src="{% static 'js/poodles-detail.js' %}"></script>

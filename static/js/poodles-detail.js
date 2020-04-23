@@ -4,40 +4,21 @@ var app = new Vue({
   data: {
     slide: 0,
     sliding: null,
-    item: {},
+    poodle: {},
     document: {
-      'document': null,
+      'path': null,
       'title': null,
       'description': null,
       'doc_type': null,
     },
-    image: null,
-    sex_select: [],
-    color_select: [],
-    person_owner_select: [],
-    person_breeder_select: [],
-    poodle_sire_select: [],
-    poodle_dam_select: [],
+    image: {
+      'path': null,
+      'title': null,
+      'description': null,
+    }
   },
   mounted: function(){
-    if('sex' in CONFIG['selects']){
-      this.sex_select = CONFIG['selects']['sex'];
-    }
-    if('color' in CONFIG['selects']){
-      this.color_select = CONFIG['selects']['color'];
-    }
-    if('person_owner' in CONFIG['selects']){
-      this.person_owner_select = CONFIG['selects']['person_owner'];
-    }
-    if('person_breeder' in CONFIG['selects']){
-      this.person_breeder_select = CONFIG['selects']['person_breeder'];
-    }
-    if('poodle_sire' in CONFIG['selects']){
-      this.poodle_sire_select = CONFIG['selects']['poodle_sire'];
-    }
-    if('poodle_dam' in CONFIG['selects']){
-      this.poodle_dam_select = CONFIG['selects']['poodle_dam'];
-    }
+
   },
   methods: {   
     onSlideStart(slide) {
@@ -50,14 +31,14 @@ var app = new Vue({
       this.document.poodle = poodle_id;
       this.$bvModal.show(CONFIG['document_modal']);
     },
-    getData: function(slug){
+    getPoodle: function(slug){
      var self = this;
      var url = CONFIG['url_item'];
      url += slug + '/'
      axios.get(url)
      .then(function (response) {
       console.log(response);
-      self.item = response.data;
+      self.poodle = response.data;
 
     })
      .catch(function (error) {
@@ -65,15 +46,15 @@ var app = new Vue({
     });
    },
    getModal: function(slug){
-    this.getData(slug)
+    this.getPoodle(slug)
     this.$bvModal.show(CONFIG['edit_modal'])
   },
   closeModal: function(id){
-    this.item = {};
+    this.poodle = {};
     this.$bvModal.hide(id);
   },
   confirmDelete: function(slug){
-    this.getData(slug);
+    this.getPoodle(slug);
     this.$bvModal.show(CONFIG['delete_modal']);      
   },
   realDelete: function(slug){
@@ -89,7 +70,7 @@ var app = new Vue({
     console.log(error);
   })
    .then(function () {
-    this.item = {};
+    this.poodle = {};
     window.location.assign('/poodles/');
   });
  },

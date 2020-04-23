@@ -1,18 +1,10 @@
-from django.db.models import (
-    Model,
-    CharField,
-    DateField,
-    ManyToManyField,
-    ForeignKey,
-    BooleanField,
-    DateTimeField,
-    TextField,
-    FileField,
-    ImageField,
-    PROTECT)
+from django.db.models import (PROTECT, BooleanField, CharField, DateField,
+                              DateTimeField, FileField, ForeignKey, ImageField,
+                              ManyToManyField, Model, TextField)
 from django.urls import reverse
-from django_extensions.db.fields import AutoSlugField
+
 from choices.views import get_tuple
+from django_extensions.db.fields import AutoSlugField
 
 
 class Poodle(Model):
@@ -77,31 +69,31 @@ class Poodle(Model):
     def __str__(self):
         return '%s %s %s "%s"' % (self.titles_prefix, self.name_registered, self.titles_suffix, self.name_call)
 
-    def get_absolute_url(self):
+    def url(self):
         return reverse('poodles:detail', args=[str(self.slug)])
 
-    def get_titled_name(self):
+    def titled_name(self):
         return '%s %s %s' % (self.titles_prefix, self.name_registered, self.titles_suffix)
 
-    def get_owners(self):
+    def owners(self):
         return self.person_owners.all()
 
-    def get_breeders(self):
+    def breeders(self):
         return self.person_breeders.all()
 
-    def get_sire(self):
+    def sire(self):
         return self.poodle_sire
 
-    def get_dam(self):
+    def dam(self):
         return self.poodle_dam
 
-    def get_documents(self):
+    def documents(self):
         return Document.objects.filter(poodle=self.id)
 
-    def get_images(self):
+    def images(self):
         return Image.objects.filter(poodle=self.id)
 
-    def get_fields(self):
+    def fields(self):
         return [
             (field.verbose_name, field.value_to_string(self))
             for field in Poodle._meta.fields
@@ -109,6 +101,8 @@ class Poodle(Model):
 
 
 class Document(Model):
+    slug = AutoSlugField(null=True, default=None, unique=True, populate_from=[
+                         'poodle__name_call', 'title', 'id'])
     poodle = ForeignKey(Poodle, verbose_name="Poodle",
                         related_name='poodles_documents',
                         on_delete=PROTECT)
@@ -118,10 +112,16 @@ class Document(Model):
         max_length=255, choices=get_tuple('category'), blank=True)
     path = FileField(upload_to='documents/')
     is_viewable = BooleanField(verbose_name="Viewable?", default=True)
-    uploaded_at = DateTimeField(auto_now_add=True)
+    created_at = DateTimeField(auto_now_add=True)
+    updated_at = DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('poodles:document', args=[str(self.slug)])
 
 
 class Image(Model):
+    slug = AutoSlugField(null=True, default=None, unique=True, populate_from=[
+        'poodle__name_call', 'title', 'id'])
     poodle = ForeignKey(Poodle, verbose_name="Poodle",
                         related_name='poodles_images',
                         on_delete=PROTECT)
@@ -129,4 +129,8 @@ class Image(Model):
     description = TextField(blank=True)
     path = ImageField(upload_to='images/')
     is_viewable = BooleanField(verbose_name="Viewable?", default=True)
-    uploaded_at = DateTimeField(auto_now_add=True)
+    created_at = DateTimeField(auto_now_add=True)
+    updated_at = DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('poodles:image', args=[str(self.slug)])

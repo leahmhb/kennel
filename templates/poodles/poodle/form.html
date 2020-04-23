@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{% if action == 'new' %}
+New Poodle
+{% elif action == 'update' %}
+Update {{ poodle.name_call }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h1 class="page-header">
+{% if action == 'new' %}
+New Poodle
+{% elif action == 'update' %}
+<b>Update</b> | {{ poodle.name_call }}
+{% endif %}
+</h1>
+{% crispy form %}
+
+{% endblock content %}

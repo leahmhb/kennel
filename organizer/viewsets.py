@@ -1,17 +1,16 @@
-from rest_framework import viewsets, generics
-from .models import Person, Kennel
-from .serializers import PersonSerializer, KennelSerializer
-from pprint import pprint
-from rest_framework.decorators import action
+from rest_framework.viewsets import ModelViewSet
+
+from .models import Kennel, Person
+from .serializers import KennelSerializer, PersonSerializer
 
 
-class PersonViewSet(viewsets.ModelViewSet):
+class PersonViewSet(ModelViewSet):
     lookup_field = 'slug'
     serializer_class = PersonSerializer
-    queryset = Person.objects.all()
+    queryset = Person.objects.all().prefetch_related()
 
 
-class KennelViewSet(viewsets.ModelViewSet):
+class KennelViewSet(ModelViewSet):
     lookup_field = 'slug'
     serializer_class = KennelSerializer
-    queryset = Kennel.objects.all()
+    queryset = Kennel.objects.all().prefetch_related()

@@ -10,34 +10,34 @@
                         <div class="col">
                             <div class="row d-flex align-items-center">
                                 <div class="col-4">
-                                    {% if poodle.get_sire %}                    
-                                    <a href="{{ poodle.get_sire.get_absolute_url }}" class="d-block">
+                                    {% if poodle.sire %}                    
+                                    <a href="{{ poodle.sire.url }}" class="d-block">
                                         <i class="fas fa-mars male-text"></i>
-                                        {{ poodle.get_sire }}
+                                        {{ poodle.sire }}
                                     </a>
                                     {% endif %}
                                 </div><!-- SIRE -->
                                 <div class="col-8">
                                     <div class="row d-flex align-items-center">
                                         <div class="col-6">
-                                            {% if poodle.get_sire.get_sire %}                   
-                                            <a href="{{ poodle.get_sire.get_sire.get_absolute_url}}" class="d-block">
+                                            {% if poodle.sire.sire %}                   
+                                            <a href="{{ poodle.sire.sire.url}}" class="d-block">
                                                 <i class="fas fa-mars male-text"></i>
-                                                {{ poodle.get_sire.get_sire }}
+                                                {{ poodle.sire.sire }}
                                             </a>
                                             {% endif %} 
                                         </div><!-- SIRE's SIRE -->
                                         <div class="col-6">
-                                            {% if poodle.get_sire.get_sire.get_sire %}              
-                                            <a href="{{ poodle.get_sire.get_sire.get_sire.get_absolute_url}}" class="d-block">
+                                            {% if poodle.sire.sire.sire %}              
+                                            <a href="{{ poodle.sire.sire.sire.url}}" class="d-block">
                                                 <i class="fas fa-mars male-text"></i>
-                                                {{ poodle.get_sire.get_sire.get_sire }}
+                                                {{ poodle.sire.sire.sire }}
                                             </a>
                                             {% endif %} 
-                                            {% if poodle.get_sire.get_sire.get_dam %}                   
-                                            <a href="{{ poodle.get_sire.get_sire.get_dam.get_absolute_url}}" class="d-block">
+                                            {% if poodle.sire.sire.dam %}                   
+                                            <a href="{{ poodle.sire.sire.dam.url}}" class="d-block">
                                                 <i class="fas fa-venus female-text"></i>
-                                                {{ poodle.get_sire.get_sire.get_dam }}
+                                                {{ poodle.sire.sire.dam }}
                                             </a>
                                             {% endif %} 
                                         </div><!-- SIRE's SIRE's side -->
@@ -45,24 +45,24 @@
                                     <hr>
                                     <div class="row d-flex align-items-center">
                                         <div class="col-6">
-                                            {% if poodle.get_sire.get_dam %}                    
-                                            <a href="{{ poodle.get_sire.get_dam.get_absolute_url }}" class="d-block">
+                                            {% if poodle.sire.dam %}                    
+                                            <a href="{{ poodle.sire.dam.url }}" class="d-block">
                                                 <i class="fas fa-venus female-text"></i>
-                                                {{ poodle.get_sire.get_dam }}               
+                                                {{ poodle.sire.dam }}               
                                             </a>
                                             {% endif %}
                                         </div><!-- SIRE's DAM -->
                                         <div class="col-6">
-                                            {% if poodle.get_sire.get_dam.get_sire %}               
-                                            <a href="{{ poodle.get_sire.get_dam.get_sire.get_absolute_url}}" class="d-block">
+                                            {% if poodle.sire.dam.sire %}               
+                                            <a href="{{ poodle.sire.dam.sire.url}}" class="d-block">
                                                 <i class="fas fa-mars male-text"></i>
-                                                {{ poodle.get_sire.get_dam.get_sire }}
+                                                {{ poodle.sire.dam.sire }}
                                             </a>
                                             {% endif %}
-                                            {% if poodle.get_sire.get_dam.get_dam %}
-                                            <a href="{{ poodle.get_sire.get_dam.get_dam.get_absolute_url }}" class="d-block">
+                                            {% if poodle.sire.dam.dam %}
+                                            <a href="{{ poodle.sire.dam.dam.url }}" class="d-block">
                                                 <i class="fas fa-venus female-text"></i>
-                                                {{ poodle.get_sire.get_dam.get_dam }}               
+                                                {{ poodle.sire.dam.dam }}               
                                             </a>
                                             {% endif %}
                                         </div><!-- SIRE's DAM's side -->
@@ -76,34 +76,34 @@
                         <div class="col">
                             <div class="row d-flex align-items-center">
                                 <div class="col-4">
-                                    {% if poodle.get_dam %}                    
-                                    <a href="{{ poodle.get_dam.get_absolute_url }}" class="d-block">
+                                    {% if poodle.dam %}                    
+                                    <a href="{{ poodle.dam.url }}" class="d-block">
                                         <i class="fas fa-venus female-text"></i>
-                                        {{ poodle.get_dam }}
+                                        {{ poodle.dam }}
                                     </a>
                                     {% endif %}
                                 </div><!-- DAM -->
                                 <div class="col-8">
                                     <div class="row d-flex align-items-center">
                                         <div class="col-6">
-                                            {% if poodle.get_dam.get_sire %}                   
-                                            <a href="{{ poodle.get_dam.get_sire.get_absolute_url}}" class="d-block">
+                                            {% if poodle.dam.sire %}                   
+                                            <a href="{{ poodle.dam.sire.url}}" class="d-block">
                                                 <i class="fas fa-mars male-text"></i>
-                                                {{ poodle.get_dam.get_sire }}
+                                                {{ poodle.dam.sire }}
                                             </a>
                                             {% endif %} 
                                         </div><!-- DAM's SIRE -->
                                         <div class="col-6">
-                                            {% if poodle.get_dam.get_sire.get_sire %}              
-                                            <a href="{{ poodle.get_dam.get_sire.get_sire.get_absolute_url}}" class="d-block">
+                                            {% if poodle.dam.sire.sire %}              
+                                            <a href="{{ poodle.dam.sire.sire.url}}" class="d-block">
                                                 <i class="fas fa-mars male-text"></i>
-                                                {{ poodle.get_dam.get_sire.get_sire }}
+                                                {{ poodle.dam.sire.sire }}
                                             </a>
                                             {% endif %} 
-                                            {% if poodle.get_dam.get_sire.get_dam %}                   
-                                            <a href="{{ poodle.get_dam.get_sire.get_dam.get_absolute_url}}" class="d-block">
+                                            {% if poodle.dam.sire.dam %}                   
+                                            <a href="{{ poodle.dam.sire.dam.url}}" class="d-block">
                                                 <i class="fas fa-venus female-text"></i>
-                                                {{ poodle.get_dam.get_sire.get_dam }}
+                                                {{ poodle.dam.sire.dam }}
                                             </a>
                                             {% endif %} 
                                         </div><!-- DAM's SIRE's side -->
@@ -111,24 +111,24 @@
                                     <hr>
                                     <div class="row d-flex align-items-center">
                                         <div class="col-6">
-                                            {% if poodle.get_dam.get_dam %}                    
-                                            <a href="{{ poodle.get_dam.get_dam.get_absolute_url }}" class="d-block">
+                                            {% if poodle.dam.dam %}                    
+                                            <a href="{{ poodle.dam.dam.url }}" class="d-block">
                                                 <i class="fas fa-venus female-text"></i>
-                                                {{ poodle.get_dam.get_dam }}               
+                                                {{ poodle.dam.dam }}               
                                             </a>
                                             {% endif %}
                                         </div><!-- DAM's DAM -->
                                         <div class="col-6">
-                                            {% if poodle.get_dam.get_dam.get_sire %}               
-                                            <a href="{{ poodle.get_dam.get_dam.get_sire.get_absolute_url}}" class="d-block">
+                                            {% if poodle.dam.dam.sire %}               
+                                            <a href="{{ poodle.dam.dam.sire.url}}" class="d-block">
                                                 <i class="fas fa-mars male-text"></i>
-                                                {{ poodle.get_dam.get_dam.get_sire }}
+                                                {{ poodle.dam.dam.sire }}
                                             </a>
                                             {% endif %}
-                                            {% if poodle.get_dam.get_dam.get_dam %}
-                                            <a href="{{ poodle.get_dam.get_dam.get_dam.get_absolute_url }}" class="d-block">
+                                            {% if poodle.dam.dam.dam %}
+                                            <a href="{{ poodle.dam.dam.dam.url }}" class="d-block">
                                                 <i class="fas fa-venus female-text"></i>
-                                                {{ poodle.get_dam.get_dam.get_dam }}               
+                                                {{ poodle.dam.dam.dam }}               
                                             </a>
                                             {% endif %}
                                         </div><!-- DAM's DAM's side -->
